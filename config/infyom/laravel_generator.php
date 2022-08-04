@@ -41,7 +41,7 @@ return [
 
         'views'             => resource_path('views/'),
 
-        'schema_files'      => resource_path('model_schemas/'),
+        'schema_files'      => base_path('model_schemas/'),
 
         'templates_dir'     => resource_path('infyom/infyom-generator-templates/'),
 
