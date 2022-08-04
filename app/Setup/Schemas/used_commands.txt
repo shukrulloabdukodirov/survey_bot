@@ -1,0 +1,3 @@
+php artisan l5-swagger:generate
+php artisan infyom:api Question --fieldsFile=app/Setup/Schemas/question_schemas.json
+php artisan infyom:rollback Question api
