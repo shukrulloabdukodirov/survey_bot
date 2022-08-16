@@ -48,30 +48,6 @@
         "inView": true
     },
     {
-        "name": "created_at",
-        "dbType": "timestamp",
-        "htmlType": "",
-        "validations": "",
-        "searchable": false,
-        "fillable": false,
-        "primary": false,
-        "inForm": false,
-        "inIndex": false,
-        "inView": true
-    },
-    {
-        "name": "updated_at",
-        "dbType": "timestamp",
-        "htmlType": "",
-        "validations": "",
-        "searchable": false,
-        "fillable": false,
-        "primary": false,
-        "inForm": false,
-        "inIndex": false,
-        "inView": true
-    },
-    {
         "type": "relation",
         "relation": "mt1,Question,question_id,id"
     }

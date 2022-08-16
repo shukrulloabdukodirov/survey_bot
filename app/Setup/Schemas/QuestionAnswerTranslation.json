@@ -36,8 +36,8 @@
         "inView": true
     },
     {
-        "name": "question_id",
-        "dbType": "integer:unsigned:foreign,questions,id",
+        "name": "question_answer_id",
+        "dbType": "integer:unsigned:foreign,question_answers,id",
         "htmlType": "",
         "validations": "",
         "searchable": true,
@@ -45,30 +45,6 @@
         "primary": false,
         "inForm": true,
         "inIndex": true,
-        "inView": true
-    },
-    {
-        "name": "created_at",
-        "dbType": "timestamp",
-        "htmlType": "",
-        "validations": "",
-        "searchable": false,
-        "fillable": false,
-        "primary": false,
-        "inForm": false,
-        "inIndex": false,
-        "inView": true
-    },
-    {
-        "name": "updated_at",
-        "dbType": "timestamp",
-        "htmlType": "",
-        "validations": "",
-        "searchable": false,
-        "fillable": false,
-        "primary": false,
-        "inForm": false,
-        "inIndex": false,
         "inView": true
     },
     {

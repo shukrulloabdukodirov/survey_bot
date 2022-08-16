@@ -12,30 +12,6 @@
         "inView": true
     },
     {
-        "name": "name",
-        "dbType": "string",
-        "htmlType": "",
-        "validations": "required|boolean",
-        "searchable": false,
-        "fillable": true,
-        "primary": false,
-        "inForm": true,
-        "inIndex": true,
-        "inView": true
-    },
-    {
-        "name": "slug",
-        "dbType": "string",
-        "htmlType": "",
-        "validations": "required|boolean",
-        "searchable": false,
-        "fillable": true,
-        "primary": false,
-        "inForm": true,
-        "inIndex": true,
-        "inView": true
-    },
-    {
         "name": "status",
         "dbType": "boolean:default,1",
         "htmlType": "",

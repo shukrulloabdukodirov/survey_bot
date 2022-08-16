@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
+
     /**
      * The path to the "home" route for your application.
      *
@@ -33,15 +34,51 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
+    protected $survey_namespace = "Base\Survey\Application\Http\Controllers\Api";
+    protected $survey_dir = "base/Survey/Application/Http/Routes/";
+
+    protected $application_namespace = "Base\Application\Application\Http\Controllers\Api";
+    protected $application_dir = "base/Application/Application/Http/Routes/";
+
+    protected $resource_namespace = "Base\Resource\Application\Http\Controllers\Api";
+    protected $resource_dir = "base/Resource/Application/Http/Routes/";
+
+    protected $applicant_namespace = "Base\User\Applicant\Application\Http\Controllers\Api";
+    protected $applicant_dir = "base/User/Applicant/Application/Http/Routes/";
     public function boot()
     {
         $this->configureRateLimiting();
 
         $this->routes(function () {
+
+
             Route::prefix('api')
                 ->middleware('api')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
+
+            //            survey
+            Route::prefix('api/v1/survey')
+                ->middleware('api')
+                ->namespace($this->survey_namespace)
+                ->group(base_path($this->survey_dir . 'api.php'));
+            //            application
+            Route::prefix('api/v1/application')
+                ->middleware('api')
+                ->namespace($this->application_namespace)
+                ->group(base_path($this->application_dir . 'api.php'));
+
+            //            resource
+            Route::prefix('api/v1/resource')
+                ->middleware('api')
+                ->namespace($this->resource_namespace)
+                ->group(base_path($this->resource_dir . 'api.php'));
+
+            //            applicant
+            Route::prefix('api/v1/applicant')
+                ->middleware('api')
+                ->namespace($this->applicant_namespace)
+                ->group(base_path($this->applicant_dir . 'api.php'));
 
             Route::middleware('web')
                 ->namespace($this->namespace)

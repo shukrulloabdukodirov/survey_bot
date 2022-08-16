@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateEducationCenterSpecialtiesTable extends Migration
+{
+
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('education_center_specialties', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('education_center_id')->unsigned();
+            $table->integer('specialty_id')->unsigned();
+            $table->boolean('status')->default(1);
+            $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('education_center_id')->references('id')->on('education_centers');
+            $table->foreign('specialty_id')->references('id')->on('specialties');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('education_center_specialties');
+    }
+}

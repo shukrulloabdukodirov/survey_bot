@@ -1,17 +1,27 @@
 <?php
 $applicantParams = require __DIR__ . '/applicant_scheme_params.php';
 $surveyParams = require __DIR__ . '/survey_scheme_params.php';
+$resourceParams = require __DIR__ . '/resource_scheme_params.php';
+$applicationParams = require __DIR__ . '/application_scheme_params.php';
 $types = [
     'applicant_params',
-    'survey_params'
+    'survey_params',
+    'resource_params',
+    'application_params'
 ];
-$type = 'survey_params';
+$type = 'application_params';
 switch($type){
     case 'applicant_params':
         $params = $applicantParams;
         break;
     case 'survey_params':
         $params = $surveyParams;
+        break;
+    case 'resource_params':
+        $params = $resourceParams;
+        break;
+    case 'application_params':
+        $params = $applicationParams;
         break;
     default:
         $params = $applicantParams;
