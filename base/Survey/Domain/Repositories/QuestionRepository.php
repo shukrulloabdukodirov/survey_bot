@@ -4,6 +4,7 @@ namespace Base\Survey\Domain\Repositories;
 
 use Base\Survey\Domain\Models\Question;
 use App\Repositories\BaseRepository;
+use Illuminate\Container\Container as Application;
 
 /**
  * Class QuestionRepository
@@ -13,6 +14,11 @@ use App\Repositories\BaseRepository;
 
 class QuestionRepository extends BaseRepository
 {
+    public function __construct(Application $app)
+    {
+        parent::__construct($app);
+    }
+
     /**
      * @var array
      */
