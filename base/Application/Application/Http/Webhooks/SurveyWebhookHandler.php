@@ -6,6 +6,6 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 {
     public function hi()
     {
-        $this->chat->message('Hello')->send(); //hi
+        $this->chat->message('Hello bratish!!')->send(); //hi
     }
 }
