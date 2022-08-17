@@ -99,10 +99,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
         }
         else{
             $keyboard = ReplyKeyboard::make()
-                ->button("Waiting for input...")
-            ->button("Waiting for input...")
-            ->button("Waiting for input...")
-            ->button("Waiting for input...");
+                ->inputPlaceholder("Waiting for input...");
             $this->chat->message("$question->text")
                 ->replyKeyboard($keyboard
                     ->chunk(1))->send();
