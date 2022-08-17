@@ -2,6 +2,7 @@
 
 namespace Base\Application\Application\Http\Webhooks;
 
+use DefStudio\Telegraph\DTO\TelegramUpdate;
 use DefStudio\Telegraph\Facades\Telegraph;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
@@ -17,6 +18,6 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 ->buttons([
                     ReplyButton::make('Contact')->requestContact(),
                 ]))->send();
-        file_put_contents('telegram.txt',$this->message()->contact());
+        file_put_contents('telegram.txt',Telegraph::botUpdates());
     }
 }
