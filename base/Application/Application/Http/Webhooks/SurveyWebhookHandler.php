@@ -2,6 +2,7 @@
 
 namespace Base\Application\Application\Http\Webhooks;
 
+use Base\Resource\Domain\Models\City;
 use Base\Resource\Domain\Models\Region;
 use DefStudio\Telegraph\DTO\TelegramUpdate;
 use DefStudio\Telegraph\Facades\Telegraph;
@@ -23,7 +24,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             $regions = Region::all();
             $regionKeyboards = [];
             foreach ($regions as $region){
-                $regionKeyboards[] =  Button::make($region->name)->action('region')->param('id', $region->id);
+                $regionKeyboards[] =  Button::make($region->name)->action('city')->param('id', $region->id);
             }
             $this->chat->message('<b>Viloyatni tanlang</b>')->keyboard(Keyboard::make()
                 ->buttons($regionKeyboards)->chunk(1))
@@ -35,20 +36,34 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     {
         $this->chat->message('<b>Assalomu alaykum </b>'.$this->message->from()->username().' Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(ReplyKeyboard::make()
             ->buttons([
-                ReplyButton::make('Telefon raqamni yuborish')->requestContact(),
+                ReplyButton::make('Telefon raqamni yuborish')->requestContact()->oneTime(),
             ])->chunk(1))
             ->send();
     }
 
-    public function region(){
+    public function city(){
         $id = $this->data->get('id');
         $regions = Region::query()->find($id)->cities;
         $regionKeyboards = [];
         foreach ($regions as $region){
-            $regionKeyboards[] =  Button::make($region->name)->action('city')->param('id', $region->id);
+            $regionKeyboards[] =  Button::make($region->name)->action('educationCenter')->param('id', $region->id);
         }
         $this->chat->message('<b>Tuman yoki shaharni tanlang</b>')->keyboard(Keyboard::make()
             ->buttons($regionKeyboards)->chunk(1))
             ->send();
+    }
+    public function educationCenter(){
+        $id = $this->data->get('id');
+        $regions = City::query()->find($id)->educationCenters;
+        $regionKeyboards = [];
+        foreach ($regions as $region){
+            $regionKeyboards[] =  Button::make($region->name)->action('question')->param('id', $region->id);
+        }
+        $this->chat->message('<b>O\'quv markazini tanlang</b>')
+            ->send();
+    }
+
+    public function question(){
+
     }
 }
