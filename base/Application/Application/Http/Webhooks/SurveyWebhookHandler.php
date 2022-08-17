@@ -20,7 +20,9 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     {
         parent::handle($request, $bot);
 
-        if($this->message->contact()!==null){
+        if($request->has('contact')){
+            Log::info('contact-bor');
+            Log::info($request->all());
             $regions = Region::all();
             $regionKeyboards = [];
             foreach ($regions as $region){
@@ -55,6 +57,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     public function educationCenter(){
         $id = $this->data->get('id');
         $regions = City::query()->find($id)->educationCenters;
+        Log::info(json_encode($regions));
         $regionKeyboards = [];
         foreach ($regions as $region){
             $regionKeyboards[] =  Button::make($region->name)->action('question')->param('id', $region->id);
