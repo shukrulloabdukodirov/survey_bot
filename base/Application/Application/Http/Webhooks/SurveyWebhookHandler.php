@@ -8,6 +8,7 @@ use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
 use DefStudio\Telegraph\Keyboard\ReplyButton;
 use DefStudio\Telegraph\Keyboard\ReplyKeyboard;
+use Illuminate\Support\Facades\Log;
 
 class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 {
@@ -18,6 +19,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 ->buttons([
                     ReplyButton::make('Contact')->requestContact(),
                 ]))->send();
-        file_put_contents('telegram.txt',Telegraph::botUpdates());
+        Log::info();
+        file_put_contents('telegram.txt',$this->message->contact());
     }
 }
