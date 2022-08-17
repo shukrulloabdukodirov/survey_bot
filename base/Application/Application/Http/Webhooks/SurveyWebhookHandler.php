@@ -98,7 +98,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 ->send();
         }
         else{
-            $this->chat->message("$question->text")->chatAction('salom')->send();
+            $this->chat->message("$question->text")->chatAction('question')->send();
         }
 
     }
