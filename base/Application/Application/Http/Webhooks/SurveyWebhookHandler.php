@@ -91,7 +91,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
         Log::info($question);
         if($question->type == 2){
             foreach ($question->questionAnswers as $region){
-                $regionKeyboards[] =  Button::make($region->string)->action('question')->param('question_id', $region->id);
+                $regionKeyboards[] =  Button::make($region->string)->action('question')->param('question_id', $question->id);
             }
             $this->chat->message("$question->text")
                 ->keyboard(Keyboard::make()->buttons($regionKeyboards)->chunk(1))
