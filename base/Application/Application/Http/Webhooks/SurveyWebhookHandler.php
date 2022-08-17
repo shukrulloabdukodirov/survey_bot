@@ -98,7 +98,9 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 ->send();
         }
         else{
-            $this->chat->message("$question->text")->chatAction('question')->send();
+            $this->chat->message("$question->text")
+                ->replyKeyboard(ReplyKeyboard::make()->inputPlaceholder("Javobni yozing")
+                    ->chunk(1))->send();
         }
 
     }
