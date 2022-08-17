@@ -13,11 +13,11 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     public function start()
     {
         Telegraph::message('hello world')
-            ->replyKeyboard(function(Keyboard $keyboard){
-                return $keyboard
-                    ->button('foo')->requestPoll()
-                    ->button('bar')->requestQuiz()
-                    ->button('baz')->webApp('https://webapp.dev');
-            })->send();
+            ->keyboard(ReplyKeyboard::make()
+                ->buttons([
+                    ReplyButton::make('foo')->requestPoll(),
+                    ReplyButton::make('bar')->requestQuiz(),
+                    ReplyButton::make('baz')->webApp('https://webapp.dev'),
+                ]))->send();
     }
 }
