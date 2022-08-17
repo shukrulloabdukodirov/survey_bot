@@ -77,7 +77,14 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 
     public function question(){
         $id = $this->data->get('question_id');
-        $this->chat->message("$id")
-            ->send();
+        if(isset($id)&&!empty($id)){
+            $this->chat->message("$id")
+                ->send();
+        }
+        else{
+            $this->chat->message("Id yoq")
+                ->send();
+        }
+
     }
 }
