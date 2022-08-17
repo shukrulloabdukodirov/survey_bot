@@ -20,5 +20,6 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                     ReplyButton::make('Contact')->requestContact(),
                 ]))->send();
         Log::info(json_encode($response->body()));
+        Log::info(json_encode($this->message->toArray()));
     }
 }
