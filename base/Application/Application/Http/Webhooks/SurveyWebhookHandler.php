@@ -15,6 +15,6 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 Button::make("🗑️ Delete")->action("delete")->param('id', "1"),
                 Button::make("📖 Mark as Read")->action("read")->param('id', "1"),
                 Button::make("👀 Open")->url('https://test.it'),
-            ])->chunk(2))->send();
+            ])->chunk(1))->send();
     }
 }
