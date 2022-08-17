@@ -20,7 +20,7 @@ class EducationCenterSpeciality extends Model
 
     use HasFactory;
 
-    public $table = 'education_center_specialties';
+    public $table = 'education_center_specialities';
 
 
     protected $dates = ['deleted_at'];

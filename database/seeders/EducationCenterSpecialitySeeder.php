@@ -22,7 +22,7 @@ class EducationCenterSpecialitySeeder extends Seeder
             foreach ($specialities as $speciality){
                 $model = new EducationCenterSpeciality();
                 $model->education_center_id = $eduCenter->id;
-                $model->specialty_id = $speciality->id;
+                $model->speciality_id = $speciality->id;
                 $model->save();
             }
         }
