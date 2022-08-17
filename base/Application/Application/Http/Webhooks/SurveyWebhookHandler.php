@@ -22,9 +22,9 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 
     public function start()
     {
-        $this->chat->message('<b>Assalomu alaykum </b>'.$this->message->from()->username().'\n\n Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(ReplyKeyboard::make()
+        $this->chat->message('<b>Assalomu alaykum </b>'.$this->message->from()->username().'<br><br>Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(ReplyKeyboard::make()
             ->buttons([
-                ReplyButton::make('Telefon raqamni yuborish')->width(30)->requestContact(),
+                ReplyButton::make('Telefon raqamni yuborish')->width(1)->requestContact(),
             ])->chunk(1))
             ->send();
     }
