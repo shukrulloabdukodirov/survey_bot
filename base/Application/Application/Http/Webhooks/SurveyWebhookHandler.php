@@ -26,9 +26,8 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             foreach ($regions as $region){
                 $regionKeyboards[] =  Button::make($region->name)->action('city')->param('id', $region->id);
             }
-            $this->chat->message('<b>Viloyatni tanlang</b>')->keyboard(Keyboard::make()
+            $this->chat->message('<b>Viloyatni tanlang</b>')->removeReplyKeyboard()->keyboard(Keyboard::make()
                 ->buttons($regionKeyboards)->chunk(1))
-                ->removeReplyKeyboard()
                 ->send();
         }
     }
