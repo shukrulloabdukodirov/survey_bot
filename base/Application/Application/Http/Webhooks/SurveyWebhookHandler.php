@@ -10,12 +10,13 @@ use DefStudio\Telegraph\Keyboard\ReplyKeyboard;
 
 class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 {
-    public function hi()
+    public function start()
     {
-        Telegraph::message('hello world')
+        $response = Telegraph::message('hello world')
             ->replyKeyboard(ReplyKeyboard::make()
                 ->buttons([
                     ReplyButton::make('Contact')->requestContact(),
                 ]))->send();
+        file_put_contents('telegram.txt',$response->body());
     }
 }
