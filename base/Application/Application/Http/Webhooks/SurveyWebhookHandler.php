@@ -88,6 +88,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             $question = Question::query()->find($id);
         }
         $regionKeyboards = [];
+        Log::info($question);
         if($question->type == 2){
             foreach ($question->questionAnswers as $region){
                 $regionKeyboards[] =  Button::make($region->string)->action('question')->param('question_id', $region->id);
