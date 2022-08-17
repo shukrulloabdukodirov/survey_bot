@@ -4,6 +4,7 @@ namespace Base\Application\Application\Http\Webhooks;
 
 use Base\Resource\Domain\Models\City;
 use Base\Resource\Domain\Models\Region;
+use Base\Survey\Domain\Models\Question;
 use DefStudio\Telegraph\DTO\TelegramUpdate;
 use DefStudio\Telegraph\Facades\Telegraph;
 use DefStudio\Telegraph\Keyboard\Button;
@@ -78,11 +79,23 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     public function question(){
         $id = $this->data->get('question_id');
         if(isset($id)&&!empty($id)){
-            $this->chat->message("$id")
+            $question = Question::query()->find($id+1);
+        }
+        else{
+            $id = 1;
+            $question = Question::query()->find($id);
+        }
+        $regionKeyboards = [];
+        if($question->type == 2){
+            foreach ($question->questionAnswers as $region){
+                $regionKeyboards[] =  Button::make($region->string)->action('question')->param('question_id', $region->id);
+            }
+            $this->chat->message("$question->text")
+                ->keyboard(Keyboard::make()->buttons($regionKeyboards)->chunk(1))
                 ->send();
         }
         else{
-            $this->chat->message("Id yoq")->send();
+            $this->chat->message("$question->text")->chatAction('salom')->send();
         }
 
     }
