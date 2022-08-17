@@ -21,5 +21,6 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 ]))->send();
         Log::info(json_encode($response->body()));
         Log::debug(json_encode($this->data));
+        Log::error(json_encode($this->callbackQuery->data()));
     }
 }
