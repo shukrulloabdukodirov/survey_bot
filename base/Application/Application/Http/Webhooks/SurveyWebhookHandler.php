@@ -17,9 +17,14 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $response = Telegraph::message('hello world')
             ->replyKeyboard(ReplyKeyboard::make()
                 ->buttons([
-                    ReplyButton::make('Contact')->requestContact(),
+                    ReplyButton::make('Contact')->action('phone')->requestContact(),
                 ]))->send();
         Log::info(json_encode($response->body()));
+        Log::debug(json_encode($this->data));
+        Log::error(json_encode($this->callbackQuery->data()));
+    }
+
+    public function phone(){
         Log::debug(json_encode($this->data));
         Log::error(json_encode($this->callbackQuery->data()));
     }
