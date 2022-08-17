@@ -2,6 +2,7 @@
 
 namespace Base\Application\Application\Http\Webhooks;
 
+use Base\Resource\Domain\Models\Region;
 use DefStudio\Telegraph\DTO\TelegramUpdate;
 use DefStudio\Telegraph\Facades\Telegraph;
 use DefStudio\Telegraph\Keyboard\Button;
@@ -16,8 +17,18 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 {
     public function handle(Request $request, TelegraphBot $bot): void
     {
-        Log::error(json_encode($request->all()));
         parent::handle($request, $bot);
+
+        if($this->message->contact()!==null){
+            $regions = Region::all();
+            $regionKeyboards = [];
+            foreach ($regions as $region){
+                $regionKeyboards[] =  Button::make($region->name)->action('region')->param('id', $region->id);
+            }
+            $this->chat->message('<b>Viloyatni tanlang</b>')->keyboard(Keyboard::make()
+                ->buttons($regionKeyboards)->chunk(1))
+                ->send();
+        }
     }
 
     public function start()
