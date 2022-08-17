@@ -39,7 +39,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     {
         $this->chat->message('<b>Assalomu alaykum </b>'.$this->message->from()->username().' Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(ReplyKeyboard::make()
             ->buttons([
-                ReplyButton::make('Telefon raqamni yuborish')->requestContact()->width(0.3),
+                ReplyButton::make('Telefon raqamni yuborish')->requestContact()->width(0.1),
             ])->chunk(1)->resize()->oneTime())
             ->send();
     }
@@ -58,7 +58,9 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     public function educationCenter(){
         $id = $this->data->get('id');
         $regions = City::query()->find($id)->educationCenters;
-        Log::info(json_encode($regions));
+        if(empty($regions)){
+            $this->chat->message('<b>O\'quv markazini topilmadi</b>')->send();
+        }
         $regionKeyboards = [];
         foreach ($regions as $region){
             $regionKeyboards[] =  Button::make($region->name)->action('question')->param('id', $region->id);
