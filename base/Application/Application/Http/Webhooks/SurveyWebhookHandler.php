@@ -58,7 +58,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     public function educationCenter(){
         $id = $this->data->get('id');
         $regions = City::query()->find($id)->educationCenters;
-        if(empty($regions)){
+        if($regions->isEmpty()){
             $this->chat->message('<b>O\'quv markazini topilmadi</b>')->send();
         }
         $regionKeyboards = [];
