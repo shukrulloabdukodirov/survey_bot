@@ -9,10 +9,6 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 {
     public function hi()
     {
-        $this->chat->message('Hello bratish!!')->keyboard(Keyboard::make()->buttons([
-            Button::make("🗑️ Delete")->action("delete")->param('id',1),
-            Button::make("📖 Mark as Read")->action("read")->param('id', 1),
-            Button::make("👀 Open")->url('https://test.it'),
-        ])->chunk(2))->send(); //hi
+        $this->chat->message('Hello bratish!!')->send(); //hi
     }
 }
