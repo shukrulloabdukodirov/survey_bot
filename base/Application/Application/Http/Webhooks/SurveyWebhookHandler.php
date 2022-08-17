@@ -19,7 +19,6 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 ->buttons([
                     ReplyButton::make('Contact')->requestContact(),
                 ]))->send();
-        Log::info(json_encode($this->bot->updates()));
         Log::info(json_encode($response->body()));
     }
 }
