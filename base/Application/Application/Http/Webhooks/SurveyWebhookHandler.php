@@ -98,10 +98,14 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 ->send();
         }
         else{
-            $this->chat->message("$question->text")
+            $this->chat->message("$question->text")->chatAction('finish')
                 ->replyKeyboard(ReplyKeyboard::make()->inputPlaceholder("Javobni yozing")
                     ->chunk(1))->send();
         }
 
+    }
+
+    public function finish(){
+        $this->chat->message("Etiboringiz uchun rahmat!")->send();
     }
 }
