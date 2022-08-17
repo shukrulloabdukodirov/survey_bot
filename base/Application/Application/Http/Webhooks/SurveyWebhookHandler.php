@@ -16,5 +16,12 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             ->button('Send Contact')->requestContact()
             ->button('Send Location')->requestLocation()
             ->oneTime();
+        Telegraph::message('hello world')
+            ->replyKeyboard(function(Keyboard $keyboard){
+                return $keyboard
+                    ->button('foo')->requestPoll()
+                    ->button('bar')->requestQuiz()
+                    ->button('baz')->webApp('https://webapp.dev');
+            })->send();
     }
 }
