@@ -40,6 +40,15 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             ->send();
     }
 
-    public function phone(){
+    public function region(){
+        $id = $this->data->get('id');
+        $regions = Region::query()->find($id)->cities;
+        $regionKeyboards = [];
+        foreach ($regions as $region){
+            $regionKeyboards[] =  Button::make($region->name)->action('city')->param('id', $region->id);
+        }
+        $this->chat->message('<b>Tuman yoki shaharni tanlang</b>')->keyboard(Keyboard::make()
+            ->buttons($regionKeyboards)->chunk(1))
+            ->send();
     }
 }
