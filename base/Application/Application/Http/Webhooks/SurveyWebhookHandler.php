@@ -12,10 +12,6 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 {
     public function start()
     {
-        $keyboard = ReplyKeyboard::make()
-            ->button('Send Contact')->requestContact()
-            ->button('Send Location')->requestLocation()
-            ->oneTime();
         Telegraph::message('hello world')
             ->replyKeyboard(function(Keyboard $keyboard){
                 return $keyboard
