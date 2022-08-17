@@ -82,8 +82,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 ->send();
         }
         else{
-            $this->chat->message("Id yoq")
-                ->send();
+            $this->chat->message("Id yoq")->send();
         }
 
     }
