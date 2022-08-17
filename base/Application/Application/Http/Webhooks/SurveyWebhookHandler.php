@@ -16,13 +16,13 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 {
     public function handle(Request $request, TelegraphBot $bot): void
     {
-        Log::info(json_encode($request->all()));
+        Log::error(json_encode($request->all()));
         parent::handle($request, $bot);
     }
 
     public function start()
     {
-        $this->chat->message('<b>Assalomu alaykum </b>'.$this->message->from()->username().'Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(ReplyKeyboard::make()
+        $this->chat->message('<b>Assalomu alaykum </b>'.$this->message->from()->username().' Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(ReplyKeyboard::make()
             ->buttons([
                 ReplyButton::make('Telefon raqamni yuborish')->requestContact(),
             ])->chunk(1))
