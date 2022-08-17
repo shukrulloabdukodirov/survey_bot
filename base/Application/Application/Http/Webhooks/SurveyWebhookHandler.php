@@ -29,6 +29,8 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             foreach ($regions as $region){
                 $regionKeyboards[] =  Button::make($region->name)->action('city')->param('id', $region->id);
             }
+            $this->chat->removeReplyKeyboard()
+                ->send();
             $this->chat->message('<b>Viloyatni tanlang</b>')->removeReplyKeyboard()->keyboard(Keyboard::make()
                 ->buttons($regionKeyboards)->chunk(1))
                 ->send();
@@ -61,13 +63,16 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
         if($regions->isEmpty()){
             $this->chat->message('<b>O\'quv markazini topilmadi</b>')->send();
         }
-        $regionKeyboards = [];
-        foreach ($regions as $region){
-            $regionKeyboards[] =  Button::make($region->name)->action('question')->param('id', $region->id);
+        else{
+            $regionKeyboards = [];
+            foreach ($regions as $region){
+                $regionKeyboards[] =  Button::make($region->name)->action('question')->param('id', $region->id);
+            }
+            $this->chat->message('<b>O\'quv markazini tanlang</b>')
+                ->keyboard(Keyboard::make()->buttons($regionKeyboards)->chunk(1))
+                ->send();
         }
-        $this->chat->message('<b>O\'quv markazini tanlang</b>')
-            ->keyboard(Keyboard::make()->buttons($regionKeyboards)->chunk(1))
-            ->send();
+
     }
 
     public function question(){
