@@ -23,11 +23,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 
     public function start()
     {
-        $this->bot->chats()->create([
-            'chat_id'=>$this->chat->chat_id,
-            'name'=>$this->message->from()->username()
-        ]);
-        $this->chat->message('Salom'.$this->message->from()->username())->send();
+
     }
 
     public function phone(){
