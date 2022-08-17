@@ -18,12 +18,15 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     {
         Log::info(json_encode($request->all()));
         parent::handle($request, $bot);
-        $this->message->contact();
     }
 
     public function start()
     {
-
+        $this->chat->message('<b>Assalomu alaykum </b>'.$this->message->from().'\n\n Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(ReplyKeyboard::make()
+            ->buttons([
+                ReplyButton::make('Telefon raqamni yuborish')->width(30)->requestContact(),
+            ])->chunk(1))
+            ->send();
     }
 
     public function phone(){
