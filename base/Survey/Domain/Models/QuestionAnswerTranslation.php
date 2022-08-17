@@ -23,11 +23,11 @@ class QuestionAnswerTranslation extends Model
     use HasFactory;
 
     public $table = 'question_answer_translations';
-    
+
 
     protected $dates = ['deleted_at'];
 
-
+    public $timestamps = false;
 
     public $fillable = [
         'string',
@@ -53,7 +53,7 @@ class QuestionAnswerTranslation extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
     /**

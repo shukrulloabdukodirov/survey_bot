@@ -1,0 +1,150 @@
+[
+    {
+        "name_uz": "Ta'lim sifatini qanday baholaysiz?",
+        "type": 2,
+        "answers": [
+            {
+                "name":"A'lo"
+            },
+            {
+                "name":"Yaxshi"
+            },
+            {
+                "name":"O'rta"
+            }
+        ]
+    },
+    {
+        "name_uz": "Ta'lim jarayonining tashkilliy ishlarini qanday baholaysiz?",
+        "type": 2,
+        "answers": [
+            {
+                "name":"A'lo"
+            },
+            {
+                "name":"Yaxshi"
+            },
+            {
+                "name":"O'rta"
+            }
+        ]
+    },
+    {
+        "name_uz": "O'zingizning o'qigan kasb-hunar bo'yicha o'qitish sifatini qanday baholaysiz?",
+        "type": 2,
+        "answers": [
+            {
+                "name":"A'lo"
+            },
+            {
+                "name":"Yaxshi"
+            },
+            {
+                "name":"O'rta"
+            }
+        ]
+    },
+    {
+        "name_uz": "Ta’lim muassasida korruptsiya duch keldingizmi? (rahbariyat, o'qituvchilar va boshqalar orasida)",
+        "type": 2,
+        "answers": [
+            {
+                "name":"Men shaxsan duch kelmaganman"
+            },
+            {
+                "name":"Guruhdoshlarim bunga duch kelishdi"
+            },
+            {
+                "name":"Men bu haqda hech narsa bilmayman"
+            }
+        ]
+    },
+    {
+        "name_uz": "Sizning o'quv jarayoningizdagi o'quv-uslubiy yoki ilmiy adabiyotlar bilan etarli darajada ta'minlanganini baholang",
+        "type": 2,
+        "answers": [
+            {
+                "name":"Ta'minlangan"
+            },
+            {
+                "name":"Ta'minlanmagan"
+            },
+            {
+                "name":"Qisman ta'minlangan"
+            }
+        ]
+    },
+    {
+        "name_uz": "Siz dars jarayonida o‘z sohangiz bo’yicha amaliy mashg‘ulotlar o‘tkazilganligini baholang",
+        "type": 2,
+        "answers": [
+            {
+                "name":"Amaliy darslar o'tkazildi"
+            },
+            {
+                "name":"Amaliy darslar o'tkazilmadi"
+            }
+        ]
+    },
+    {
+        "name_uz": "Ta'lim muassasasi sizga axborot resurslaridan foydalanish imkoniyatini taqdim etishini baholang. (elektron darsliklar, internet)",
+        "type": 2,
+        "answers": [
+            {
+                "name":"Foydalandim"
+            },
+            {
+                "name":"Foydalanmadim"
+            }
+        ]
+    },
+    {
+        "name_uz": "O'qituvchilarning vazifalarini o'z vaqtida bajarishini baholang",
+        "type": 2,
+        "answers": [
+            {
+                "name":"A'lo"
+            },
+            {
+                "name":"Yaxshi"
+            },
+            {
+                "name":"O'rta"
+            }
+        ]
+    },
+    {
+        "name_uz": "O'qituvchilarning o’z ishiga nisbatdan bo’lgan ma’suliyatini baholang",
+        "type": 2,
+        "answers": [
+            {
+                "name":"A'lo"
+            },
+            {
+                "name":"Yaxshi"
+            },
+            {
+                "name":"O'rta"
+            }
+        ]
+    },
+    {
+        "name_uz": "O'qituvchining bilim va tajribasini qanday baholaysiz?",
+        "type": 2,
+        "answers": [
+            {
+                "name":"A'lo"
+            },
+            {
+                "name":"Yaxshi"
+            },
+            {
+                "name":"O'rta"
+            }
+        ]
+    },
+    {
+        "name_uz": "Sizda taqdim etilayotgan ta'lim xizmatlari sifatini oshirish va o’quv jarayonidan tashqari ishlarni tashkil qilish bo'yicha fikrlaringiz bormi? Istaklaringizni yozing",
+        "type": 1
+    }
+]

@@ -23,11 +23,11 @@ class SurveyTranslation extends Model
     use HasFactory;
 
     public $table = 'survey_translations';
-    
+
 
     protected $dates = ['deleted_at'];
 
-
+    public $timestamps = false;
 
     public $fillable = [
         'name',
@@ -53,7 +53,7 @@ class SurveyTranslation extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
     /**

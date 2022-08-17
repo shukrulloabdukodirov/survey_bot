@@ -2,6 +2,7 @@
 
 namespace Base\Survey\Domain\Models;
 
+use Astrotomic\Translatable\Translatable;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,12 +22,14 @@ class QuestionAnswer extends Model
 
     use HasFactory;
 
+    use Translatable;
+
     public $table = 'question_answers';
-    
+
 
     protected $dates = ['deleted_at'];
 
-
+    public $translatedAttributes = ['string'];
 
     public $fillable = [
         'status',
