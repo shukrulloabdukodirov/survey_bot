@@ -98,8 +98,12 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 ->send();
         }
         else{
+            $keyboard = ReplyKeyboard::make()
+                ->button('Send Contact')->requestContact()
+                ->button('Send Location')->requestLocation()
+                ->inputPlaceholder("Waiting for input...");
             $this->chat->message("$question->text")
-                ->replyKeyboard(ReplyKeyboard::make()->inputPlaceholder("Javobni yozing")
+                ->replyKeyboard($keyboard
                     ->chunk(1))->send();
         }
 
