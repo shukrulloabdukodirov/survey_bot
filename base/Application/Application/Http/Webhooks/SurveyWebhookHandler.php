@@ -19,9 +19,9 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     public function handle(Request $request, TelegraphBot $bot): void
     {
         parent::handle($request, $bot);
-        Log::info('contact-bor');
-        Log::info($request->all());
-        if($request->has('contact')){
+        $data = $request->all();
+
+        if(isset($data['message']['contact'])&&!empty($data['message']['contact'])){
             Log::info('contact-bor');
             Log::info($request->all());
             $regions = Region::all();
