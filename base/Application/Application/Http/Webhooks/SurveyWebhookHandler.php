@@ -79,7 +79,9 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     public function question(){
         $id = $this->data->get('question_id');
         if(isset($id)&&!empty($id)){
-            $question = Question::query()->find($id+1);
+
+            $nextUserId = Question::query()->where('id', '>', $id)->min('id');
+            $question = Question::query()->find($nextUserId);
         }
         else{
             $id = 1;
