@@ -28,6 +28,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             }
             $this->chat->message('<b>Viloyatni tanlang</b>')->keyboard(Keyboard::make()
                 ->buttons($regionKeyboards)->chunk(1))
+                ->removeReplyKeyboard()
                 ->send();
         }
     }
@@ -60,6 +61,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             $regionKeyboards[] =  Button::make($region->name)->action('question')->param('id', $region->id);
         }
         $this->chat->message('<b>O\'quv markazini tanlang</b>')
+            ->keyboard(Keyboard::make()->buttons($regionKeyboards)->chunk(1))
             ->send();
     }
 
