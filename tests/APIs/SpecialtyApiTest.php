@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
-use Base\Resource\Domain\Models\Specialty;
+use Base\Resource\Domain\Models\Speciality;
 
 class SpecialtyApiTest extends TestCase
 {
@@ -15,7 +15,7 @@ class SpecialtyApiTest extends TestCase
      */
     public function test_create_specialty()
     {
-        $specialty = Specialty::factory()->make()->toArray();
+        $specialty = Speciality::factory()->make()->toArray();
 
         $this->response = $this->json(
             'POST',
@@ -30,7 +30,7 @@ class SpecialtyApiTest extends TestCase
      */
     public function test_read_specialty()
     {
-        $specialty = Specialty::factory()->create();
+        $specialty = Speciality::factory()->create();
 
         $this->response = $this->json(
             'GET',
@@ -45,8 +45,8 @@ class SpecialtyApiTest extends TestCase
      */
     public function test_update_specialty()
     {
-        $specialty = Specialty::factory()->create();
-        $editedSpecialty = Specialty::factory()->make()->toArray();
+        $specialty = Speciality::factory()->create();
+        $editedSpecialty = Speciality::factory()->make()->toArray();
 
         $this->response = $this->json(
             'PUT',
@@ -62,7 +62,7 @@ class SpecialtyApiTest extends TestCase
      */
     public function test_delete_specialty()
     {
-        $specialty = Specialty::factory()->create();
+        $specialty = Speciality::factory()->create();
 
         $this->response = $this->json(
             'DELETE',

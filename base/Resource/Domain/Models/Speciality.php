@@ -2,36 +2,36 @@
 
 namespace Base\Resource\Domain\Models;
 
+use Astrotomic\Translatable\Translatable;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Class SpecialtyTranslation
+ * Class Specialty
  * @package Base\Resource\Domain\Models
  * @version August 11, 2022, 1:52 pm UTC
  *
- * @property string $name
- * @property string $locale
- * @property integer $specialty_id
+ * @property boolean $status
  */
-class SpecialtyTranslation extends Model
+class Speciality extends Model
 {
     use SoftDeletes;
 
     use HasFactory;
 
-    public $table = 'specialty_translations';
-    
+    use Translatable;
+
+    public $table = 'specialities';
+
+    public $translatedAttributes = ['name'];
 
     protected $dates = ['deleted_at'];
 
 
 
     public $fillable = [
-        'name',
-        'locale',
-        'specialty_id'
+        'status'
     ];
 
     /**
@@ -41,9 +41,7 @@ class SpecialtyTranslation extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'name' => 'string',
-        'locale' => 'string',
-        'specialty_id' => 'integer'
+        'status' => 'boolean'
     ];
 
     /**
@@ -52,8 +50,8 @@ class SpecialtyTranslation extends Model
      * @var array
      */
     public static $rules = [
-        
+        'status' => 'required|boolean'
     ];
 
-    
+
 }

@@ -4,8 +4,8 @@ namespace Base\Resource\Application\Http\Controllers\Api\V1;
 
 use Base\Resource\Application\Http\Requests\Api\V1\CreateSpecialtyTranslationAPIRequest;
 use Base\Resource\Application\Http\Requests\Api\V1\UpdateSpecialtyTranslationAPIRequest;
-use Base\Resource\Domain\Models\SpecialtyTranslation;
-use Base\Resource\Domain\Repositories\SpecialtyTranslationRepository;
+use Base\Resource\Domain\Models\SpecialityTranslation;
+use Base\Resource\Domain\Repositories\SpecialityTranslationRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -15,12 +15,12 @@ use Response;
  * @package Base\Resource\Application\Http\Controllers\Api\V1
  */
 
-class SpecialtyTranslationAPIController extends AppBaseController
+class SpecialityTranslationAPIController extends AppBaseController
 {
-    /** @var  SpecialtyTranslationRepository */
+    /** @var  SpecialityTranslationRepository */
     private $specialtyTranslationRepository;
 
-    public function __construct(SpecialtyTranslationRepository $specialtyTranslationRepo)
+    public function __construct(SpecialityTranslationRepository $specialtyTranslationRepo)
     {
         $this->specialtyTranslationRepository = $specialtyTranslationRepo;
     }
@@ -70,7 +70,7 @@ class SpecialtyTranslationAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var SpecialtyTranslation $specialtyTranslation */
+        /** @var SpecialityTranslation $specialtyTranslation */
         $specialtyTranslation = $this->specialtyTranslationRepository->find($id);
 
         if (empty($specialtyTranslation)) {
@@ -93,7 +93,7 @@ class SpecialtyTranslationAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        /** @var SpecialtyTranslation $specialtyTranslation */
+        /** @var SpecialityTranslation $specialtyTranslation */
         $specialtyTranslation = $this->specialtyTranslationRepository->find($id);
 
         if (empty($specialtyTranslation)) {
@@ -117,7 +117,7 @@ class SpecialtyTranslationAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var SpecialtyTranslation $specialtyTranslation */
+        /** @var SpecialityTranslation $specialtyTranslation */
         $specialtyTranslation = $this->specialtyTranslationRepository->find($id);
 
         if (empty($specialtyTranslation)) {

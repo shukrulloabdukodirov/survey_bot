@@ -1,7 +1,7 @@
 <?php namespace Tests\Repositories;
 
-use Base\Resource\Domain\Models\SpecialtyTranslation;
-use Base\Resource\Domain\Repositories\SpecialtyTranslationRepository;
+use Base\Resource\Domain\Models\SpecialityTranslation;
+use Base\Resource\Domain\Repositories\SpecialityTranslationRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
@@ -11,14 +11,14 @@ class SpecialtyTranslationRepositoryTest extends TestCase
     use ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var SpecialtyTranslationRepository
+     * @var SpecialityTranslationRepository
      */
     protected $specialtyTranslationRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->specialtyTranslationRepo = \App::make(SpecialtyTranslationRepository::class);
+        $this->specialtyTranslationRepo = \App::make(SpecialityTranslationRepository::class);
     }
 
     /**
@@ -26,14 +26,14 @@ class SpecialtyTranslationRepositoryTest extends TestCase
      */
     public function test_create_specialty_translation()
     {
-        $specialtyTranslation = SpecialtyTranslation::factory()->make()->toArray();
+        $specialtyTranslation = SpecialityTranslation::factory()->make()->toArray();
 
         $createdSpecialtyTranslation = $this->specialtyTranslationRepo->create($specialtyTranslation);
 
         $createdSpecialtyTranslation = $createdSpecialtyTranslation->toArray();
         $this->assertArrayHasKey('id', $createdSpecialtyTranslation);
         $this->assertNotNull($createdSpecialtyTranslation['id'], 'Created SpecialtyTranslation must have id specified');
-        $this->assertNotNull(SpecialtyTranslation::find($createdSpecialtyTranslation['id']), 'SpecialtyTranslation with given id must be in DB');
+        $this->assertNotNull(SpecialityTranslation::find($createdSpecialtyTranslation['id']), 'SpecialtyTranslation with given id must be in DB');
         $this->assertModelData($specialtyTranslation, $createdSpecialtyTranslation);
     }
 
@@ -42,7 +42,7 @@ class SpecialtyTranslationRepositoryTest extends TestCase
      */
     public function test_read_specialty_translation()
     {
-        $specialtyTranslation = SpecialtyTranslation::factory()->create();
+        $specialtyTranslation = SpecialityTranslation::factory()->create();
 
         $dbSpecialtyTranslation = $this->specialtyTranslationRepo->find($specialtyTranslation->id);
 
@@ -55,8 +55,8 @@ class SpecialtyTranslationRepositoryTest extends TestCase
      */
     public function test_update_specialty_translation()
     {
-        $specialtyTranslation = SpecialtyTranslation::factory()->create();
-        $fakeSpecialtyTranslation = SpecialtyTranslation::factory()->make()->toArray();
+        $specialtyTranslation = SpecialityTranslation::factory()->create();
+        $fakeSpecialtyTranslation = SpecialityTranslation::factory()->make()->toArray();
 
         $updatedSpecialtyTranslation = $this->specialtyTranslationRepo->update($fakeSpecialtyTranslation, $specialtyTranslation->id);
 
@@ -70,11 +70,11 @@ class SpecialtyTranslationRepositoryTest extends TestCase
      */
     public function test_delete_specialty_translation()
     {
-        $specialtyTranslation = SpecialtyTranslation::factory()->create();
+        $specialtyTranslation = SpecialityTranslation::factory()->create();
 
         $resp = $this->specialtyTranslationRepo->delete($specialtyTranslation->id);
 
         $this->assertTrue($resp);
-        $this->assertNull(SpecialtyTranslation::find($specialtyTranslation->id), 'SpecialtyTranslation should not exist in DB');
+        $this->assertNull(SpecialityTranslation::find($specialtyTranslation->id), 'SpecialtyTranslation should not exist in DB');
     }
 }

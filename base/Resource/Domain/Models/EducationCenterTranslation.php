@@ -2,6 +2,7 @@
 
 namespace Base\Resource\Domain\Models;
 
+use Astrotomic\Translatable\Translatable;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,8 +22,10 @@ class EducationCenterTranslation extends Model
 
     use HasFactory;
 
+    public $timestamps = false;
+
     public $table = 'education_center_translations';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -52,8 +55,8 @@ class EducationCenterTranslation extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    
+
 }

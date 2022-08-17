@@ -7,27 +7,32 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Class Specialty
+ * Class SpecialtyTranslation
  * @package Base\Resource\Domain\Models
  * @version August 11, 2022, 1:52 pm UTC
  *
- * @property boolean $status
+ * @property string $name
+ * @property string $locale
+ * @property integer $specialty_id
  */
-class Specialty extends Model
+class SpecialityTranslation extends Model
 {
     use SoftDeletes;
 
     use HasFactory;
 
-    public $table = 'specialties';
-    
+    public $table = 'speciality_translations';
+
+    public $timestamps = false;
 
     protected $dates = ['deleted_at'];
 
 
 
     public $fillable = [
-        'status'
+        'name',
+        'locale',
+        'speciality_id'
     ];
 
     /**
@@ -37,7 +42,9 @@ class Specialty extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'status' => 'boolean'
+        'name' => 'string',
+        'locale' => 'string',
+        'speciality_id' => 'integer'
     ];
 
     /**
@@ -46,8 +53,8 @@ class Specialty extends Model
      * @var array
      */
     public static $rules = [
-        'status' => 'required|boolean'
+
     ];
 
-    
+
 }

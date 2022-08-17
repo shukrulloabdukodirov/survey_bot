@@ -17,16 +17,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class CityTranslation extends Model
 {
+
     use SoftDeletes;
 
     use HasFactory;
 
     public $table = 'city_translations';
-    
+
+    public $timestamps = false;
 
     protected $dates = ['deleted_at'];
-
-
 
     public $fillable = [
         'name',
@@ -52,8 +52,8 @@ class CityTranslation extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    
+
 }

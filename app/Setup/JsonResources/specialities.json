@@ -1,0 +1,61 @@
+[
+    {
+        "title": "Xizmatlar",
+        "items": [
+            "Ofitsiant",
+            "Qandolat oshpazi",
+            "Oshpaz",
+            "Tikuvchi(dizayner+modeler)",
+            "Masaj terapevti",
+            "Enaga",
+            "Tirnoq bo'yicha texnik",
+            "Erkak soch stilisti",
+            "Soch ustasi",
+            "Kosmetolog"
+        ]
+    },
+    {
+        "title": "Texniklar",
+        "items": [
+            "Payvandchi",
+            "Tokarlik operatori",
+            "Frezator operatori",
+            "Chalangar",
+            "Maishiy texnikani ta'mirlash",
+            "Elektromontyor",
+            "Ko'tarish mashinalari operatori"
+        ]
+    },
+    {
+        "title": "Raqamli texnologiyalar",
+        "items": [
+            "Kompyuter savodxonligi",
+            "Veb-dizayn"
+        ]
+    },
+    {
+        "title": "Fuqarolik ishi",
+        "items": [
+            "Alyuminiy va plastmassa profillarni qoplash",
+            "Gips-karton qoplamasi",
+            "Masonlik",
+            "Rassom va shuvoqchi"
+        ]
+    },
+    {
+        "title": "Tadbirkorlik kurslari",
+        "items": [
+            "Tadbirkorlik kurslari"
+        ]
+    },
+    {
+        "title": "Xorijiy tillar",
+        "items": [
+            "Rus tili",
+            "Ingliz tili",
+            "Koreys",
+            "Xitoy",
+            "Yapon titli"
+        ]
+    }
+]

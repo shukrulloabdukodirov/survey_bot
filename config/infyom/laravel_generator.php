@@ -9,7 +9,7 @@ $types = [
     'resource_params',
     'application_params'
 ];
-$type = 'application_params';
+$type = 'resource_params';
 switch($type){
     case 'applicant_params':
         $params = $applicantParams;

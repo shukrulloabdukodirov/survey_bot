@@ -1,7 +1,7 @@
 <?php namespace Tests\Repositories;
 
-use Base\Resource\Domain\Models\Specialty;
-use Base\Resource\Domain\Repositories\SpecialtyRepository;
+use Base\Resource\Domain\Models\Speciality;
+use Base\Resource\Domain\Repositories\SpecialityRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
@@ -11,14 +11,14 @@ class SpecialtyRepositoryTest extends TestCase
     use ApiTestTrait, DatabaseTransactions;
 
     /**
-     * @var SpecialtyRepository
+     * @var SpecialityRepository
      */
     protected $specialtyRepo;
 
     public function setUp() : void
     {
         parent::setUp();
-        $this->specialtyRepo = \App::make(SpecialtyRepository::class);
+        $this->specialtyRepo = \App::make(SpecialityRepository::class);
     }
 
     /**
@@ -26,14 +26,14 @@ class SpecialtyRepositoryTest extends TestCase
      */
     public function test_create_specialty()
     {
-        $specialty = Specialty::factory()->make()->toArray();
+        $specialty = Speciality::factory()->make()->toArray();
 
         $createdSpecialty = $this->specialtyRepo->create($specialty);
 
         $createdSpecialty = $createdSpecialty->toArray();
         $this->assertArrayHasKey('id', $createdSpecialty);
         $this->assertNotNull($createdSpecialty['id'], 'Created Specialty must have id specified');
-        $this->assertNotNull(Specialty::find($createdSpecialty['id']), 'Specialty with given id must be in DB');
+        $this->assertNotNull(Speciality::find($createdSpecialty['id']), 'Specialty with given id must be in DB');
         $this->assertModelData($specialty, $createdSpecialty);
     }
 
@@ -42,7 +42,7 @@ class SpecialtyRepositoryTest extends TestCase
      */
     public function test_read_specialty()
     {
-        $specialty = Specialty::factory()->create();
+        $specialty = Speciality::factory()->create();
 
         $dbSpecialty = $this->specialtyRepo->find($specialty->id);
 
@@ -55,8 +55,8 @@ class SpecialtyRepositoryTest extends TestCase
      */
     public function test_update_specialty()
     {
-        $specialty = Specialty::factory()->create();
-        $fakeSpecialty = Specialty::factory()->make()->toArray();
+        $specialty = Speciality::factory()->create();
+        $fakeSpecialty = Speciality::factory()->make()->toArray();
 
         $updatedSpecialty = $this->specialtyRepo->update($fakeSpecialty, $specialty->id);
 
@@ -70,11 +70,11 @@ class SpecialtyRepositoryTest extends TestCase
      */
     public function test_delete_specialty()
     {
-        $specialty = Specialty::factory()->create();
+        $specialty = Speciality::factory()->create();
 
         $resp = $this->specialtyRepo->delete($specialty->id);
 
         $this->assertTrue($resp);
-        $this->assertNull(Specialty::find($specialty->id), 'Specialty should not exist in DB');
+        $this->assertNull(Speciality::find($specialty->id), 'Specialty should not exist in DB');
     }
 }

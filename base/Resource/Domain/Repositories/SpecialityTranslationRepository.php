@@ -2,22 +2,24 @@
 
 namespace Base\Resource\Domain\Repositories;
 
-use Base\Resource\Domain\Models\Specialty;
+use Base\Resource\Domain\Models\SpecialityTranslation;
 use App\Repositories\BaseRepository;
 
 /**
- * Class SpecialtyRepository
+ * Class SpecialtyTranslationRepository
  * @package Base\Resource\Domain\Repositories
  * @version August 11, 2022, 1:52 pm UTC
 */
 
-class SpecialtyRepository extends BaseRepository
+class SpecialityTranslationRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        
+        'name',
+        'locale',
+        'speciality_id'
     ];
 
     /**
@@ -35,6 +37,6 @@ class SpecialtyRepository extends BaseRepository
      **/
     public function model()
     {
-        return Specialty::class;
+        return SpecialityTranslation::class;
     }
 }

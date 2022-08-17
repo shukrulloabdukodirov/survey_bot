@@ -1,0 +1,159 @@
+{
+    "total": 14,
+    "data": [
+        {
+            "id": 1,
+            "soato_id": 1735,
+            "name_uz": "",
+            "name_oz": "Qoraqalpog'iston Respublikasi",
+            "name_ru": "",
+            "name_en": "",
+            "status_id": 1,
+            "status_name": "Aktiv",
+            "created_at": "2022-04-12 20:39:52"
+        },
+        {
+            "id": 2,
+            "soato_id": 1706,
+            "name_uz": "",
+            "name_oz": "Buxoro viloyati",
+            "name_ru": "",
+            "name_en": "",
+            "status_id": 1,
+            "status_name": "Aktiv",
+            "created_at": "2022-04-12 20:40:05"
+        },
+        {
+            "id": 3,
+            "soato_id": 1718,
+            "name_uz": "",
+            "name_oz": "Samarqand viloyati",
+            "name_ru": "",
+            "name_en": "",
+            "status_id": 1,
+            "status_name": "Aktiv",
+            "created_at": "2022-04-12 20:40:14"
+        },
+        {
+            "id": 4,
+            "soato_id": 1710,
+            "name_uz": "Қашқадарё вилояти",
+            "name_oz": "Qashqadaryo viloyati",
+            "name_ru": "Кашкадарьинская область",
+            "name_en": "Kashkadarya",
+            "status_id": 1,
+            "status_name": "Aktiv",
+            "created_at": "2022-04-19 10:06:01"
+        },
+        {
+            "id": 5,
+            "soato_id": 1712,
+            "name_uz": "",
+            "name_oz": "Navoiy viloyati",
+            "name_ru": "Навоийская область",
+            "name_en": "Navoi",
+            "status_id": 1,
+            "status_name": "Aktiv",
+            "created_at": "2022-04-19 10:06:47"
+        },
+        {
+            "id": 6,
+            "soato_id": 1714,
+            "name_uz": "",
+            "name_oz": "Namangan viloyati",
+            "name_ru": "Наманганская область",
+            "name_en": "Namangan",
+            "status_id": 1,
+            "status_name": "Aktiv",
+            "created_at": "2022-04-19 10:07:22"
+        },
+        {
+            "id": 7,
+            "soato_id": 1722,
+            "name_uz": "",
+            "name_oz": "Surxondaryo viloyati",
+            "name_ru": "Сурхандарьинская область",
+            "name_en": "Surkhandarya",
+            "status_id": 1,
+            "status_name": "Aktiv",
+            "created_at": "2022-04-19 10:08:45"
+        },
+        {
+            "id": 8,
+            "soato_id": 1724,
+            "name_uz": "",
+            "name_oz": "Sirdaryo viloyati",
+            "name_ru": "Сырдарьинская область",
+            "name_en": "Syrdarya",
+            "status_id": 1,
+            "status_name": "Aktiv",
+            "created_at": "2022-04-19 10:09:50"
+        },
+        {
+            "id": 9,
+            "soato_id": 1727,
+            "name_uz": "Тошкент вилояти",
+            "name_oz": "Toshkent viloyati",
+            "name_ru": "Ташкентская область",
+            "name_en": "Tashkent",
+            "status_id": 1,
+            "status_name": "Aktiv",
+            "created_at": "2022-04-19 10:10:19"
+        },
+        {
+            "id": 10,
+            "soato_id": 1733,
+            "name_uz": "",
+            "name_oz": "Xorazm viloyati",
+            "name_ru": "Хорезмская область",
+            "name_en": "Khorezm",
+            "status_id": 1,
+            "status_name": "Aktiv",
+            "created_at": "2022-04-19 10:10:49"
+        },
+        {
+            "id": 11,
+            "soato_id": 1730,
+            "name_uz": "",
+            "name_oz": "Farg'ona viloyati",
+            "name_ru": "Ферганская область",
+            "name_en": "Fergana",
+            "status_id": 1,
+            "status_name": "Aktiv",
+            "created_at": "2022-04-19 10:10:54"
+        },
+        {
+            "id": 12,
+            "soato_id": 1703,
+            "name_uz": "",
+            "name_oz": "Andijon viloyati",
+            "name_ru": "Андижанская область",
+            "name_en": "Andijan",
+            "status_id": 1,
+            "status_name": "Aktiv",
+            "created_at": "2022-04-19 10:12:52"
+        },
+        {
+            "id": 13,
+            "soato_id": 1708,
+            "name_uz": "",
+            "name_oz": "Jizzax viloyati",
+            "name_ru": "Джизакская область",
+            "name_en": "Djizzakh",
+            "status_id": 1,
+            "status_name": "Aktiv",
+            "created_at": "2022-04-19 10:13:52"
+        },
+        {
+            "id": 14,
+            "soato_id": 1726,
+            "name_uz": "",
+            "name_oz": "Toshkent shahri",
+            "name_ru": "город Ташкент",
+            "name_en": "Tashkent city",
+            "status_id": 1,
+            "status_name": "Aktiv",
+            "created_at": "2022-04-19 10:15:03"
+        }
+    ]
+}

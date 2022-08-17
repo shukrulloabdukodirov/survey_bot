@@ -17,14 +17,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class RegionTranslation extends Model
 {
-    use SoftDeletes;
-
+    public $timestamps = false;
     use HasFactory;
 
     public $table = 'region_translations';
-    
 
-    protected $dates = ['deleted_at'];
 
 
 
@@ -52,8 +49,8 @@ class RegionTranslation extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    
+
 }

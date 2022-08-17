@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\ApiTestTrait;
-use Base\Resource\Domain\Models\SpecialtyTranslation;
+use Base\Resource\Domain\Models\SpecialityTranslation;
 
 class SpecialtyTranslationApiTest extends TestCase
 {
@@ -15,7 +15,7 @@ class SpecialtyTranslationApiTest extends TestCase
      */
     public function test_create_specialty_translation()
     {
-        $specialtyTranslation = SpecialtyTranslation::factory()->make()->toArray();
+        $specialtyTranslation = SpecialityTranslation::factory()->make()->toArray();
 
         $this->response = $this->json(
             'POST',
@@ -30,7 +30,7 @@ class SpecialtyTranslationApiTest extends TestCase
      */
     public function test_read_specialty_translation()
     {
-        $specialtyTranslation = SpecialtyTranslation::factory()->create();
+        $specialtyTranslation = SpecialityTranslation::factory()->create();
 
         $this->response = $this->json(
             'GET',
@@ -45,8 +45,8 @@ class SpecialtyTranslationApiTest extends TestCase
      */
     public function test_update_specialty_translation()
     {
-        $specialtyTranslation = SpecialtyTranslation::factory()->create();
-        $editedSpecialtyTranslation = SpecialtyTranslation::factory()->make()->toArray();
+        $specialtyTranslation = SpecialityTranslation::factory()->create();
+        $editedSpecialtyTranslation = SpecialityTranslation::factory()->make()->toArray();
 
         $this->response = $this->json(
             'PUT',
@@ -62,7 +62,7 @@ class SpecialtyTranslationApiTest extends TestCase
      */
     public function test_delete_specialty_translation()
     {
-        $specialtyTranslation = SpecialtyTranslation::factory()->create();
+        $specialtyTranslation = SpecialityTranslation::factory()->create();
 
         $this->response = $this->json(
             'DELETE',

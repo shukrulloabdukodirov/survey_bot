@@ -4,8 +4,8 @@ namespace Base\Resource\Application\Http\Controllers\Api\V1;
 
 use Base\Resource\Application\Http\Requests\Api\V1\CreateSpecialtyAPIRequest;
 use Base\Resource\Application\Http\Requests\Api\V1\UpdateSpecialtyAPIRequest;
-use Base\Resource\Domain\Models\Specialty;
-use Base\Resource\Domain\Repositories\SpecialtyRepository;
+use Base\Resource\Domain\Models\Speciality;
+use Base\Resource\Domain\Repositories\SpecialityRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -15,12 +15,12 @@ use Response;
  * @package Base\Resource\Application\Http\Controllers\Api\V1
  */
 
-class SpecialtyAPIController extends AppBaseController
+class SpecialityAPIController extends AppBaseController
 {
-    /** @var  SpecialtyRepository */
+    /** @var  SpecialityRepository */
     private $specialtyRepository;
 
-    public function __construct(SpecialtyRepository $specialtyRepo)
+    public function __construct(SpecialityRepository $specialtyRepo)
     {
         $this->specialtyRepository = $specialtyRepo;
     }
@@ -70,7 +70,7 @@ class SpecialtyAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var Specialty $specialty */
+        /** @var Speciality $specialty */
         $specialty = $this->specialtyRepository->find($id);
 
         if (empty($specialty)) {
@@ -93,7 +93,7 @@ class SpecialtyAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        /** @var Specialty $specialty */
+        /** @var Speciality $specialty */
         $specialty = $this->specialtyRepository->find($id);
 
         if (empty($specialty)) {
@@ -117,7 +117,7 @@ class SpecialtyAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var Specialty $specialty */
+        /** @var Speciality $specialty */
         $specialty = $this->specialtyRepository->find($id);
 
         if (empty($specialty)) {

@@ -36,7 +36,7 @@
         "inView": true
     },
     {
-        "name": "specialty_id",
+        "name": "speciality_id",
         "dbType": "integer:unsigned:foreign,specialties,id",
         "htmlType": "",
         "validations": "",

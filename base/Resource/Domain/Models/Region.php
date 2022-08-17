@@ -2,6 +2,7 @@
 
 namespace Base\Resource\Domain\Models;
 
+use Astrotomic\Translatable\Translatable;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,16 +20,19 @@ class Region extends Model
     use SoftDeletes;
 
     use HasFactory;
+    use Translatable;
 
+    public $translatedAttributes = ['name'];
     public $table = 'regions';
-    
+
 
     protected $dates = ['deleted_at'];
 
 
-    protected $primaryKey = 'soato_id';
+    protected $primaryKey = 'id';
 
     public $fillable = [
+        'soato_id',
         'status'
     ];
 
@@ -57,6 +61,6 @@ class Region extends Model
      **/
     public function cities()
     {
-        return $this->hasMany(\Base\Resource\Domain\Models\City::class, 'region_soato_id', 'id');
+        return $this->hasMany(\Base\Resource\Domain\Models\City::class, 'region_soato_id', 'soato_id');
     }
 }

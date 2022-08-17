@@ -25,7 +25,7 @@ class CreateApplicationsTable extends Migration
             $table->softDeletes();
             $table->foreign('survey_id')->references('id')->on('surveys');
             $table->foreign('education_center_id')->references('id')->on('education_centers');
-            $table->foreign('speciality_id')->references('id')->on('specialties');
+            $table->foreign('speciality_id')->references('id')->on('specialities');
             $table->foreign('applicant_id')->references('id')->on('applicants');
         });
     }

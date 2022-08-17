@@ -2,17 +2,17 @@
 
 namespace Base\Resource\Infrastructure\Factories;
 
-use Base\Resource\Domain\Models\Specialty;
+use Base\Resource\Domain\Models\Speciality;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class SpecialtyFactory extends Factory
+class SpecialityFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Specialty::class;
+    protected $model = Speciality::class;
 
     /**
      * Define the model's default state.

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSpecialtyTranslationsTable extends Migration
+class CreateSpecialityTranslationsTable extends Migration
 {
 
     /**
@@ -14,13 +14,13 @@ class CreateSpecialtyTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('specialty_translations', function (Blueprint $table) {
+        Schema::create('speciality_translations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('locale');
-            $table->integer('specialty_id')->unsigned();
+            $table->integer('speciality_id')->unsigned();
             $table->softDeletes();
-            $table->foreign('specialty_id')->references('id')->on('specialties');
+            $table->foreign('speciality_id')->references('id')->on('specialities');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateSpecialtyTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('specialty_translations');
+        Schema::drop('speciality_translations');
     }
 }

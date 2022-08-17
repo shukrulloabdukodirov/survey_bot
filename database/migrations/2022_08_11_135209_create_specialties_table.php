@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSpecialtiesTable extends Migration
+class CreateSpecialitiesTable extends Migration
 {
 
     /**
@@ -14,7 +14,7 @@ class CreateSpecialtiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('specialties', function (Blueprint $table) {
+        Schema::create('specialities', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('status')->default(1);
             $table->timestamps();
@@ -29,6 +29,6 @@ class CreateSpecialtiesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('specialties');
+        Schema::drop('specialities');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEducationCenterSpecialtiesTable extends Migration
+class CreateEducationCenterSpecialitiesTable extends Migration
 {
 
     /**
@@ -14,15 +14,15 @@ class CreateEducationCenterSpecialtiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('education_center_specialties', function (Blueprint $table) {
+        Schema::create('education_center_specialities', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('education_center_id')->unsigned();
-            $table->integer('specialty_id')->unsigned();
+            $table->integer('speciality_id')->unsigned();
             $table->boolean('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('education_center_id')->references('id')->on('education_centers');
-            $table->foreign('specialty_id')->references('id')->on('specialties');
+            $table->foreign('speciality_id')->references('id')->on('specialities');
         });
     }
 
@@ -33,6 +33,6 @@ class CreateEducationCenterSpecialtiesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('education_center_specialties');
+        Schema::drop('education_center_specialities');
     }
 }

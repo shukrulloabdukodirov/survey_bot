@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "179539572cf194fca5407369100177d3",
+    "content-hash": "a006d65a2bbfe51be07d4f744ef23367",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -64,27 +64,29 @@
         },
         {
             "name": "astrotomic/laravel-translatable",
-            "version": "v11.9.1",
+            "version": "v11.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Astrotomic/laravel-translatable.git",
-                "reference": "d853a3c34be42941dc83c5cddd9e1e98c71abae1"
+                "reference": "6f2e3855836d46ab7ad3dabd269a400404f8b42c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Astrotomic/laravel-translatable/zipball/d853a3c34be42941dc83c5cddd9e1e98c71abae1",
-                "reference": "d853a3c34be42941dc83c5cddd9e1e98c71abae1",
+                "url": "https://api.github.com/repos/Astrotomic/laravel-translatable/zipball/6f2e3855836d46ab7ad3dabd269a400404f8b42c",
+                "reference": "6f2e3855836d46ab7ad3dabd269a400404f8b42c",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "5.8.* || ^6.0 || ^7.0 || ^8.0",
-                "illuminate/database": "5.8.* || ^6.0 || ^7.0 || ^8.0",
-                "illuminate/support": "5.8.* || ^6.0 || ^7.0 || ^8.0",
-                "php": ">=7.2"
+                "illuminate/contracts": "^8.0 || ^9.0",
+                "illuminate/database": "^8.0 || ^9.0",
+                "illuminate/support": "^8.0 || ^9.0",
+                "php": "^8.0"
             },
             "require-dev": {
-                "orchestra/testbench": "3.8.* || ^4.0 || ^5.0 || ^6.0",
-                "phpunit/phpunit": "^8.0 || ^9.0"
+                "laravel/legacy-factories": "^1.0.4",
+                "mockery/mockery": "^1.3.3",
+                "orchestra/testbench": "^6.0 || ^7.0",
+                "phpunit/phpunit": "^9.0"
             },
             "type": "library",
             "extra": {
@@ -133,7 +135,7 @@
             },
             "funding": [
                 {
-                    "url": "https://offset.earth/treeware",
+                    "url": "https://forest.astrotomic.info",
                     "type": "custom"
                 },
                 {
@@ -141,11 +143,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/SarahSibert",
+                    "type": "github"
+                },
+                {
                     "url": "https://issuehunt.io/r/astrotomic",
                     "type": "issuehunt"
                 }
             ],
-            "time": "2020-11-19T14:10:38+00:00"
+            "time": "2022-02-05T10:42:52+00:00"
         },
         {
             "name": "brick/math",

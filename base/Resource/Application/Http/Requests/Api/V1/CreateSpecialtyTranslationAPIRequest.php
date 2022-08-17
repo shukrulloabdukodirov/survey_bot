@@ -2,7 +2,7 @@
 
 namespace Base\Resource\Application\Http\Requests\Api\V1;
 
-use Base\Resource\Domain\Models\SpecialtyTranslation;
+use Base\Resource\Domain\Models\SpecialityTranslation;
 use InfyOm\Generator\Request\APIRequest;
 
 class CreateSpecialtyTranslationAPIRequest extends APIRequest
@@ -24,6 +24,6 @@ class CreateSpecialtyTranslationAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return SpecialtyTranslation::$rules;
+        return SpecialityTranslation::$rules;
     }
 }

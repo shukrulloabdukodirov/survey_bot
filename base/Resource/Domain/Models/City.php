@@ -2,6 +2,7 @@
 
 namespace Base\Resource\Domain\Models;
 
+use Astrotomic\Translatable\Translatable;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,17 +18,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class City extends Model
 {
+    use Translatable;
+
     use SoftDeletes;
 
     use HasFactory;
 
     public $table = 'cities';
-    
 
     protected $dates = ['deleted_at'];
 
+    public $translatedAttributes = ['name'];
 
-    protected $primaryKey = 'soato_id';
+    protected $primaryKey = 'id';
 
     public $fillable = [
         'region_soato_id',
