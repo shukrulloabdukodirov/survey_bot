@@ -41,8 +41,8 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     public function start()
     {
         $this->chat->message('<b>Assalomu alaykum </b>'.$this->message->from()->username().' Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(ReplyKeyboard::make()
-            ->buttons([
-                ReplyButton::make('Telefon raqamni yuborish')->requestContact()->width(0.1),
+            ->row([
+                ReplyButton::make('Telefon raqamni yuborish')->requestContact()->action('delete')->param('id', '42')
             ])->chunk(1)->resize()->oneTime())
             ->send();
     }
@@ -99,8 +99,6 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
         }
         else{
             $keyboard = ReplyKeyboard::make()
-                ->button('Send Contact')->requestContact()
-                ->button('Send Location')->requestLocation()
                 ->inputPlaceholder("Waiting for input...");
             $this->chat->message("$question->text")
                 ->replyKeyboard($keyboard
