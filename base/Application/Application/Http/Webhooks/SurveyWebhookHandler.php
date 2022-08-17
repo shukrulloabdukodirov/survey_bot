@@ -5,16 +5,20 @@ namespace Base\Application\Application\Http\Webhooks;
 use DefStudio\Telegraph\Facades\Telegraph;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
+use DefStudio\Telegraph\Keyboard\ReplyKeyboard;
 
 class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 {
-    public function hi()
+    public function start()
     {
-        Telegraph::message('hello world')
-            ->keyboard(Keyboard::make()->buttons([
-                Button::make("🗑️ Delete")->action("delete")->param('id', "1"),
-                Button::make("📖 Mark as Read")->action("read")->param('id', "1"),
-                Button::make("👀 Open")->url('https://test.it'),
-            ])->chunk(1))->send();
+        $keyboard = ReplyKeyboard::make()
+            ->button('Text')
+            ->button('Send Contact')->requestContact()
+            ->button('Send Location')->requestLocation()
+            ->button('Create Quiz')->requestQuiz()
+            ->button('Create Poll')->requestPoll()
+            ->button('Start WebApp')->webApp('https://web.app.dev');
+        Telegraph::message('Assalomu alaykum')
+            ->keyboard($keyboard)->send();
     }
 }
