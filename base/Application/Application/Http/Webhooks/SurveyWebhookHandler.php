@@ -19,7 +19,6 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 ->buttons([
                     ReplyButton::make('Contact')->requestContact(),
                 ]))->send();
-        Log::info($this->message->contact());
-        file_put_contents('telegram.txt',$this->message->contact());
+        Log::info(json_encode($this->message->contact()));
     }
 }
