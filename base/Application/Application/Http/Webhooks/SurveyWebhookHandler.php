@@ -21,7 +21,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     {
         parent::handle($request, $bot);
         $data = $request->all();
-
+        Log::info($request->all());
         if(isset($data['message']['contact'])&&!empty($data['message']['contact'])){
             Log::info('contact-bor');
             Log::info($request->all());
@@ -98,7 +98,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 ->send();
         }
         else{
-            $this->chat->message("$question->text")->chatAction('finish')
+            $this->chat->message("$question->text")
                 ->replyKeyboard(ReplyKeyboard::make()->inputPlaceholder("Javobni yozing")
                     ->chunk(1))->send();
         }
