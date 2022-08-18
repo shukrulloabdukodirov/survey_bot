@@ -48,6 +48,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 
     public function city(){
         $id = $this->data->get('id');
+        Log::info('City id:'.$id);
         $regions = Region::query()->find($id)->cities;
         $regionKeyboards = [];
         foreach ($regions as $region){
