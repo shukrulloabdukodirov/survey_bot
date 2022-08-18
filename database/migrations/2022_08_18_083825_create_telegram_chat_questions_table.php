@@ -15,6 +15,7 @@ class CreateTelegramChatQuestionsTable extends Migration
     {
         Schema::create('telegram_chat_questions', function (Blueprint $table) {
             $table->id();
+            $table->string("question");
             $table->timestamps();
         });
     }
