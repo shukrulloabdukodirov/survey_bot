@@ -22,14 +22,11 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
         parent::handle($request, $bot);
         $data = $request->all();
         Log::info($request->all());
-        Log::info(session()->all());
         // if(session()->has('turn_action'))
         // {
         //     Log::info(session()->get('turn_action'));
         // }
         if(isset($data['message']['contact'])&&!empty($data['message']['contact'])){
-            session('hello','salom');
-            Log::info(session()->all());
             Log::info('contact-bor');
             Log::info($request->all());
             $regions = Region::all();
@@ -39,7 +36,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             }
             $this->chat->message('Rahmat!')->removeReplyKeyboard()
                 ->send();
-            $this->chat->message('<b>Viloyatni tanlang</b>')->replyKeyboard(ReplyKeyboard::make()->buttons($regionKeyboards))
+            $this->chat->message('<b>Viloyatni tanlang</b>')->replyKeyboard(ReplyKeyboard::make()->row($regionKeyboards)->chunk(2))
             ->send();
             
             // $session=is_array(session()->get('turn_action'))?session()->get('turn_action'):[];
