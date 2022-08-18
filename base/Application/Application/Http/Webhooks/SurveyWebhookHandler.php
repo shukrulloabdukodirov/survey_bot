@@ -41,7 +41,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     {
         $this->chat->message('<b>Assalomu alaykum </b>'.$this->message->from()->username().' Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(\Base\Application\Application\Utils\Telegram\Buttons\ReplyKeyboard::make()
             ->row([
-                \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('Telefon raqamni yuborish')->requestContact()->action('salom')->param('id','suka')
+                \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('Telefon raqamni yuborish')->requestContact()->param('id','suka')
             ])->chunk(3)->resize(false)->selective(true))
             ->send();
     }
