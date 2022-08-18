@@ -28,11 +28,11 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             $regions = Region::all();
             $regionKeyboards = [];
             foreach ($regions as $region){
-                $regionKeyboards[] = Button::make($region->name)->action('city')->param('id', $region->id);
+                $regionKeyboards[] =  ReplyButton::make($region->name)->action('city')->param('id', $region->id);
             }
             $this->chat->message('Rahmat!')->removeReplyKeyboard()
                 ->send();
-            $this->chat->message('<b>Viloyatni tanlang</b>')->replyKeyboard(\Base\Application\Application\Utils\Telegram\Buttons\ReplyKeyboard::make()->buttons($regionKeyboards))
+            $this->chat->message('<b>Viloyatni tanlang</b>')->replyKeyboard(ReplyKeyboard::make()->buttons($regionKeyboards))->chunk(2)
             ->send();
         }
     }
