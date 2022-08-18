@@ -28,7 +28,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             $regions = Region::all();
             $regionKeyboards = [];
             foreach ($regions as $region){
-                $regionKeyboards[] =  \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make($region->name)->action('city')->param('id', $region->id);
+                $regionKeyboards[] = Button::make($region->name)->action('city')->param('id', $region->id);
             }
             $this->chat->message('Rahmat!')->removeReplyKeyboard()
                 ->send();
@@ -48,7 +48,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 
     public function city(){
         $id = $this->data->get('id');
-        Log::info('City id:'.$id);
+        Log::info('contact-bor');
         $regions = Region::query()->find($id)->cities;
         $regionKeyboards = [];
         foreach ($regions as $region){
