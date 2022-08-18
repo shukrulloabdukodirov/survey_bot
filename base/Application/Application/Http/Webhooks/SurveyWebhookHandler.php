@@ -3,6 +3,7 @@
 namespace Base\Application\Application\Http\Webhooks;
 
 use Base\Resource\Domain\Models\City;
+use Base\Resource\Domain\Models\CityTranslation;
 use Base\Resource\Domain\Models\Region;
 use Base\Resource\Domain\Models\RegionTranslation;
 use Base\Survey\Domain\Models\Question;
@@ -47,10 +48,19 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
         if(isset($data['message']['text']))
         {
             $region=RegionTranslation::where('name',$data['message']['text'])->first();
+            $district=CityTranslation::where('name',$data['message']['text'])->first();
             if($region)
             {
+                $this->chat->message('Rahmat!')->removeReplyKeyboard()
+                ->send();
                 $this->city($region->region_id);
             }
+             else if($district)
+             {
+                $this->chat->message('Rahmat!')->removeReplyKeyboard()
+                ->send();
+                $this->educationCenter($district->city_id);
+             }
         }
     }
 
@@ -69,14 +79,13 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $regions = Region::query()->find($id)->cities;
         $regionKeyboards = [];
         foreach ($regions as $region){
-            $regionKeyboards[] =  Button::make($region->name)->action('educationCenter')->param('id', $region->id);
+            $regionKeyboards[] =  ReplyButton::make($region->name);
         }
-        $this->chat->message('<b>Tuman yoki shaharni tanlang</b>')->keyboard(Keyboard::make()
-            ->buttons($regionKeyboards)->chunk(1))
+        $this->chat->message('<b>Tuman yoki shaharni tanlang</b>')->replyKeyboard(ReplyKeyboard::make()
+            ->row($regionKeyboards)->chunk(2))
             ->send();
     }
-    public function educationCenter(){
-        $id = $this->data->get('id');
+    public function educationCenter($id){
         $regions = City::query()->find($id)->educationCenters;
         if($regions->isEmpty()){
             $this->chat->message('<b>O\'quv markazini topilmadi</b>')->send();
