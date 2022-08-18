@@ -46,7 +46,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
         }
         if(isset($data['message']['text']))
         {
-            $regions=RegionTranslation::where('name',$data['message']['text'])->first();
+            $region=RegionTranslation::where('name',$data['message']['text'])->first();
             if($region)
             {
                 $this->city($region->region_id);
