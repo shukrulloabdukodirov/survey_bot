@@ -29,6 +29,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
         // }
         if(isset($data['message']['contact'])&&!empty($data['message']['contact'])){
             session('hello','salom');
+            Log::info(session()->all());
             Log::info('contact-bor');
             Log::info($request->all());
             $regions = Region::all();
