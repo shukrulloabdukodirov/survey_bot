@@ -4,6 +4,7 @@ namespace Base\Application\Application\Http\Webhooks;
 
 use Base\Resource\Domain\Models\City;
 use Base\Resource\Domain\Models\Region;
+use Base\Resource\Domain\Models\RegionTranslation;
 use Base\Survey\Domain\Models\Question;
 use DefStudio\Telegraph\DTO\TelegramUpdate;
 use DefStudio\Telegraph\Facades\Telegraph;
@@ -43,6 +44,14 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             ])->chunk(3)->resize(false)->selective(true))
             ->send();
         }
+        if(isset($data['message']['text']))
+        {
+            $id=RegionTranslation::where('name',$data['message']['text'])->first()->region_id;
+            if($id)
+            {
+                $this->city($id);
+            }
+        }
     }
 
     public function start()
@@ -55,8 +64,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             ->send();
     }
 
-    public function city(){
-        $id = $this->data->get('id');
+    public function city($id){
         Log::info('contact-bor');
         $regions = Region::query()->find($id)->cities;
         $regionKeyboards = [];

@@ -6,7 +6,7 @@ use App\Common\Helpers\JsonParser;
 use Base\Resource\Domain\Models\TelegramChatQuestion;
 use Illuminate\Database\Seeder;
 
-class TelegramChatQuestions extends Seeder
+class TelegramChatQuestionsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
