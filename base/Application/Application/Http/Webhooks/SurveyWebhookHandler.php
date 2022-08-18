@@ -93,10 +93,10 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
         else{
             $regionKeyboards = [];
             foreach ($regions as $region){
-                $regionKeyboards[] =  Button::make($region->name)->action('question')->param('id', $region->id);
+                $regionKeyboards[] =  ReplyButton::make($region->name);
             }
             $this->chat->message('<b>O\'quv markazini tanlang</b>')
-                ->keyboard(Keyboard::make()->buttons($regionKeyboards)->chunk(1))
+                ->replyKeyboard(ReplyKeyboard::make()->row($regionKeyboards)->chunk(2))
                 ->send();
         }
 
