@@ -32,7 +32,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             }
             $this->chat->message('Rahmat!')->removeReplyKeyboard()
                 ->send();
-            $this->chat->message('<b>Viloyatni tanlang</b>')->replyKeyboard(ReplyKeyboard::make()->buttons($regionKeyboards))->chunk(2)
+            $this->chat->message('<b>Viloyatni tanlang</b>')->replyKeyboard(ReplyKeyboard::make()->buttons($regionKeyboards))
             ->send();
         }
     }
