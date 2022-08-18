@@ -35,7 +35,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             $this->chat->message('<b>Viloyatni tanlang</b>')->replyKeyboard(ReplyKeyboard::make()->row($regionKeyboards)->chunk(2))
             ->send();
         }
-        if($data['message']['text']="So'rovnomada ishtirok etish")
+        if($data['message']['text']==="So'rovnomada ishtirok etish")
         {   
             $this->chat->message('<b>Telefon raqamingizni kiriting (+998 ** *** ** ** Formatda)</b>'.$this->message->from()->username().' Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(\Base\Application\Application\Utils\Telegram\Buttons\ReplyKeyboard::make()
             ->row([
@@ -50,7 +50,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
         $this->chat->message('<b>Assalomu alaykum </b>'.$this->message->from()->username())->send();
         $this->chat->message('Marhamat so\'rovnomada ishtirok eting')->replyKeyboard(\Base\Application\Application\Utils\Telegram\Buttons\ReplyKeyboard::make()
             ->row([
-                \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make("So'rovnomada ishtirok etish")
+                \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make("So'rovnomada ishtirok etish")->requestContact()->action('salom')->param('id','suka')
             ])->chunk(3)->resize(false)->selective(true))
             ->send();
     }
