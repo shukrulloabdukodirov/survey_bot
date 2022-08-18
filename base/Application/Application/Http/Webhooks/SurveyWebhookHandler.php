@@ -22,10 +22,6 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
         parent::handle($request, $bot);
         $data = $request->all();
         Log::info($request->all());
-        // if(session()->has('turn_action'))
-        // {
-        //     Log::info(session()->get('turn_action'));
-        // }
         if(isset($data['message']['contact'])&&!empty($data['message']['contact'])){
             Log::info('contact-bor');
             Log::info($request->all());
@@ -38,18 +34,23 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
                 ->send();
             $this->chat->message('<b>Viloyatni tanlang</b>')->replyKeyboard(ReplyKeyboard::make()->row($regionKeyboards)->chunk(2))
             ->send();
-            
-            // $session=is_array(session()->get('turn_action'))?session()->get('turn_action'):[];
-            // $session[$data['message']['chat']['id']]=['id'=>1,'message'=>"Viloyatni tanlang"];
-            // session('turn_action',$session);
+        }
+        if($data['message']['text']="So'rovnomada ishtirok etish")
+        {   
+            $this->chat->message('<b>Telefon raqamingizni kiriting (+998 ** *** ** ** Formatda)</b>'.$this->message->from()->username().' Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(\Base\Application\Application\Utils\Telegram\Buttons\ReplyKeyboard::make()
+            ->row([
+                \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('Telefon raqamni yuborish')->requestContact()->action('salom')->param('id','suka')
+            ])->chunk(3)->resize(false)->selective(true))
+            ->send();
         }
     }
 
     public function start()
     {
-        $this->chat->message('<b>Assalomu alaykum </b>'.$this->message->from()->username().' Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(\Base\Application\Application\Utils\Telegram\Buttons\ReplyKeyboard::make()
+        $this->chat->message('<b>Assalomu alaykum </b>'.$this->message->from()->username())->send();
+        $this->chat->message('Marhamat so\'rovnomada ishtirok eting')->replyKeyboard(\Base\Application\Application\Utils\Telegram\Buttons\ReplyKeyboard::make()
             ->row([
-                \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('Telefon raqamni yuborish')->requestContact()->action('salom')->param('id','suka')
+                \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make("So'rovnomada ishtirok etish")
             ])->chunk(3)->resize(false)->selective(true))
             ->send();
     }
