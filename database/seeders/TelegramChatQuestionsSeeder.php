@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 use App\Common\Helpers\JsonParser;
-use Base\Resource\Domain\Models\TelegramChatQuestion;
 use Illuminate\Database\Seeder;
-
+use Base\Resource\Domain\Models\TelegramChatQuestion;
 class TelegramChatQuestionsSeeder extends Seeder
 {
     /**

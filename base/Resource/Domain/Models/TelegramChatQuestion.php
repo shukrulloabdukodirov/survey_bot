@@ -2,13 +2,11 @@
 
 namespace Base\Resource\Domain\Models;
 
-use Astrotomic\Translatable\Translatable;
 use Eloquent as Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
-class City extends Model
+class TelegramChatQuestion extends Model
 {
     use HasFactory;
 
