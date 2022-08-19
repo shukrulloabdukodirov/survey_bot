@@ -17,13 +17,13 @@ use DefStudio\Telegraph\Models\TelegraphBot;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
+
+
 class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 {
     public function handle(Request $request, TelegraphBot $bot): void
     {
         parent::handle($request, $bot);
-        $data = $request->all();
-        Log::info($request->all());
         if(isset($data['message']['contact'])&&!empty($data['message']['contact'])){
             Log::info('contact-bor');
             Log::info($request->all());
@@ -37,16 +37,16 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
             $this->chat->message('<b>Viloyatni tanlang</b>')->replyKeyboard(ReplyKeyboard::make()->row($regionKeyboards)->chunk(2))
             ->send();
         }
-        // if(isset($data['message']['text'])&&$data['message']['text']==="So'rovnomada ishtirok etish")
-        // {   
-        //     $this->chat->message('Rahmat!')->removeReplyKeyboard()
-        //     ->send();
-        //     $this->chat->message('<b>Telefon raqamingizni kiriting (+998 ** *** ** ** Formatda)</b>'.$this->message->from()->username().' Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(\Base\Application\Application\Utils\Telegram\Buttons\ReplyKeyboard::make()
-        //     ->row([
-        //         \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('Send Phone')->requestContact()->action('salom')->param('id','suka')
-        //     ])->selective(true))
-        //     ->send();
-        // }
+        if(isset($data['message']['text'])&&$data['message']['text']==="So'rovnomada ishtirok etish")
+        {   
+            $this->chat->message('Rahmat!')->removeReplyKeyboard()
+            ->send();
+            $this->chat->message('<b>Telefon raqamingizni kiriting (+998 ** *** ** ** Formatda)</b>'.$this->message->from()->username().' Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(\Base\Application\Application\Utils\Telegram\Buttons\ReplyKeyboard::make()
+            ->row([
+                \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('Send Phone')->requestContact()->action('salom')->param('id','suka')
+            ])->selective(true))
+            ->send();
+        }
         if(isset($data['message']['text']))
         {
             $region=RegionTranslation::where('name',$data['message']['text'])->first();
@@ -68,10 +68,12 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 
     public function start()
     {
+       $data= request()->all();
+       Log::info($data);
         $this->chat->message('<b>Assalomu alaykum </b>'.$this->message->from()->username())->send();
         $this->chat->message('Marhamat so\'rovnomada ishtirok eting')->replyKeyboard(\Base\Application\Application\Utils\Telegram\Buttons\ReplyKeyboard::make()
             ->row([
-                \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make("So'rovnomada ishtirok etish")->webApp('https://xorazm.mehnat.uz')
+                \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make("So'rovnomada ishtirok etish")
             ])->chunk(1)->resize(true)->selective(true))
             ->send();
     }
