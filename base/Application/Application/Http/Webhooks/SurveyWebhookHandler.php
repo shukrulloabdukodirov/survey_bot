@@ -69,7 +69,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
     public function start()
     {
         $this->chat->message('<b>Assalomu alaykum </b>'.$this->message->from()->username())->send();
-        $this->chat->message('Marhamat so\'rovnomada ishtirok eting')->replyKeyboard(\Base\Application\Application\Utils\Telegram\Buttons\ReplyKeyboard::make()
+        $this->chat->message('Marhamat so\'rovnomada ishtirok eting')->replyKeyboard(ReplyKeyboard::make()
         ->button("Start web")->webApp('https://xorazm.mehnat.uz'))
             // ->row([
             //     \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make("So'rovnomada ishtirok etish")
