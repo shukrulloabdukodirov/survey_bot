@@ -39,7 +39,8 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
         }
         if(isset($data['message']['text'])&&$data['message']['text']==="So'rovnomada ishtirok etish")
         {   
-            $this->chat->message('Rahmat!')->removeReplyKeyboard()->send();
+            $this->chat->message('Rahmat!')->removeReplyKeyboard()
+            ->send();
             $this->chat->message('<b>Telefon raqamingizni kiriting (+998 ** *** ** ** Formatda)</b>'.$this->message->from()->username().' Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(\Base\Application\Application\Utils\Telegram\Buttons\ReplyKeyboard::make()
             ->row([
                 \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('Send Phone')->requestContact()->action('salom')->param('id','suka')
