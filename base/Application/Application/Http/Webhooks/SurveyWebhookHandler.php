@@ -23,7 +23,6 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 {
     public function handle(Request $request, TelegraphBot $bot): void
     {
-        Log::info($bot);
         parent::handle($request, $bot);
         if(isset($data['message']['contact'])&&!empty($data['message']['contact'])){
 
@@ -70,6 +69,7 @@ class SurveyWebhookHandler extends \DefStudio\Telegraph\Handlers\WebhookHandler
 
     public function start()
     {
+        Log::info($this->bot);
         $this->chat->message('<b>Assalomu alaykum </b>'.$this->message->from()->username())->send();
         $this->chat->message('Marhamat so\'rovnomada ishtirok eting')->replyKeyboard(\Base\Application\Application\Utils\Telegram\Buttons\ReplyKeyboard::make()
             ->row([
