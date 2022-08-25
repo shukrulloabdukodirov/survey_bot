@@ -103,7 +103,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
     }
 
     public function educationCenter($id){
-        $regions = City::query()->find($id)->educationCenters;
+        $regions = Region::query()->find($id)->educationCenters;
         if($regions->isEmpty()){
             $this->chat->message('<b>O\'quv markazini topilmadi</b>')->send();
         }

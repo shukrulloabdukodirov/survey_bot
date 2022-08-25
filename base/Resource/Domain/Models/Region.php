@@ -63,4 +63,8 @@ class Region extends Model
     {
         return $this->hasMany(\Base\Resource\Domain\Models\City::class, 'region_soato_id', 'soato_id');
     }
+
+    public function educationCenters(){
+        return $this->hasMany(EducationCenter::class, 'region_id','id');
+    }
 }

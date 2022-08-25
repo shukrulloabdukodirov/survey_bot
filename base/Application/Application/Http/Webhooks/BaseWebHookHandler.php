@@ -192,13 +192,13 @@ abstract class BaseWebHookHandler
             if($region)
             {
                 $this->chat->message('Rahmat!')->send();
-                $this->city($region->region_id);
+                $this->educationCenter($region->region_id);
             }
-            else if($district)
-            {
-                $this->chat->message('Rahmat!')->send();
-                $this->educationCenter($district->city_id);            
-            }
+            // else if($district)
+            // {
+            //     $this->chat->message('Rahmat!')->send();
+            //     $this->educationCenter($district->city_id);            
+            // }
             else if($educationCenter)
             {
                 $this->chat->message('Rahmat!')->send();
