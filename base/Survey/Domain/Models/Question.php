@@ -26,7 +26,7 @@ class Question extends Model
 
     public $table = 'questions';
 
-
+    protected $with=['questionAnswers'];
     protected $dates = ['deleted_at'];
 
     public $translatedAttributes = ['text'];

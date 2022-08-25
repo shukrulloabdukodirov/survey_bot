@@ -59,6 +59,9 @@ class EducationCenter extends Model
     public static $rules = [
         'status' => 'required|boolean'
     ];
-
+    public function specialities()
+    {
+        return $this->hasMany(\Base\Resource\Domain\Models\Speciality::class, 'region_soato_id', 'soato_id');
+    }
 
 }

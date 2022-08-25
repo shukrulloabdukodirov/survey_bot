@@ -30,7 +30,8 @@ class Applicant extends Model
 
     public $fillable = [
         'phone',
-        'pin'
+        'pin',
+        'chat_id'
     ];
 
     /**
@@ -41,7 +42,8 @@ class Applicant extends Model
     protected $casts = [
         'id' => 'integer',
         'phone' => 'integer',
-        'pin' => 'integer'
+        'pin' => 'integer',
+        'chat_id'=>'integer'
     ];
 
     /**
