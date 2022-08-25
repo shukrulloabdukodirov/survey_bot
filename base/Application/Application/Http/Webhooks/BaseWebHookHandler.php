@@ -230,22 +230,29 @@ abstract class BaseWebHookHandler
         } 
         if(isset($data['message']['contact']))
         {
-            $this->applicant->update([
-                'phone'=>intval(str_replace(['-',' ','+'],'',$data['message']['contact']['phone_number']))
-            ]);
-        $regions = Region::all();
-        $regionKeyboards = [];
-        foreach ($regions as $region){
-            $regionKeyboards[] =  ReplyButton::make($region->name);
-        }
-        $this->chat->message('Rahmat!')
+            $applicant=Applicant::where(['chat_id'=>$this->chat->chat_id])->first();
+            if($applicant)
+            {
+                $applicant->update([
+                    'phone'=>intval(str_replace(['-',' ','+'],'',$data['message']['contact']['phone_number']))
+                ]);
+            }
+            $regions = Region::all();
+            $regionKeyboards = [];
+            foreach ($regions as $region){
+                $regionKeyboards[] =  ReplyButton::make($region->name);
+            }
+            $this->chat->message('Rahmat!')->removeReplyKeyboard()
+                ->send();
+            $this->chat->message('<b>Viloyatni tanlang</b>')
+            ->replyKeyboard(
+                ReplyKeyboard::make()
+                ->row([
+                    \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('◀️Asosiy menyu'),
+                    \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('🔙Orqaga'),
+                ])->chunk(2)->selective(true)
+                ->row($regionKeyboards)->chunk(2))
             ->send();
-        $this->chat->message('<b>Viloyatni tanlang</b>')
-        ->replyKeyboard(ReplyKeyboard::make()
-        ->button('◀️Asosiy menyu')->width(0.5)->resize(true)
-        ->button('🔙Orqaga')->width(0.5)->resize(true)
-        ->row($regionKeyboards)->chunk(2))
-        ->send();
         }
 
     }
