@@ -207,18 +207,15 @@ abstract class BaseWebHookHandler
             }
             if($data['message']['text']==='◀️Asosiy menyu')
             {
-                $this->chat->message('Marhamat so\'rovnomada ishtirok eting')->replyKeyboard(\Base\Application\Application\Utils\Telegram\Buttons\ReplyKeyboard::make()
-                ->row([
-                    \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make("So'rovnomada ishtirok etish")
-                ])->chunk(1)->resize(true)->selective(true))
+                $this->chat->message('Marhamat so\'rovnomada ishtirok eting')->replyKeyboard(ReplyKeyboard::make()
+                ->button("So'rovnomada ishtirok etish")->resize(true))
                 ->send();
             }
             else if($data['message']['text']==='🔙Orqaga')
             {
-                $this->chat->message('Marhamat so\'rovnomada ishtirok eting')->replyKeyboard(\Base\Application\Application\Utils\Telegram\Buttons\ReplyKeyboard::make()
-                ->row([
-                    \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make("So'rovnomada ishtirok etish")
-                ])->chunk(1)->resize(true)->selective(true))
+                $this->chat->message('Marhamat so\'rovnomada ishtirok eting')
+                ->replyKeyboard(ReplyKeyboard::make()
+                ->button("So'rovnomada ishtirok etish")->resize(true))
                 ->send();
             }
         }
