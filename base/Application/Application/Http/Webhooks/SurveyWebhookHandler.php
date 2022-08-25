@@ -122,7 +122,13 @@ class SurveyWebhookHandler extends BaseWebHookHandler
 
     }
     public function specialities($id){
-        $specialities = DB::table('speciality_translations')->select('name')->where('locale','=','uz')->get();
+        // $specialities = EducationCenter::query()->find($id)-> specialities();
+        $specialities = DB::table('education_center_specialities')
+        ->select('speciality_translations.name')
+        ->where('education_center_id','=',$id)
+        ->join('speciality_translations', 'speciality_translations.speciality_id','=','education_center_specialities.speciality_id')
+        ->where('speciality_translations.locale','=','uz')
+        ->get();
         Log::info($specialities);
         if($specialities->isEmpty()){
             $this->chat->message('<b>Ushbu o\'quv markazda yo\'nalishlar topilmadi!</b>')->send();

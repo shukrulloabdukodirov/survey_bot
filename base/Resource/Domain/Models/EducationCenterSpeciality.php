@@ -52,5 +52,7 @@ class EducationCenterSpeciality extends Model
     public static $rules = [
         'status' => 'required|boolean'
     ];
-
+    // public function specialities(){
+    //     return $this->(EducationCenter::class, 'region_id','id');
+    // }
 }

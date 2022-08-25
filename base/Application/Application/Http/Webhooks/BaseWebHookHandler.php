@@ -189,6 +189,7 @@ abstract class BaseWebHookHandler
             $region=RegionTranslation::where('name',$this->message->text())->first();
             $district=CityTranslation::where('name',$this->message->text())->first();
             $educationCenter=EducationCenterTranslation::where('name',$this->message->text())->first();
+            Log::info($educationCenter);
             if($region)
             {
                 $this->chat->message('Rahmat!')->send();
