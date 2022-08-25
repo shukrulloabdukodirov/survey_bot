@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Common\Helpers\JsonParser;
-use Base\Application\Domain\Models\EducationCenterSpeciality;
 use Base\Resource\Domain\Models\EducationCenter;
+use Base\Resource\Domain\Models\EducationCenterSpeciality;
 use Base\Resource\Domain\Models\Speciality;
 use Illuminate\Database\Seeder;
 
