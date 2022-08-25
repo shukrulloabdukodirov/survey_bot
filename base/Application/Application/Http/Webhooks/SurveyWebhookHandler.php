@@ -82,8 +82,10 @@ class SurveyWebhookHandler extends BaseWebHookHandler
 
     public function start()
     {
-        
-
+        $this->chat->message('<b>Assalomu alaykum </b>'.$this->message->from()->username())->send();
+        $this->chat->message('Marhamat so\'rovnomada ishtirok eting')->replyKeyboard(ReplyKeyboard::make()
+        ->button("So'rovnomada ishtirok etish")->resize(true))
+        ->send();
     }
 
     public function city($id){
@@ -94,12 +96,10 @@ class SurveyWebhookHandler extends BaseWebHookHandler
             $regionKeyboards[] =  ReplyButton::make($region->name);
         }
         $this->chat->message('<b>Tuman yoki shaharni tanlang</b>')->replyKeyboard(ReplyKeyboard::make()
-            ->row([
-                \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('◀️Asosiy menyu'),
-                \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('🔙Orqaga'),
-            ])->chunk(2)->selective(true)
-            ->row($regionKeyboards)->chunk(2))
-            ->send();
+        ->button('◀️Asosiy menyu')->width(0.5)->resize(true)
+        ->button('🔙Orqaga')->width(0.5)->resize(true)
+        ->row($regionKeyboards)->chunk(2))
+        ->send();
     }
 
     public function educationCenter($id){
@@ -114,10 +114,8 @@ class SurveyWebhookHandler extends BaseWebHookHandler
             }
             $this->chat->message('<b>O\'quv markazini tanlang</b>')
                 ->replyKeyboard(ReplyKeyboard::make()
-                ->row([
-                    \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('◀️Asosiy menyu'),
-                    \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('🔙Orqaga'),
-                ])->chunk(2)->selective(true)
+                ->button('◀️Asosiy menyu')->width(0.5)->resize(true)
+                ->button('🔙Orqaga')->width(0.5)->resize(true)
                 ->row($regionKeyboards)->chunk(2))
                 ->send();
         }
@@ -135,10 +133,8 @@ class SurveyWebhookHandler extends BaseWebHookHandler
             }
             $this->chat->message('<b>Tamomlagan yo\'nalishingizni markazini tanlang</b>')
                 ->replyKeyboard(ReplyKeyboard::make()
-                ->row([
-                    \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('◀️Asosiy menyu'),
-                    \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('🔙Orqaga'),
-                ])->chunk(2)->selective(true)
+                ->button('◀️Asosiy menyu')->width(0.5)->resize(true)
+                ->button('🔙Orqaga')->width(0.5)->resize(true)
                 ->row($specialitieKeyboards)->chunk(2))
                 ->send();
         }

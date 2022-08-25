@@ -180,15 +180,10 @@ abstract class BaseWebHookHandler
             {
                 $this->chat->message('Rahmat!')
                 ->send();
-                $this->chat->message('<b>Telefon raqamingizni kiriting (+998********* Formatda)</b>'.$this->message->from()->username().' Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(\Base\Application\Application\Utils\Telegram\Buttons\ReplyKeyboard::make()
-                ->row([
-                    \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('◀️Asosiy menyu'),
-                    \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('🔙Orqaga'),
-                ])->chunk(2)->selective(true)
-                
-                ->row([
-                    \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('Telefon raqamni yuborish')->requestContact(),
-                ])->selective(true))
+                $this->chat->message('<b>Telefon raqamingizni kiriting (+998********* Formatda)</b>'.$this->message->from()->username().' Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(ReplyKeyboard::make()
+                ->button('◀️Asosiy menyu')->width(0.5)->resize(true)
+                ->button('🔙Orqaga')->width(0.5)->resize(true)
+                ->button('📱Telefon raqamni yuborish')->requestContact()->resize(true))
                 ->send();
             }
             $region=RegionTranslation::where('name',$this->message->text())->first();
@@ -235,29 +230,22 @@ abstract class BaseWebHookHandler
         } 
         if(isset($data['message']['contact']))
         {
-            $applicant=Applicant::where(['chat_id'=>$this->chat->chat_id])->first();
-            if($applicant)
-            {
-                $applicant->update([
-                    'phone'=>intval(str_replace(['-',' ','+'],'',$data['message']['contact']['phone_number']))
-                ]);
-            }
-            $regions = Region::all();
-            $regionKeyboards = [];
-            foreach ($regions as $region){
-                $regionKeyboards[] =  ReplyButton::make($region->name);
-            }
-            $this->chat->message('Rahmat!')->removeReplyKeyboard()
-                ->send();
-            $this->chat->message('<b>Viloyatni tanlang</b>')
-            ->replyKeyboard(
-                ReplyKeyboard::make()
-                ->row([
-                    \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('◀️Asosiy menyu'),
-                    \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('🔙Orqaga'),
-                ])->chunk(2)->selective(true)
-                ->row($regionKeyboards)->chunk(2))
+            $this->applicant->update([
+                'phone'=>intval(str_replace(['-',' ','+'],'',$data['message']['contact']['phone_number']))
+            ]);
+        $regions = Region::all();
+        $regionKeyboards = [];
+        foreach ($regions as $region){
+            $regionKeyboards[] =  ReplyButton::make($region->name);
+        }
+        $this->chat->message('Rahmat!')
             ->send();
+        $this->chat->message('<b>Viloyatni tanlang</b>')
+        ->replyKeyboard(ReplyKeyboard::make()
+        ->button('◀️Asosiy menyu')->width(0.5)->resize(true)
+        ->button('🔙Orqaga')->width(0.5)->resize(true)
+        ->row($regionKeyboards)->chunk(2))
+        ->send();
         }
 
     }
