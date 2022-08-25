@@ -36,22 +36,26 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         parent::handle($request, $bot);
         $data=$request->all();
         Log::info($data);
-        $app=Applicant::where('chat_id','=',$data['message']['chat']['id'])->first();
-        if(!$app)
-        {
-            $app= Applicant::create([
-                'chat_id'=>$data['message']['chat']['id']
-            ]);
-        }
-        $this->applicant=$app;
-        $chat=DB::table('telegraph_chats')->where('chat_id','=',$data['message']['chat']['id'])->get();
-        if(!$chat)
-        {
-            $chat=$this->bot->chats()->create([
-                'chat_id'=>$data['message']['chat']['id'],
-                'name'=>$data['message']['chat']['first_name']
-            ]);
-        }
+      if(isset($data['message']))
+      {
+          $app=Applicant::where('chat_id','=',$data['message']['chat']['id'])->first();
+          if(!$app)
+          {
+              $app= Applicant::create([
+                  'chat_id'=>$data['message']['chat']['id']
+              ]);
+          }
+          $this->applicant=$app;
+          $chat=DB::table('telegraph_chats')->where('chat_id','=',$data['message']['chat']['id'])->get();
+          if(!$chat)
+          {
+              $chat=$this->bot->chats()->create([
+                  'chat_id'=>$data['message']['chat']['id'],
+                  'name'=>$data['message']['chat']['first_name']
+              ]);
+          }
+
+      }
 
         if(isset($data['message']['text'])&&$data['message']['text']==='/start')
         {
