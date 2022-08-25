@@ -27,13 +27,13 @@ class RegionSeeder extends Seeder
                     'name'=>$region['name_oz']
                 ],
                 'ru' => [
-                    'name'=>$region['name_oz']
+                    'name'=>$region['name_ru']
                 ],
                 'en' => [
-                    'name'=>$region['name_oz']
+                    'name'=>$region['name_en']
                 ],
                 'cyrl' => [
-                    'name'=>$region['name_oz']
+                    'name'=>$region['name_uz']
                 ]
             ]);
             $model->save();

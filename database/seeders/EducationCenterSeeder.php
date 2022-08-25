@@ -22,25 +22,29 @@ class EducationCenterSeeder extends Seeder
         $education_centers = $array;
 
         foreach ($education_centers as $education_center){
+            if($education_center['education_center']!=='#Н/Д'){
+                $model = new EducationCenter();
 
-            $model = new EducationCenter();
-            $model->region_id = Region::where('soato_id',substr($education_center['soato'],0,4))->first()->id;
-            $model->city_id = City::where('soato_id',$education_center['soato'])->first()->id;
-            $model->fill([
-                'uz' => [
-                    'name'=>$education_center['name']
-                ],
-                'ru' => [
-                    'name'=>$education_center['name']
-                ],
-                'en' => [
-                    'name'=>$education_center['name']
-                ],
-                'cyrl' => [
-                    'name'=>$education_center['name']
-                ]
-            ]);
-            $model->save();
+                $model->region_id = Region::whereTranslation('name',$education_center['region'],'cyrl')->first()->id;
+                $model->city_id = null;
+                $model->fill([
+                    'uz' => [
+                        'name'=>strtoupper($education_center['education_center'])
+                    ],
+                    'ru' => [
+                        'name'=>strtoupper($education_center['education_center'])
+                    ],
+                    'en' => [
+                        'name'=>strtoupper($education_center['education_center'])
+                    ],
+                    'cyrl' => [
+                        'name'=>strtoupper($education_center['education_center'])
+                    ]
+                ]);
+                $model->education_center_type_id = str_contains($education_center['education_center'], 'MONOMARKAZI')?1:2;
+                $model->save();
+            }
+
         }
     }
 }
