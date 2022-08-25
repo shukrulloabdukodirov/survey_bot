@@ -118,8 +118,10 @@ class SurveyWebhookHandler extends BaseWebHookHandler
             }
             $this->chat->message('<b>O\'quv markazini tanlang</b>')
                 ->replyKeyboard(ReplyKeyboard::make()
-                ->button('◀️Asosiy menyu')->width(0.5)->resize(true)
-                ->button('🔙Orqaga')->width(0.5)->resize(true)
+                ->row([
+                    ReplyButton::make('◀️Asosiy menyu')->width(0.5)->resize(true),
+                    ReplyButton::make('🔙Orqaga')->width(0.5)->resize(true)
+                ])->resize()->chunk(2)
                 ->row($regionKeyboards)->resize()->chunk(1))
                 ->send();
         }
