@@ -123,6 +123,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
     }
     public function specialities($id){
         $specialities = DB::table('speciality_translations')->select('name')->where('locale','=','uz')->get();
+        Log::info($specialities);
         if($specialities->isEmpty()){
             $this->chat->message('<b>Ushbu o\'quv markazda yo\'nalishlar topilmadi!</b>')->send();
         }
