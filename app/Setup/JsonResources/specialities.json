@@ -1,61 +1,299 @@
 [
     {
-        "title": "Xizmatlar",
-        "items": [
-            "Ofitsiant",
-            "Qandolat oshpazi",
-            "Oshpaz",
-            "Tikuvchi(dizayner+modeler)",
-            "Masaj terapevti",
-            "Enaga",
-            "Tirnoq bo'yicha texnik",
-            "Erkak soch stilisti",
-            "Soch ustasi",
-            "Kosmetolog"
-        ]
+        "speciality": "Axborot texnologiyalari"
     },
     {
-        "title": "Texniklar",
-        "items": [
-            "Payvandchi",
-            "Tokarlik operatori",
-            "Frezator operatori",
-            "Chalangar",
-            "Maishiy texnikani ta'mirlash",
-            "Elektromontyor",
-            "Ko'tarish mashinalari operatori"
-        ]
+        "speciality": "Elektr va elektronika"
     },
     {
-        "title": "Raqamli texnologiyalar",
-        "items": [
-            "Kompyuter savodxonligi",
-            "Veb-dizayn"
-        ]
+        "speciality": "Metallarga ishlov berish va chilangarlik"
     },
     {
-        "title": "Fuqarolik ishi",
-        "items": [
-            "Alyuminiy va plastmassa profillarni qoplash",
-            "Gips-karton qoplamasi",
-            "Masonlik",
-            "Rassom va shuvoqchi"
-        ]
+        "speciality": "Tikuvchi"
     },
     {
-        "title": "Tadbirkorlik kurslari",
-        "items": [
-            "Tadbirkorlik kurslari"
-        ]
+        "speciality": "Yigiruv ishlab chiqarish texnalogiyasi"
     },
     {
-        "title": "Xorijiy tillar",
-        "items": [
-            "Rus tili",
-            "Ingliz tili",
-            "Koreys",
-            "Xitoy",
-            "Yapon titli"
-        ]
+        "speciality": "Oshpaz"
+    },
+    {
+        "speciality": "Qandolatchi"
+    },
+    {
+        "speciality": "Uqalovchi"
+    },
+    {
+        "speciality": "Sartaroshlik (erkaklar sartaroshi)"
+    },
+    {
+        "speciality": "Sartaroshlik (ayollar sartaroshi)"
+    },
+    {
+        "speciality": "Kompyuter texnigi"
+    },
+    {
+        "speciality": "Buxgalter (o'rta malakali)"
+    },
+    {
+        "speciality": "Elektrik"
+    },
+    {
+        "speciality": "Santexnika ishlari ustasi"
+    },
+    {
+        "speciality": "Ofitsiant Batler"
+    },
+    {
+        "speciality": "Yosh bolalar uchun enaga, tarbiyachi yordamchisi"
+    },
+    {
+        "speciality": "Oshpaz-qandolatchi"
+    },
+    {
+        "speciality": "Santexnik-chilangar"
+    },
+    {
+        "speciality": "Payvandlovchi"
+    },
+    {
+        "speciality": "Avtomobillarga texnik xizmat ko'rsatish va ta'mirlash chilangari"
+    },
+    {
+        "speciality": "Kompyuter injiniringi texnigi"
+    },
+    {
+        "speciality": "Quyonchilik"
+    },
+    {
+        "speciality": "Chorvador"
+    },
+    {
+        "speciality": "Asalarichilik"
+    },
+    {
+        "speciality": "Issiqxona va limonariya"
+    },
+    {
+        "speciality": "Metallarga ishlov beruvchi usta"
+    },
+    {
+        "speciality": "Avtomobillarni ta'mirlash va TXK (kuzov-motor)"
+    },
+    {
+        "speciality": "Avtomobillarni ta'mirlash va TXK (avtoelektrik)"
+    },
+    {
+        "speciality": "Payvandlovchi (Elektr-gaz, argon)"
+    },
+    {
+        "speciality": "PARRANDACHILIK"
+    },
+    {
+        "speciality": "BALIQCHILIK"
+    },
+    {
+        "speciality": "Qo'lda gilam to'qish"
+    },
+    {
+        "speciality": "Mebel ustasi"
+    },
+    {
+        "speciality": "Elektrogazpayvandchi"
+    },
+    {
+        "speciality": "Elektromontyor"
+    },
+    {
+        "speciality": "G'isht teruvchi"
+    },
+    {
+        "speciality": "Maishiy texnika va mobil qurilmalarni ta'mirlovchi usta"
+    },
+    {
+        "speciality": "Kosmetolog"
+    },
+    {
+        "speciality": "Qurilish pardozlash"
+    },
+    {
+        "speciality": "Maishiy texnika qurilmalarini ta'mirlash ustasi"
+    },
+    {
+        "speciality": "Issiqxona bo'yicha mutaxassis"
+    },
+    {
+        "speciality": "Kompyuter operatori"
+    },
+    {
+        "speciality": "Metallarga ishlov beruvchi (tokar, frezerchi)"
+    },
+    {
+        "speciality": "Yosh bolalar uchun enaga va keksalarni parvarishlovchi mutaxassis"
+    },
+    {
+        "speciality": "Elektrik/elektromontyor"
+    },
+    {
+        "speciality": "Avtomobillarni ta’mirlash va ularga texnik xizmat ko’rsatish bo’yicha texnik-mexanik"
+    },
+    {
+        "speciality": "Qishloq xo'jaligi mexanizatori"
+    },
+    {
+        "speciality": "Buxgalteriya"
+    },
+    {
+        "speciality": "Bolalar massajchisi"
+    },
+    {
+        "speciality": "To'quvchilik (hunarmandchilik)"
+    },
+    {
+        "speciality": "Traktorchilik"
+    },
+    {
+        "speciality": "Elektromontajchi (elektrik)"
+    },
+    {
+        "speciality": "Avtoservis xizmat ko'rsatish (motorist + xodovshik, kuzov ta'mirlovchi )"
+    },
+    {
+        "speciality": "Bog'bon"
+    },
+    {
+        "speciality": "Umumqurilish yo'nalishi kurslari"
+    },
+    {
+        "speciality": "Zardo'zlik"
+    },
+    {
+        "speciality": "Zamonaviy pardalar tikuvchi va dizayneri"
+    },
+    {
+        "speciality": "Payvandlash ishlari"
+    },
+    {
+        "speciality": "Maishiy elektr jixozlarini ta'mirlovchi elektromexanik"
+    },
+    {
+        "speciality": "Mashinasozlik texnologiyasi, mashinasozlik ishlab chikarish jixozlari va ularni avtomatlashtirish"
+    },
+    {
+        "speciality": "Kompyuter grafikasi va multimediya  tizimlari texnigi"
+    },
+    {
+        "speciality": "Mebel jihozlarini yasash va ta'mirlash ustasi"
+    },
+    {
+        "speciality": "Massajchi"
+    },
+    {
+        "speciality": "Mashinasozlik ishlab chiqarish texnologiyasi"
+    },
+    {
+        "speciality": "Elektrotexnika, elektronika va avtomatlashtirish"
+    },
+    {
+        "speciality": "Elektron texnikalarini montaj qilish va sozlash texnigi"
+    },
+    {
+        "speciality": "Kiyim tikuvchi"
+    },
+    {
+        "speciality": "Elektrpayvandchi"
+    },
+    {
+        "speciality": "Tikuvchi (portyer va pardalar bo'yicha)"
+    },
+    {
+        "speciality": "Yarim avtomat mashinalarda elektrpayvandchi (KEMPI rusumidagi)"
+    },
+    {
+        "speciality": "Marketing bo'yicha mutaxassis (SMM reklama bo'yicha mutaxassis)"
+    },
+    {
+        "speciality": "Yog'och o'ymakorligi"
+    },
+    {
+        "speciality": "Zargarlik"
+    },
+    {
+        "speciality": "Kompyuter dizayni dasturlari arxitektura proyekt dasturlari (3D Max, AutoCAD)"
+    },
+    {
+        "speciality": "Alyuminiy va plastik profillari bilan ishlash ustasi"
+    },
+    {
+        "speciality": "Tom yopuvchi"
+    },
+    {
+        "speciality": "Kran mashinisti (kranchi)"
+    },
+    {
+        "speciality": "Mashinasozlik Tokar raqamli dasturi boshqaruv dastgohi operatori PDB dasturida dasturchi"
+    },
+    {
+        "speciality": "Kashtachilik"
+    },
+    {
+        "speciality": "Radioteleapparaturalarni ta'mirlash va xizmat ko'rsatish"
+    },
+    {
+        "speciality": "Alyumin va plasmassa profillarga ishlov berish ustasi"
+    },
+    {
+        "speciality": "Charm poyabzal ustasi"
+    },
+    {
+        "speciality": "Santexnika va chilangarlik ishlari ustasi"
+    },
+    {
+        "speciality": "Neyl-stilist"
+    },
+    {
+        "speciality": "Web dasturchi"
+    },
+    {
+        "speciality": "Ofitsiant"
+    },
+    {
+        "speciality": "Yuk ko'tarish mashinalari operatori"
+    },
+    {
+        "speciality": "Gipsakartonga ishlov berish ustasi"
+    },
+    {
+        "speciality": "Suvoqchi, bo'yoqchi"
+    },
+    {
+        "speciality": "Gidroponika texnologiyasi"
+    },
+    {
+        "speciality": "Surdotarjimon"
+    },
+    {
+        "speciality": "Kafelchi"
+    },
+    {
+        "speciality": "Kichik mehr shavqat hamshirasi"
+    },
+    {
+        "speciality": "Muzlatgich va sovutgichlarni ta'mirlash ustasi"
+    },
+    {
+        "speciality": "Qishloq xo'jaligi mahsulotlarini qayta ishlash"
+    },
+    {
+        "speciality": "Liftga xizmat ko'rsatuvchi"
+    },
+    {
+        "speciality": "Burg'ulashga xizmat ko'rsatish bo'yicha chilangar"
+    },
+    {
+        "speciality": "Oddiy metallardan milliy uslubda tayyorlangan taqinchoqlar"
+    },
+    {
+        "speciality": "Kadrlar bo'yicha inspektor"
     }
 ]

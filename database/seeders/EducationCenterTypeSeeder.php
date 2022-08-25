@@ -3,13 +3,12 @@
 namespace Database\Seeders;
 
 use App\Common\Helpers\JsonParser;
-use Base\Resource\Domain\Models\City;
 use Base\Resource\Domain\Models\EducationCenter;
+use Base\Resource\Domain\Models\EducationCenterType;
 use Base\Resource\Domain\Models\Region;
-use Base\Resource\Domain\Models\Speciality;
 use Illuminate\Database\Seeder;
 
-class SpecialitySeeder extends Seeder
+class EducationCenterTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,29 +17,28 @@ class SpecialitySeeder extends Seeder
      */
     public function run()
     {
-        $data = new JsonParser('specialities.json');
+        $data = new JsonParser('education_center_types.json');
         $array = $data->toArray();
-        $specialities = $array;
+        $education_centers = $array;
 
-        foreach ($specialities as $speciality){
+        foreach ($education_centers as $education_center){
 
-            $model = new Speciality();
+            $model = new EducationCenterType();
             $model->fill([
                 'uz' => [
-                    'name'=>strtoupper($speciality['speciality'])
+                    'name'=>strtoupper($education_center['name_uz'])
                 ],
                 'ru' => [
-                    'name'=>strtoupper($speciality['speciality'])
+                    'name'=>strtoupper($education_center['name_ru'])
                 ],
                 'en' => [
-                    'name'=>strtoupper($speciality['speciality'])
+                    'name'=>strtoupper($education_center['name_en'])
                 ],
                 'cyrl' => [
-                    'name'=>strtoupper($speciality['speciality'])
+                    'name'=>strtoupper($education_center['name_cyrl'])
                 ]
             ]);
             $model->save();
-
         }
     }
 }

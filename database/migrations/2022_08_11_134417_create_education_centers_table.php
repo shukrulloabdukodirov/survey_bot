@@ -17,8 +17,8 @@ class CreateEducationCentersTable extends Migration
         Schema::create('education_centers', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('status')->default(1);
-            $table->integer('region_id')->unsigned();
-            $table->integer('city_id')->unsigned();
+            $table->integer('region_id')->unsigned()->nullable();
+            $table->integer('city_id')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('region_id')->references('id')->on('regions');

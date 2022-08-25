@@ -1,63 +1,286 @@
 [
     {
-        "name": "Nukus 'Ishga marhamat' monomarkazi",
-        "soato": 1735401,
-        "region": "Qoraqalpog'iston respublikasi"
+        "region": "Қашқадарё вилояти",
+        "education_center": "SHAXRISABZ ISHSIZLARNI KASB-HUNARGA O'QITISH MARKAZI"
     },
     {
-        "name": "Urganch 'Ishga marhamat' monomarkazi",
-        "soato": 1733401,
-        "region": "Xorazm viloyati"
+        "region": "Тошкент шаҳри",
+        "education_center": "MEHNAT ORGANLARI XODIMLARI MALAKASINI OSHIRISH RESPUBLIKASI KURSI"
     },
     {
-        "name": "Navoiy 'Ishga marhamat' monomarkazi",
-        "soato": 1712401,
-        "region": "Navoiy viloyati"
+        "region": "Хоразм вилояти",
+        "education_center": "XONQA KASB-HUNARGA O`QITISH MARKAZI"
     },
     {
-        "name": "Qarshi 'Ishga marhamat' monomarkazi",
-        "soato": 1710224,
-        "region": "Qashqadaryo viloyati"
+        "region": "Қорақалпоғистон Республикаси",
+        "education_center": "NUKUS KASB-HUNARGA O'QITISH MARKAZI"
     },
     {
-        "name": "Samarqand 'Ishga marhamat' monomarkazi",
-        "soato": 1718401,
-        "region": "Samarqand viloyati"
+        "region": "Андижон вилояти",
+        "education_center": "ULUG'NOR KASB-HUNARGA O`QITISH MARKAZI"
     },
     {
-        "name": "Farg'ona 'Ishga marhamat' monomarkazi",
-        "soato": 1730401,
-        "region": "Farg'ona viloyati"
+        "region": "Сурхондарё вилояти",
+        "education_center": "#Н/Д"
     },
     {
-        "name": "Andijon 'Ishga marhamat' monomarkazi",
-        "soato": 1703401,
-        "region": "Andijon viloyati"
+        "region": "Сурхондарё вилояти",
+        "education_center": "OLTINSOY KASB-HUNARGA O`QITISH MARKAZI"
     },
     {
-        "name": "Namangan 'Ishga marhamat' monomarkazi",
-        "soato": 1714401,
-        "region": "Namangan viloyati"
+        "region": "Хоразм вилояти",
+        "education_center": "YANGIBOZOR KASB-HUNARGA O'QITISH MARKAZI"
     },
     {
-        "name": "Guliston 'Ishga marhamat' monomarkazi",
-        "soato": 1724401,
-        "region": "Sirdaryo viloyati"
+        "region": "Қашқадарё вилояти",
+        "education_center": "DEHQONOBOD KASB-HUNARGA O‘QITISH MARKAZI"
     },
     {
-        "name": "Jizzax 'Ishga marhamat' monomarkazi",
-        "soato": 1708401,
-        "region": "Jizzax viloyati"
+        "region": "Тошкент вилояти",
+        "education_center": "BEKOBOD KASB-HUNARGA O'QITISH MARKAZI"
     },
     {
-        "name": "Denov 'Ishga marhamat' monomarkazi",
-        "soato": 1722210,
-        "region": "Surxondaryo viloyati"
+        "region": "Жиззах вилояти",
+        "education_center": "MIRZACHO'L TUMANI KASB-HUNARGA O'QITISH MARKAZI"
     },
     {
-        "name": "Angor 'Ishga marhamat' monomarkazi",
-        "soato": 1722202,
-        "region": "Surxondaryo viloyati"
+        "region": "Наманган вилояти",
+        "education_center": "UCHQO'RG'ON KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Андижон вилояти",
+        "education_center": "QO'RG'ONTEPA KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Наманган вилояти",
+        "education_center": "TO'RAQO'RG'ON KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Тошкент вилояти",
+        "education_center": "PISKENT KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Бухоро вилояти",
+        "education_center": "QORAKO'L KASB HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Самарқанд вилояти",
+        "education_center": "SAMARQAND ISHSIZLARNI KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Фарғона вилояти",
+        "education_center": "FARG'ONA TUMAN KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Жиззах вилояти",
+        "education_center": "ZARBDOR KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Сирдарё вилояти",
+        "education_center": "OQOLTIN KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Навоий вилояти",
+        "education_center": "NUROTA KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Тошкент шаҳри",
+        "education_center": "TOSHKENT SHAHRIDAGI ISHSIZ FUQAROLARNI KASB-HUNARGA O‘QITISH MARKAZI"
+    },
+    {
+        "region": "Самарқанд вилояти",
+        "education_center": "KATTAQO'RG'ON SHAHAR KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Қорақалпоғистон Республикаси",
+        "education_center": "ELLIKQAL’A KASB-HUNARGA O‘QITISh MARKAZI"
+    },
+    {
+        "region": "Тошкент шаҳри",
+        "education_center": "TOSHKENT SHAHAR ISHSIZLARNI KASBGA TAYYORLASH, QAYTA TAYYORLASH VA MALAKASINI OSHIRISH O'QUV MARKAZI"
+    },
+    {
+        "region": "Андижон вилояти",
+        "education_center": "SHAHRIXON KASB - XUNARGA O‘QITISH MARKAZI"
+    },
+    {
+        "region": "Қашқадарё вилояти",
+        "education_center": "QAMASHI KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Андижон вилояти",
+        "education_center": "ASAKA KASB-HUNARGA O`QITISH MARKAZI"
+    },
+    {
+        "region": "Самарқанд вилояти",
+        "education_center": "ISHTIXON KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Тошкент шаҳри",
+        "education_center": "OLMAZOR KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Тошкент вилояти",
+        "education_center": "#Н/Д"
+    },
+    {
+        "region": "Фарғона вилояти",
+        "education_center": "BUVAYDA KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Наманган вилояти",
+        "education_center": "NAMANGAN KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Фарғона вилояти",
+        "education_center": "O'ZBEKISTON TUMAN KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Андижон вилояти",
+        "education_center": "BO'STON KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Хоразм вилояти",
+        "education_center": "TUPROQQAL'A KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Сурхондарё вилояти",
+        "education_center": "SARIOSIYO KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Сурхондарё вилояти",
+        "education_center": "SHO'RCHI KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Самарқанд вилояти",
+        "education_center": "BULUNG'UR KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Фарғона вилояти",
+        "education_center": "QUVA TUMAN KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Бухоро вилояти",
+        "education_center": "JONDOR KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Қорақалпоғистон Республикаси",
+        "education_center": "TAXIATOSH KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Сирдарё вилояти",
+        "education_center": "SAYXUNOBOD KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Жиззах вилояти",
+        "education_center": "DO'STLIK KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Сурхондарё вилояти",
+        "education_center": "QIZIRIQ KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Самарқанд вилояти",
+        "education_center": "JOMBOY KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Сирдарё вилояти",
+        "education_center": "XOVOS KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Наманган вилояти",
+        "education_center": "YANGIQO'RG'ON KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Хоразм вилояти",
+        "education_center": "XIVA KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Жиззах вилояти",
+        "education_center": "ZAFAROBOD KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Тошкент вилояти",
+        "education_center": "QIBRAY KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Хоразм вилояти",
+        "education_center": "QO'SHKO'PIR KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Қашқадарё вилояти",
+        "education_center": "KASBI KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Бухоро вилояти",
+        "education_center": "ROMITAN KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Қорақалпоғистон Республикаси",
+        "education_center": "NUKUS SHAHAR \"ISHGA MARHAMAT\" MONOMARKAZI"
+    },
+    {
+        "region": "Андижон вилояти",
+        "education_center": "ANDIJON SHAHAR \"ISHGA MARHAMAT\" MONOMARKAZI"
+    },
+    {
+        "region": "Бухоро вилояти",
+        "education_center": "BUXORO SHAHAR \"ISHGA MARHAMAT\" MONOMARKAZI"
+    },
+    {
+        "region": "Жиззах вилояти",
+        "education_center": "JIZZAX SHAHAR \"ISHGA MARHAMAT\" MONOMARKAZI"
+    },
+    {
+        "region": "Навоий вилояти",
+        "education_center": "NAVOIY SHAHAR \"ISHGA MARHAMAT\" MONOMARKAZI"
+    },
+    {
+        "region": "Қашқадарё вилояти",
+        "education_center": "QARSHI SHAHRIDAGI \"ISHGA MARHAMAT\" MONOMARKAZI"
+    },
+    {
+        "region": "Наманган вилояти",
+        "education_center": "NAMANGAN SHAHAR \"ISHGA MARHAMAT\" MONOMARKAZI"
+    },
+    {
+        "region": "Самарқанд вилояти",
+        "education_center": "SAMARQAND SHAHAR “ISHGA MARHAMAT” MONOMARKAZI"
+    },
+    {
+        "region": "Сирдарё вилояти",
+        "education_center": "GULISTON SHAHAR \"ISHGA MARHAMAT\" MONOMARKAZI"
+    },
+    {
+        "region": "Сурхондарё вилояти",
+        "education_center": "ANGOR TUMAN \"ISHGA MARHAMAT\" MONOMARKAZI"
+    },
+    {
+        "region": "Сурхондарё вилояти",
+        "education_center": "DENOV TUMAN \"ISHGA MARHAMAT\" MONOMARKAZI"
+    },
+    {
+        "region": "Фарғона вилояти",
+        "education_center": "FARG'ONA SHAHAR \"ISHGA MARHAMAT\" MONOMARKAZI"
+    },
+    {
+        "region": "Хоразм вилояти",
+        "education_center": "URGANCH SHAHAR \"ISHGA MARHAMAT\" MONOMARKAZI"
+    },
+    {
+        "region": "Тошкент вилояти",
+        "education_center": "OQQO'RG'ON TUMAN \"ISHGA MARHAMAT\" MONOMARKAZI"
+    },
+    {
+        "region": "Тошкент шаҳри",
+        "education_center": "TOSHKENT SHAHRIDAGI \"ISHGA MARHAMAT\" MONOMARKAZI"
+    },
+    {
+        "region": "Тошкент вилояти",
+        "education_center": "BEKOBOD SHAHAR KASB-HUNARGA O'QITISH MARKAZI"
+    },
+    {
+        "region": "Фарғона вилояти",
+        "education_center": "FARG'ONA SHAHRIDAGI ISHSIZ FUQAROLARNI KASB-HUNARGA O'QITISH MARKAZI"
     }
 ]
-
