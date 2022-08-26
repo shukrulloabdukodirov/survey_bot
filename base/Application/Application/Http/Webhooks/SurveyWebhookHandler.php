@@ -118,9 +118,11 @@ class SurveyWebhookHandler extends BaseWebHookHandler
             }
             $this->chat->message('<b>O\'quv markazini tanlang</b>')
                 ->replyKeyboard(ReplyKeyboard::make()
-                ->button('◀️Asosiy menyu')->width(0.5)->resize(true)
-                ->button('🔙Orqaga')->width(0.5)->resize(true)
-                ->row($regionKeyboards)->chunk(2))
+                ->row($regionKeyboards)->resize()
+                ->row([
+                    ReplyButton::make('◀️Asosiy menyu')->width(0.5),
+                    ReplyButton::make('🔙Orqaga')->width(0.5)
+                ])->resize()->chunk(1))
                 ->send();
         }
 
@@ -144,15 +146,18 @@ class SurveyWebhookHandler extends BaseWebHookHandler
             }
             $this->chat->message('<b>O\'qigan yo\'nalishingizni tanlang</b>')
                 ->replyKeyboard(ReplyKeyboard::make()
-                ->button('◀️Asosiy menyu')->width(0.5)->resize(true)
-                ->button('🔙Orqaga')->width(0.5)->resize(true)
-                ->row($specialitieKeyboards)->chunk(2))
+                ->row($specialitieKeyboards)->resize()
+                ->row([
+                    ReplyButton::make('◀️Asosiy menyu')->width(0.5),
+                    ReplyButton::make('🔙Orqaga')->width(0.5)
+                ])->chunk(1)->resize()
+                )
                 ->send();
         }
 
     }
 
-    
+
     public function question(){
         $id = $this->data->get('question_id');
         if(isset($id)&&!empty($id)){
@@ -238,7 +243,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
     //                 'condition'=>true
     //             ]);
     //         }
-    //         else 
+    //         else
     //         {
     //             $nextStep->update(['condition'=>true]);
     //         }
@@ -305,7 +310,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                 $this->city($region->region_id);
                 $step->update(['condition'=>false]);
                 $this->nextStep($index+1);
-                
+
             }break;
 
             case 5:{
@@ -327,7 +332,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         }
     }
     public function nextStep($step)
-    {   
+    {
         $data=$this->request->all();
         $step=TelegramChatQuestionAnswer::where(['applicant_id'=>$this->applicant->id,'telegram_chat_question_id'=>$step])->first();
         if(!$step)
