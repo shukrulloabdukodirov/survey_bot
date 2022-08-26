@@ -142,7 +142,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
             foreach ($specialities as $specialitiy){
                 $specialitieKeyboards[] =ReplyButton::make($specialitiy->name)->webApp('https://172-105-76-165.ip.linodeusercontent.com/form');
             }
-            $this->chat->message('<b>Tamomlagan yo\'nalishingizni markazini tanlang</b>')
+            $this->chat->message('<b>O\'qigan yo\'nalishingizni tanlang</b>')
                 ->replyKeyboard(ReplyKeyboard::make()
                 ->button('◀️Asosiy menyu')->width(0.5)->resize(true)
                 ->button('🔙Orqaga')->width(0.5)->resize(true)

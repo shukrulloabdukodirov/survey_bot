@@ -242,7 +242,7 @@ abstract class BaseWebHookHandler
             }
             $this->chat->message('Rahmat!')->removeReplyKeyboard()
                 ->send();
-            $this->chat->message('<b>Viloyatni tanlang</b>')
+            $this->chat->message('<b>Viloyatni tanlang emas siz o\'qigan muassasa joylashgan viloyatni tanlang</b>')
             ->replyKeyboard(
                 ReplyKeyboard::make()
                 ->row([
