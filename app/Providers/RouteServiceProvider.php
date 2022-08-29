@@ -58,24 +58,24 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/api.php'));
 
             //            survey
-            Route::prefix('api/v1/survey')
+            Route::prefix('api/v1/')
                 ->middleware('api')
                 ->namespace($this->survey_namespace)
                 ->group(base_path($this->survey_dir . 'api.php'));
             //            application
-            Route::prefix('api/v1/application')
+            Route::prefix('api/v1/')
                 ->middleware('api')
                 ->namespace($this->application_namespace)
                 ->group(base_path($this->application_dir . 'api.php'));
 
             //            resource
-            Route::prefix('api/v1/resource')
+            Route::prefix('api/v1/')
                 ->middleware('api')
                 ->namespace($this->resource_namespace)
                 ->group(base_path($this->resource_dir . 'api.php'));
 
             //            applicant
-            Route::prefix('api/v1/applicant')
+            Route::prefix('api/v1/')
                 ->middleware('api')
                 ->namespace($this->applicant_namespace)
                 ->group(base_path($this->applicant_dir . 'api.php'));

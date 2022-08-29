@@ -19,7 +19,7 @@ class ApplicationAnswer extends Model
     use HasFactory;
 
     public $table = 'application_answers';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -27,7 +27,7 @@ class ApplicationAnswer extends Model
     protected $primaryKey = 'condition';
 
     public $fillable = [
-        
+
     ];
 
     /**
@@ -50,8 +50,19 @@ class ApplicationAnswer extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    
+    public function application(){
+        return $this->belongsTo(\Base\Application\Domain\Models\Application::class, 'application_id', 'id');
+    }
+
+    public function question(){
+        return $this->belongsTo(\Base\Survey\Domain\Models\Question::class, 'question_id', 'id');
+    }
+
+    public function questionAnswer(){
+        return $this->belongsTo(\Base\Survey\Domain\Models\QuestionAnswer::class, 'question_answer_id', 'id');
+    }
+
 }
