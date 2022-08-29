@@ -2,6 +2,8 @@
 
 namespace Base\Application\Application\Http\Controllers\Api\V1;
 
+use Base\Application\Application\Http\Collections\Api\V1\ApplicationCollection;
+use Base\Application\Application\Http\Collections\Api\V1\ApplicationResource;
 use Base\Application\Application\Http\Requests\Api\V1\CreateApplicationAPIRequest;
 use Base\Application\Application\Http\Requests\Api\V1\UpdateApplicationAPIRequest;
 use Base\Application\Domain\Models\Application;
@@ -40,7 +42,7 @@ class ApplicationAPIController extends AppBaseController
             $request->get('limit')
         );
 
-        return $this->sendResponse($applications->toArray(), 'Applications retrieved successfully');
+        return $this->sendResponse(new ApplicationCollection($applications), 'Applications retrieved successfully');
     }
 
     /**
@@ -102,7 +104,7 @@ class ApplicationAPIController extends AppBaseController
 
         $application = $this->applicationRepository->update($input, $id);
 
-        return $this->sendResponse($application->toArray(), 'Application updated successfully');
+        return $this->sendResponse(new ApplicationResource($application), 'Application updated successfully');
     }
 
     /**
