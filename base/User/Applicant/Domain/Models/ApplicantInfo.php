@@ -27,7 +27,7 @@ class ApplicantInfo extends Model
     use HasFactory;
 
     public $table = 'applicant_infos';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -65,14 +65,7 @@ class ApplicantInfo extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     **/
-    public function applicantInfo()
-    {
-        return $this->belongsTo(\Base\User\Applicant\Domain\Models\ApplicantInfo::class);
-    }
 }

@@ -72,6 +72,6 @@ class Application extends Model
         return  $this->belongsTo(\Base\Resource\Domain\Models\Speciality::class, 'speciality_id', 'id');
     }
     public function answers(){
-        return  $this->hasMany(\Base\Application\Domain\Models\Application::class, 'application_id', 'id');
+        return  $this->hasMany(\Base\Application\Domain\Models\ApplicationAnswer::class, 'application_id', 'id');
     }
 }

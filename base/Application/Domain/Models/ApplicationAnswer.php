@@ -26,15 +26,11 @@ class ApplicationAnswer extends Model
 
 
     public $fillable = [
-<<<<<<< HEAD
         'application_id',
         'question_id',
         'answer_by_input',
         'question_answer_id',
-        'condition' 
-=======
-
->>>>>>> 4bd4bfebd3fe7ae4ab2e067be4d875980aeecb81
+        'condition'
     ];
 
     /**
