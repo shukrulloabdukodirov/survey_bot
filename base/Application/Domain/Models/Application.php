@@ -24,10 +24,13 @@ class Application extends Model
     protected $dates = ['deleted_at'];
 
 
-    protected $primaryKey = 'condition';
 
     public $fillable = [
-        
+        'applicant_id',
+        'survey_id',
+        'education_center_id',
+        'speciality_id',
+        'condition'
     ];
 
     /**

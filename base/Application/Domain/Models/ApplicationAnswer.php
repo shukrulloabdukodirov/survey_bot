@@ -24,10 +24,13 @@ class ApplicationAnswer extends Model
     protected $dates = ['deleted_at'];
 
 
-    protected $primaryKey = 'condition';
 
     public $fillable = [
-        
+        'application_id',
+        'question_id',
+        'answer_by_input',
+        'question_answer_id',
+        'condition' 
     ];
 
     /**

@@ -16,16 +16,16 @@ class CreateApplicationAnswersTable extends Migration
     {
         Schema::create('application_answers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('application_id')->unsigned();
-            $table->integer('question_id')->unsigned();
-            $table->string('answer_by_input')->nullable();
-            $table->integer('question_answer_id')->unsigned();
+            $table->integer('application_id')->unsigned()->nullable();
+            $table->integer('question_id')->unsigned()->nullable();
+            $table->string('answer_by_input')->nullable()->nullable();
+            $table->integer('question_answer_id')->unsigned()->nullable();
             $table->integer('condition')->default(1);
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('application_id')->references('id')->on('applications');
-            $table->foreign('question_id')->references('id')->on('questions');
-            $table->foreign('question_answer_id')->references('id')->on('question_answers');
+            $table->foreign('application_id')->references('id')->on('applications')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('question_answer_id')->references('id')->on('question_answers')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

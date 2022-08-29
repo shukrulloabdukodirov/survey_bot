@@ -16,10 +16,10 @@ class CreateApplicationsTable extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('survey_id')->unsigned();
-            $table->integer('education_center_id')->unsigned();
-            $table->integer('speciality_id')->unsigned();
-            $table->integer('applicant_id')->unsigned();
+            $table->integer('survey_id')->unsigned()->nullable();
+            $table->integer('education_center_id')->unsigned()->nullable();
+            $table->integer('speciality_id')->unsigned()->nullable();
+            $table->integer('applicant_id')->unsigned()->nullable();
             $table->integer('condition')->default(1);
             $table->timestamps();
             $table->softDeletes();
