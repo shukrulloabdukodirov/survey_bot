@@ -57,39 +57,38 @@ class SurveyWebhookHandler extends BaseWebHookHandler
 
       }
 
-        if(isset($data['message']['text'])&&$data['message']['text']==='/start')
+    if(isset($data['message']['text'])&&$data['message']['text']==='/start')
+    {
+        $step=TelegramChatQuestionAnswer::where(['applicant_id'=>$this->applicant->id,'condition'=>true])->first();
+        if($step)
         {
-            $step=TelegramChatQuestionAnswer::where(['applicant_id'=>$this->applicant->id,'condition'=>true])->first();
-            if($step)
-            {
-                $step->update(['condition'=>false]);
-            }
-            $step=TelegramChatQuestionAnswer::where(['applicant_id'=>$this->applicant->id,'telegram_chat_question_id'=>1])->first();
-            if(!$step)
-            {
-                TelegramChatQuestionAnswer::create([
-                    'applicant_id'=>$this->applicant->id,
-                    'telegram_chat_question_id'=>1,
-                    'value'=>isset($data['message']['text'])?$data['message']['text']:'Some text',
-                    'condition'=>true
-                ]);
-            }
-            else
-            {
-                $step->update(['condition'=>true]);
-            }
-
+            $step->update(['condition'=>false]);
         }
-        // $this->NextStep();
-        // $this->steps();
+        $step=TelegramChatQuestionAnswer::where(['applicant_id'=>$this->applicant->id,'telegram_chat_question_id'=>1])->first();
+        if(!$step)
+        {
+            TelegramChatQuestionAnswer::create([
+                'applicant_id'=>$this->applicant->id,
+                'telegram_chat_question_id'=>1,
+                'value'=>isset($data['message']['text'])?$data['message']['text']:'Some text',
+                'condition'=>true
+            ]);
+        }
+        else
+        {
+            $step->update(['condition'=>true]);
+        }
     }
-
+    // $this->NextStep();
+    // $this->steps();
+    }
     public function start()
     {
-        $this->chat->message('<b>Assalomu alaykum </b>'.$this->message->from()->username())->send();
-        $this->chat->message('Marhamat so\'rovnomada ishtirok eting')->replyKeyboard(ReplyKeyboard::make()
-        ->button("So'rovnomada ishtirok etish")->resize(true))
-        ->send();
+        Log::info($this->request->all());
+        // $this->chat->message('<b>Assalomu alaykum </b>'.$this->message->from()->username())->send();
+        // $this->chat->message('Marhamat so\'rovnomada ishtirok eting')->replyKeyboard(ReplyKeyboard::make()
+        // ->button("So'rovnomada ishtirok etish")->resize(true))
+        // ->send();
     }
 
     public function city($id){
@@ -253,13 +252,20 @@ class SurveyWebhookHandler extends BaseWebHookHandler
     //     Log::info($this->step);
     //     // $this->steps();
     // }
-
     public function steps()
     {
         $step=TelegramChatQuestionAnswer::where(['applicant_id'=>$this->applicant->id,'condition'=>true])->first();
+        $message=$this->message->text();
+        $checkMessage=$this->checkMessage($step);
+        if($checkMessage)
+        {
+            $message=$checkMessage;
+            $step=TelegramChatQuestionAnswer::where(['applicant_id'=>$this->applicant->id,'condition'=>true])->first();
+        }
+        Log::info($message);
+        Log::info($step);
         $data=$this->request->all();
         $index=$step->telegram_chat_question_id;
-        Log::info($index);
         switch($index)
         {
             case 1:{
@@ -267,88 +273,230 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                 $this->chat->message('Marhamat so\'rovnomada ishtirok eting')->replyKeyboard(ReplyKeyboard::make()
                 ->button("So'rovnomada ishtirok etish")->resize(true))
                 ->send();
-                $step->update(['condition'=>false]);
-                $this->nextStep($index+1);
+                $this->nextStep($step);
             }break;
             case 2:{
-                $this->chat->message('Rahmat!')
-                ->send();
-                $this->chat->message('<b>Telefon raqamingizni kiriting (+998********* Formatda)</b>'.$this->message->from()->username().' Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(ReplyKeyboard::make()
-                ->button('◀️Asosiy menyu')->width(0.5)->resize(true)
-                ->button('🔙Orqaga')->width(0.5)->resize(true)
-                ->button('📱Telefon raqamni yuborish')->requestContact()->resize(true))
-                ->send();
-                $step->update(['condition'=>false]);
-                $this->nextStep($index+1);
+                if($message==="So'rovnomada ishtirok etish")
+                {
+                    $this->chat->message('Rahmat!')
+                    ->send();
+                    $this->chat->message('<b>Telefon raqamingizni kiriting (+998********* Formatda)</b>'.$this->message->from()->username().' Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(ReplyKeyboard::make()
+                    ->button('🔙Orqaga')->width(0.5)->resize(true)
+                    ->button('📱Telefon raqamni yuborish')->requestContact()->resize(true))
+                    ->send();
+                    $this->nextStep($step,$this->message->text());
+                }
+                else{
+                    $this->chat->html("<b>Noto'g'ri ma'lumot jo'natildi!</b>")->send();
+                    $this->chat->html("Iltimos to'g'ri buyruqni tanlang!")->send();
+                }
             }break;
             case 3:{
-                    $this->applicant->update([
-                        'phone'=>intval(str_replace(['-',' ','+'],'',$data['message']['contact']['phone_number']))
-                    ]);
-                $regions = Region::all();
-                $regionKeyboards = [];
-                foreach ($regions as $region){
-                    $regionKeyboards[] =  ReplyButton::make($region->name);
-                }
-                $this->chat->message('Rahmat!')
-                    ->send();
-                $this->chat->message('<b>Viloyatni tanlang</b>')
-                ->replyKeyboard(ReplyKeyboard::make()
-                ->row([
-                    \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('◀️Asosiy menyu'),
-                    \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('🔙Orqaga'),
-                ])->chunk(2)->selective(true)
-                ->row($regionKeyboards)->chunk(2))
-                ->send();
-                $step->update(['condition'=>false]);
-                $this->nextStep($index+1);
+                    if(isset($data['message']['contact']['phone_number']))
+                    {
+                        $phone=str_replace(['-',' ','+'],'',$data['message']['contact']['phone_number']);
+                    }
+                    else
+                    {
+                        $phone=str_replace(['-',' ','+'],'',$message);
+                    }
+                    if($phone=$this->checkPhone($phone))
+                    {
+                        $this->applicant->update([
+                            'phone'=>intval($phone)
+                        ]);
+                        $regions = Region::all();
+                        $regionKeyboards = [];
+                        foreach ($regions as $region){
+                            $regionKeyboards[] =  ReplyButton::make($region->name);
+                        }
+                        $this->chat->message('Rahmat!')
+                            ->send();
+                        $this->chat->message('<b>Viloyatni tanlang</b>')
+                        ->replyKeyboard(ReplyKeyboard::make()
+                        ->row($regionKeyboards)->chunk(2)
+                        ->row([
+                            \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('🔙Orqaga'),
+                        ])->chunk(2)->selective(true))
+                        ->send();
+                        $this->nextStep($step,$phone);
+                    }
+                    else
+                    {
+                        $this->errorMessage("<b>Noto'g'ri  telefon raqam jo'natildi!</b>");
+                        $this->errorMessage("Iltimos, qaytadan urunib ko'ring!");
+                    }
             }break;
             case 4:{
-                $region=RegionTranslation::where('name',$data['message']['text'])->first();
-                $this->chat->message('Rahmat!')
-                ->send();
-                $this->city($region->region_id);
-                $step->update(['condition'=>false]);
-                $this->nextStep($index+1);
-
+                $region=RegionTranslation::where('name',$message)->first();
+                if($region)
+                {
+                    $this->chat->message('Rahmat!')
+                    ->send();
+                    $this->educationCenter($region->region_id);
+                    $this->nextStep($step,$this->message->text());
+                }
+                else
+                {
+                    $this->errorMessage("<b>Noto'g'ri viloyat tanlangan!</b>");
+                    $this->errorMessage("Iltimos qaytadan urunib ko'ring!");
+                }
             }break;
+
+            // case 5:{
+            //     $district=CityTranslation::where('name',$data['message']['text'])->first();
+            //     $this->chat->message('Rahmat!')->removeReplyKeyboard()
+            //     ->send();
+            //     $this->educationCenter($district->city_id);
+            //     $step->update(['condition'=>false]);
+            //     $this->nextStep($step,$this->message->text());
+            // }break;
 
             case 5:{
-                $district=CityTranslation::where('name',$data['message']['text'])->first();
-                $this->chat->message('Rahmat!')->removeReplyKeyboard()
-                ->send();
-                $this->educationCenter($district->city_id);
-                $step->update(['condition'=>false]);
-                $this->nextStep($index+1);
-            }break;
+                if($message)
+                {
+                    $educationCenter=EducationCenterTranslation::where('name',$message)->first();
+                    if($educationCenter)
+                    {
+                        $this->chat->message('Rahmat!')->removeReplyKeyboard()
+                        ->send();
+                        $this->specialities($educationCenter->education_center_id);
+                        $this->nextStep($step,$this->message->text());
+                    }
+                    else
+                    {
+                        $this->errorMessage("<b>Noto'g'ri o'quv markazi  tanlangan!</b>");
+                        $this->errorMessage("Iltimos qaytadan urunib ko'ring!");
+                    }
+                }
+                else if(isset($data['message']['web_app_data']))
+                {
 
-            case 6:{
-                $educationCenter=EducationCenterTranslation::where('name',$data['message']['text'])->first();
-                $this->chat->message('Rahmat!')->removeReplyKeyboard()
-                ->send();
-                $this->specialities($educationCenter->education_center_id);
-                $step->update(['condition'=>false]);
+                    Log::info($data['message']['web_app_data']['data']);  
+                    // $step->update(['value'=>$data['message']['web_app_data']['button_text']]);
+                    // if($data['message']['web_app_data']['data']==='Test yakunlandi')
+                    // {
+                    //     $this->finish();
+                    //     $step->update(['condition'=>false]);
+                    // }
+                }
             }break;
         }
     }
-    public function nextStep($step)
+    public function nextStep(TelegramChatQuestionAnswer $step,$value=null)
     {
         $data=$this->request->all();
-        $step=TelegramChatQuestionAnswer::where(['applicant_id'=>$this->applicant->id,'telegram_chat_question_id'=>$step])->first();
-        if(!$step)
+        $index=$step->telegram_chat_question_id+1;
+        if($value)
         {
-            TelegramChatQuestionAnswer::create([
-                'applicant_id'=>$this->applicant->id,
-                'telegram_chat_question_id'=>$step,
-                'value'=>isset($data['message']['text'])?$data['message']['text']:'Some text',
-                'condition'=>true
-            ]);
+           $previous=TelegramChatQuestionAnswer::where(['applicant_id'=>$this->applicant->id,'telegram_chat_question_id'=>$index-2])->first();
+           if($previous)
+           {
+                $previous->update(['value'=>$value]);
+           }
         }
-        else
+        $questions=TelegramChatQuestion::all();
+        $lastId=$questions[sizeof($questions)-1]->id;
+        if($index<=$lastId)
         {
             $step->update([
-                'condition'=>true
+                'condition'=>false,
             ]);
+            $step=TelegramChatQuestionAnswer::where(['applicant_id'=>$this->applicant->id,'telegram_chat_question_id'=>$index])->first();
+            if(!$step)
+            {
+                TelegramChatQuestionAnswer::create([
+                    'applicant_id'=>$this->applicant->id,
+                    'telegram_chat_question_id'=>$index,
+                    'value'=>isset($data['message']['text'])?$data['message']['text']:'Some text',
+                    'condition'=>true
+                ]);
+            }
+            else
+            {
+                $step->update([
+                    'condition'=>true
+                ]);
+            }
         }
+        
+        
+    }
+
+    public function checkMessage(TelegramChatQuestionAnswer $step)
+    {
+        $message=$this->message->text();
+        switch($message)
+        {
+            case "🔙Orqaga":{
+                $previous=TelegramChatQuestionAnswer::where(['applicant_id'=>$this->applicant->id,'telegram_chat_question_id'=>$step->telegram_chat_question_id-2])->first();
+                if($previous)
+                {
+                    $step->update(['condition'=>false]);
+                    $previous->update([
+                        'condition'=>true
+                    ]);
+                    $doublePrevious=TelegramChatQuestionAnswer::where(['applicant_id'=>$this->applicant->id,'telegram_chat_question_id'=>$step->telegram_chat_question_id-3])->first();
+                    if($doublePrevious)
+                    {
+                        return $doublePrevious->value;
+                    }
+                    else 
+                    {
+                        return '/start';
+                    } 
+                }
+            }break;
+            case "◀️Asosiy menyu":{
+                $previous=TelegramChatQuestionAnswer::where(['applicant_id'=>$this->applicant->id,'telegram_chat_question_id'=>3])->first();
+                if($previous)
+                {
+                    $step->update(['condition'=>false]);
+                    $previous->update([
+                        'condition'=>true
+                    ]);
+                    $doublePrevious=TelegramChatQuestionAnswer::where(['applicant_id'=>$this->applicant->id,'telegram_chat_question_id'=>$step->telegram_chat_question_id-3])->first();
+                    if($doublePrevious)
+                    {
+                        return $doublePrevious->value;
+                    }
+                    else 
+                    {
+                        return '/start';
+                    }  
+                }
+            }break;
+        }
+        return false;   
+    }
+    public function checkPhone($phone)
+    {
+        $check=false;
+        if(is_numeric($phone))
+        {
+            if(strlen($phone)===9)
+            {
+                $phone='998'.$phone;
+                $check=true;
+            }
+            else if(strlen($phone)===12)
+            {
+                $check=true;
+            }
+            else{
+              return false;  
+            }
+
+            return $phone;
+        }
+        else 
+        {
+            return false;
+        }
+    }
+    public function errorMessage($message)
+    {
+        Log::info($message);
+        $this->chat->html($message)->send();
     }
 }

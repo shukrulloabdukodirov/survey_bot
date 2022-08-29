@@ -173,85 +173,85 @@ abstract class BaseWebHookHandler
 
     protected function handleChatMessage(Stringable $text): void
     {
-        $data=$this->request->all();
-        if(isset($data['message']['text']))
-        {
-            if($data['message']['text']==="So'rovnomada ishtirok etish")
-            {
-                $this->chat->message('Rahmat!')
-                ->send();
-                $this->chat->message('<b>Telefon raqamingizni kiriting (+998********* Formatda)</b>'.$this->message->from()->username().' Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(ReplyKeyboard::make()
-                ->button('◀️Asosiy menyu')->width(0.5)->resize(true)
-                ->button('🔙Orqaga')->width(0.5)->resize(true)
-                ->button('📱Telefon raqamni yuborish')->requestContact()->resize(true))
-                ->send();
-            }
-            $region=RegionTranslation::where('name',$this->message->text())->first();
-            $district=CityTranslation::where('name',$this->message->text())->first();
-            $educationCenter=EducationCenterTranslation::where('name',$this->message->text())->first();
-            Log::info($educationCenter);
-            if($region)
-            {
-                $this->chat->message('Rahmat!')->send();
-                $this->educationCenter($region->region_id);
-            }
-            // else if($district)
-            // {
-            //     $this->chat->message('Rahmat!')->send();
-            //     $this->educationCenter($district->city_id);            
-            // }
-            else if($educationCenter)
-            {
-                $this->chat->message('Rahmat!')->send();
-                $this->specialities($educationCenter->education_center_id);
-            }
-            if($data['message']['text']==='◀️Asosiy menyu')
-            {
-                $this->chat->message('Marhamat so\'rovnomada ishtirok eting')->replyKeyboard(ReplyKeyboard::make()
-                ->button("So'rovnomada ishtirok etish")->resize(true))
-                ->send();
-            }
-            else if($data['message']['text']==='🔙Orqaga')
-            {
-                $this->chat->message('Marhamat so\'rovnomada ishtirok eting')
-                ->replyKeyboard(ReplyKeyboard::make()
-                ->button("So'rovnomada ishtirok etish")->resize(true))
-                ->send();
-            }
-        }
-        if(isset($data['message']['web_app_data']))
-        {
-            if($data['message']['web_app_data']['data']==='Test yakunlandi')
-            {
-                $this->finish();
-            }
-        } 
-        if(isset($data['message']['contact']))
-        {
-            $applicant=Applicant::where(['chat_id'=>$this->chat->chat_id])->first();
-            if($applicant)
-            {
-                $applicant->update([
-                    'phone'=>intval(str_replace(['-',' ','+'],'',$data['message']['contact']['phone_number']))
-                ]);
-            }
-            $regions = Region::all();
-            $regionKeyboards = [];
-            foreach ($regions as $region){
-                $regionKeyboards[] =  ReplyButton::make($region->name);
-            }
-            $this->chat->message('Rahmat!')->removeReplyKeyboard()
-                ->send();
-            $this->chat->message('<b>Siz o\'qigan muassasa joylashgan viloyatni tanlang</b>')
-            ->replyKeyboard(
-                ReplyKeyboard::make()
-                ->row([
-                    \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('◀️Asosiy menyu'),
-                    \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('🔙Orqaga'),
-                ])->chunk(2)->selective(true)
-                ->row($regionKeyboards)->chunk(2))
-            ->send();
-        }
+        // $data=$this->request->all();
+        // if(isset($data['message']['text']))
+        // {
+        //     if($data['message']['text']==="So'rovnomada ishtirok etish")
+        //     {
+        //         $this->chat->message('Rahmat!')
+        //         ->send();
+        //         $this->chat->message('<b>Telefon raqamingizni kiriting (+998********* Formatda)</b>'.$this->message->from()->username().' Iltimos telefon raqamingizni bizga yuboring.')->replyKeyboard(ReplyKeyboard::make()
+        //         ->button('◀️Asosiy menyu')->width(0.5)->resize(true)
+        //         ->button('🔙Orqaga')->width(0.5)->resize(true)
+        //         ->button('📱Telefon raqamni yuborish')->requestContact()->resize(true))
+        //         ->send();
+        //     }
+        //     $region=RegionTranslation::where('name',$this->message->text())->first();
+        //     $district=CityTranslation::where('name',$this->message->text())->first();
+        //     $educationCenter=EducationCenterTranslation::where('name',$this->message->text())->first();
+        //     Log::info($educationCenter);
+        //     if($region)
+        //     {
+        //         $this->chat->message('Rahmat!')->send();
+        //         $this->educationCenter($region->region_id);
+        //     }
+        //     // else if($district)
+        //     // {
+        //     //     $this->chat->message('Rahmat!')->send();
+        //     //     $this->educationCenter($district->city_id);            
+        //     // }
+        //     else if($educationCenter)
+        //     {
+        //         $this->chat->message('Rahmat!')->send();
+        //         $this->specialities($educationCenter->education_center_id);
+        //     }
+        //     if($data['message']['text']==='◀️Asosiy menyu')
+        //     {
+        //         $this->chat->message('Marhamat so\'rovnomada ishtirok eting')->replyKeyboard(ReplyKeyboard::make()
+        //         ->button("So'rovnomada ishtirok etish")->resize(true))
+        //         ->send();
+        //     }
+        //     else if($data['message']['text']==='🔙Orqaga')
+        //     {
+        //         $this->chat->message('Marhamat so\'rovnomada ishtirok eting')
+        //         ->replyKeyboard(ReplyKeyboard::make()
+        //         ->button("So'rovnomada ishtirok etish")->resize(true))
+        //         ->send();
+        //     }
+        // }
+        // if(isset($data['message']['web_app_data']))
+        // {
+        //     if($data['message']['web_app_data']['data']==='Test yakunlandi')
+        //     {
+        //         $this->finish();
+        //     }
+        // } 
+        // if(isset($data['message']['contact']))
+        // {
+        //     $applicant=Applicant::where(['chat_id'=>$this->chat->chat_id])->first();
+        //     if($applicant)
+        //     {
+        //         $applicant->update([
+        //             'phone'=>intval(str_replace(['-',' ','+'],'',$data['message']['contact']['phone_number']))
+        //         ]);
+        //     }
+        //     $regions = Region::all();
+        //     $regionKeyboards = [];
+        //     foreach ($regions as $region){
+        //         $regionKeyboards[] =  ReplyButton::make($region->name);
+        //     }
+        //     $this->chat->message('Rahmat!')->removeReplyKeyboard()
+        //         ->send();
+        //     $this->chat->message('<b>Siz o\'qigan muassasa joylashgan viloyatni tanlang</b>')
+        //     ->replyKeyboard(
+        //         ReplyKeyboard::make()
+        //         ->row([
+        //             \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('◀️Asosiy menyu'),
+        //             \Base\Application\Application\Utils\Telegram\Buttons\ReplyButton::make('🔙Orqaga'),
+        //         ])->chunk(2)->selective(true)
+        //         ->row($regionKeyboards)->chunk(2))
+        //     ->send();
+        // }
 
     }
 
