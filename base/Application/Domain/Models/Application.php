@@ -19,7 +19,7 @@ class Application extends Model
     use HasFactory;
 
     public $table = 'applications';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -53,8 +53,25 @@ class Application extends Model
      * @var array
      */
     public static $rules = [
-        
+
     ];
 
-    
+    public function survey(){
+        return  $this->belongsTo(\Base\Survey\Domain\Models\Survey::class, 'survey_id', 'id');
+    }
+
+    public function educationCenter(){
+        return  $this->belongsTo(\Base\Resource\Domain\Models\EducationCenter::class, 'education_center_id', 'id');
+    }
+
+    public function speciality(){
+        return  $this->belongsTo(\Base\Resource\Domain\Models\Speciality::class, 'speciality_id', 'id');
+    }
+
+    public function applicant(){
+        return  $this->belongsTo(\Base\Resource\Domain\Models\Speciality::class, 'speciality_id', 'id');
+    }
+    public function answers(){
+        return  $this->hasMany(\Base\Application\Domain\Models\Application::class, 'application_id', 'id');
+    }
 }

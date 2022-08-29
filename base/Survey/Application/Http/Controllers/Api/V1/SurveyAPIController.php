@@ -2,6 +2,8 @@
 
 namespace Base\Survey\Application\Http\Controllers\Api\V1;
 
+use Base\Survey\Application\Http\Collections\Api\V1\SurveyCollection;
+use Base\Survey\Application\Http\Collections\Api\V1\SurveyResource;
 use Base\Survey\Application\Http\Requests\Api\V1\CreateSurveyAPIRequest;
 use Base\Survey\Application\Http\Requests\Api\V1\UpdateSurveyAPIRequest;
 use Base\Survey\Domain\Models\Survey;
@@ -40,7 +42,7 @@ class SurveyAPIController extends AppBaseController
             $request->get('limit')
         );
 
-        return $this->sendResponse($surveys->toArray(), 'Surveys retrieved successfully');
+        return $this->sendResponse(new SurveyCollection($surveys), 'Surveys retrieved successfully');
     }
 
     /**
@@ -51,14 +53,14 @@ class SurveyAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateSurveyAPIRequest $request)
-    {
-        $input = $request->all();
-
-        $survey = $this->surveyRepository->create($input);
-
-        return $this->sendResponse($survey->toArray(), 'Survey saved successfully');
-    }
+//    public function store(CreateSurveyAPIRequest $request)
+//    {
+//        $input = $request->all();
+//
+//        $survey = $this->surveyRepository->create($input);
+//
+//        return $this->sendResponse(new SurveyResource($survey), 'Survey saved successfully');
+//    }
 
     /**
      * Display the specified Survey.
@@ -77,7 +79,7 @@ class SurveyAPIController extends AppBaseController
             return $this->sendError('Survey not found');
         }
 
-        return $this->sendResponse($survey->toArray(), 'Survey retrieved successfully');
+        return $this->sendResponse(new SurveyResource($survey), 'Survey retrieved successfully');
     }
 
     /**
@@ -102,7 +104,7 @@ class SurveyAPIController extends AppBaseController
 
         $survey = $this->surveyRepository->update($input, $id);
 
-        return $this->sendResponse($survey->toArray(), 'Survey updated successfully');
+        return $this->sendResponse(new SurveyResource($survey), 'Survey updated successfully');
     }
 
     /**
