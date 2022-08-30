@@ -20,6 +20,9 @@ class QuestionResource extends JsonResource
             'text_uz'=>$this->translate('uz')->text,
             'text_ru'=>$this->translate('ru')->text,
             'text_en'=>$this->translate('en')->text,
+            'answer_uz'=>new QuestionAnswerCollection($this->questionAnswers),
+            'answer_ru'=>new QuestionAnswerCollection($this->questionAnswers),
+            'answer_en'=>new QuestionAnswerCollection($this->questionAnswers),
         ];
     }
 }
