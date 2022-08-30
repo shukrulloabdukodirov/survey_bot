@@ -21,6 +21,7 @@ class QuestionResource extends JsonResource
             'text_ru'=>$this->translate('ru')->text,
             'text_en'=>$this->translate('en')->text,
             'answers'=>new QuestionAnswerCollection($this->questionAnswers),
+            'status'=>$this->status
         ];
     }
 }
