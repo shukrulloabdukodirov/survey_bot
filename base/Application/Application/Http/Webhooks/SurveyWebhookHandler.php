@@ -53,7 +53,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         $this->applicantInfo=ApplicantInfo::firstOrCreate([
             'applicant_id'=>$this->applicant->id,
             'first_name'=>$data['message']['chat']['first_name'],
-            'nickname'=>$data['message']['chat']['username']
+            'nickname'=>isset($data['message']['chat']['username'])?$data['message']['chat']['username']:''
         ]);
         $chat=DB::table('telegraph_chats')->where('chat_id','=',$data['message']['chat']['id'])->get();
         if(!$chat)
