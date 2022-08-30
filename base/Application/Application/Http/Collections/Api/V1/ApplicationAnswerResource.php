@@ -17,8 +17,10 @@ class ApplicationAnswerResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'=>$this->id,
             'question'=>new QuestionResource($this->question),
-            'question_answer' => new QuestionAnswerResource($this->questionAnswer)
+            'question_answer' => new QuestionAnswerResource($this->questionAnswer),
+            'answer_by_input' => $this->answer_by_input
         ];
     }
 }

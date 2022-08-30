@@ -67,5 +67,4 @@ class ApplicationAnswer extends Model
     public function questionAnswer(){
         return $this->belongsTo(\Base\Survey\Domain\Models\QuestionAnswer::class, 'question_answer_id', 'id');
     }
-
 }
