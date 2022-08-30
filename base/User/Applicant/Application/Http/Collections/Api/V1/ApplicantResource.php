@@ -15,6 +15,8 @@ class ApplicantResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'=>$this->id,
+            'name'=>$this->applicantInfos[0]->first_name,
             'phone'=>$this->phone,
         ];
     }

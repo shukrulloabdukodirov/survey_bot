@@ -79,7 +79,7 @@ class ApplicationAPIController extends AppBaseController
             return $this->sendError('Application not found');
         }
 
-        return $this->sendResponse($application->toArray(), 'Application retrieved successfully');
+        return $this->sendResponse(new ApplicationResource($application), 'Application retrieved successfully');
     }
 
     /**

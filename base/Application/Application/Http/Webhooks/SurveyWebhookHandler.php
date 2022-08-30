@@ -17,6 +17,7 @@ use Base\Resource\Domain\Models\TelegramChatQuestion;
 use Base\Resource\Domain\Models\TelegramChatQuestionAnswer;
 use Base\Survey\Domain\Models\Question;
 use Base\User\Applicant\Domain\Models\Applicant;
+use Base\User\Applicant\Domain\Models\ApplicantInfo;
 use DefStudio\Telegraph\DTO\TelegramUpdate;
 use DefStudio\Telegraph\Exceptions\TelegramWebhookException;
 use DefStudio\Telegraph\Facades\Telegraph;
@@ -34,7 +35,7 @@ use Illuminate\Support\Stringable;
 class SurveyWebhookHandler extends BaseWebHookHandler
 {
     protected Application $application;
-
+    protected ApplicantInfo $applicantInfo;
 
     public function handle(Request $request, TelegraphBot $bot): void
     {
@@ -44,9 +45,15 @@ class SurveyWebhookHandler extends BaseWebHookHandler
       if(isset($data['message']))
       {
         $this->applicant=Applicant::firstOrCreate([ 'chat_id'=>$data['message']['chat']['id']]);
+        
         $this->application=Application::firstOrCreate([
             'applicant_id'=>$this->applicant->id,
             'survey_id'=>1
+        ]);
+        $this->applicantInfo=ApplicantInfo::firstOrCreate([
+            'applicant_id'=>$this->applicant->id,
+            'first_name'=>$data['message']['chat']['first_name'],
+            'nickname'=>$data['message']['chat']['username']
         ]);
         $chat=DB::table('telegraph_chats')->where('chat_id','=',$data['message']['chat']['id'])->get();
         if(!$chat)
