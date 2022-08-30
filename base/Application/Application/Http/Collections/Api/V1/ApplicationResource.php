@@ -19,7 +19,8 @@ class ApplicationResource extends JsonResource
         return [
             'applicant'=>new ApplicantResource($this->applicant),
             'education_center'=>new EducationCenterResource($this->educaitonCenter),
-            'answers'=>new ApplicationAnswerCollection($this->answers)
+            'answers'=>new ApplicationAnswerCollection($this->answers),
+            'condition'=>$this->condition,
         ];
     }
 }

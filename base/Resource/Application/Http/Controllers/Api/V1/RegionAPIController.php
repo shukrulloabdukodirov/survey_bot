@@ -2,6 +2,9 @@
 
 namespace Base\Resource\Application\Http\Controllers\Api\V1;
 
+use Base\Resource\Application\Http\Collections\Api\V1\RegionCollection;
+use Base\Resource\Application\Http\Collections\Api\V1\RegionShowCollection;
+use Base\Resource\Application\Http\Collections\Api\V1\RegionShowResource;
 use Base\Resource\Application\Http\Requests\Api\V1\CreateRegionAPIRequest;
 use Base\Resource\Application\Http\Requests\Api\V1\UpdateRegionAPIRequest;
 use Base\Resource\Domain\Models\Region;
@@ -40,7 +43,7 @@ class RegionAPIController extends AppBaseController
             $request->get('limit')
         );
 
-        return $this->sendResponse($regions->toArray(), 'Regions retrieved successfully');
+        return $this->sendResponse(new RegionCollection($regions), 'Regions retrieved successfully');
     }
 
     /**
@@ -77,7 +80,7 @@ class RegionAPIController extends AppBaseController
             return $this->sendError('Region not found');
         }
 
-        return $this->sendResponse($region->toArray(), 'Region retrieved successfully');
+        return $this->sendResponse(new RegionShowResource($region), 'Region retrieved successfully');
     }
 
     /**

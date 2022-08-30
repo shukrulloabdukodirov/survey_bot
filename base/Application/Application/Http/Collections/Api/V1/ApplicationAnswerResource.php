@@ -18,7 +18,8 @@ class ApplicationAnswerResource extends JsonResource
     {
         return [
             'question'=>new QuestionResource($this->question),
-            'question_answer' => new QuestionAnswerResource($this->questionAnswer)
+            'question_answer' => new QuestionAnswerResource($this->questionAnswer),
+            'condition'=>$this->condition,
         ];
     }
 }

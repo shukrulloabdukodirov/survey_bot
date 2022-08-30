@@ -15,9 +15,14 @@ class QuestionResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'text_uz'=>$this->translate('uz')->text,
-            'text_ru'=>$this->translate('ru')->text,
-            'text_en'=>$this->translate('en')->text,
+            'id'=>$this->id,
+            'question_uz'=>$this->translate('uz')->text,
+            'question_ru'=>$this->translate('ru')->text,
+            'question_en'=>$this->translate('en')->text,
+            'answers_uz'=>new QuestionAnswerCollection($this->questionAnswers),
+            'answers_ru'=>new QuestionAnswerCollection($this->questionAnswers),
+            'answers_en'=>new QuestionAnswerCollection($this->questionAnswers),
+            'status'=>$this->status,
         ];
     }
 }

@@ -61,7 +61,7 @@ class EducationCenter extends Model
     ];
     public function specialities()
     {
-        return $this->hasMany(\Base\Resource\Domain\Models\Speciality::class, 'region_soato_id', 'soato_id');
+        return $this->belongsToMany(\Base\Resource\Domain\Models\Speciality::class,'education_center_specialities','education_center_id','speciality_id');
     }
 
 }

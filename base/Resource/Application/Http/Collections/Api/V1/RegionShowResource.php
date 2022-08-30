@@ -1,10 +1,11 @@
 <?php
 
-namespace Base\Survey\Application\Http\Collections\Api\V1;
+namespace Base\Resource\Application\Http\Collections\Api\V1;
 
+use Base\Resource\Domain\Models\Region;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SurveyResource extends JsonResource
+class RegionShowResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -12,6 +13,7 @@ class SurveyResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
+    public $collects = Region::class;
     public function toArray($request)
     {
         return [
@@ -19,8 +21,8 @@ class SurveyResource extends JsonResource
             'name_uz'=>$this->translate('uz')->name,
             'name_ru'=>$this->translate('ru')->name,
             'name_en'=>$this->translate('en')->name,
-            'questions' => new QuestionCollection($this->questions),
             'status'=>$this->status,
+            'education_centers' => new EducationCenterCollection($this->educationCenters)
         ];
     }
 }
