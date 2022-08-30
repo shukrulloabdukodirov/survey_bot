@@ -89,10 +89,10 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         }
     }
     // $this->NextStep();
-    if($this->applicant)
-    {
-        $this->steps();
-    }
+    // if(isset($this->applicant))
+    // {
+    //     // $this->steps();
+    // }
     }
     public function start()
     {
