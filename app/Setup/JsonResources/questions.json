@@ -1,16 +1,19 @@
 [
     {
-        "name_uz": "Ta'lim sifatini qanday baholaysiz?",
+        "name_uz": "O‘zingiz o‘qiyotgan kasb-hunar markazidagi ta’lim sifatini qanday baholaysiz?",
         "type": 2,
         "answers": [
             {
-                "name":"A'lo"
+                "name":"A’lo"
             },
             {
                 "name":"Yaxshi"
             },
             {
-                "name":"O'rta"
+                "name":"O‘rta"
+            },
+            {
+                "name":"Qoniqarsiz "
             }
         ]
     },
@@ -19,132 +22,150 @@
         "type": 2,
         "answers": [
             {
-                "name":"A'lo"
+                "name":"A’lo"
             },
             {
                 "name":"Yaxshi"
             },
             {
-                "name":"O'rta"
+                "name":"O‘rta"
+            },
+             {
+                "name":"Qoniqarsiz"
             }
         ]
     },
     {
-        "name_uz": "O'zingizning o'qigan kasb-hunar bo'yicha o'qitish sifatini qanday baholaysiz?",
+        "name_uz": "Kasbiy yo‘nalishingiz bo‘yicha o‘tilayotgan darslarni qanday baholaysiz?",
         "type": 2,
         "answers": [
             {
-                "name":"A'lo"
+                "name":"A’lo"
             },
             {
                 "name":"Yaxshi"
             },
             {
-                "name":"O'rta"
+                "name":"O‘rta"
+            },
+             {
+                "name":"Qoniqarsiz"
             }
         ]
     },
     {
-        "name_uz": "Ta’lim muassasida korrupsiya duch keldingizmi? (rahbariyat, o'qituvchilar va boshqalar orasida)",
+        "name_uz": "O‘quv markazingizda korrupsiyaga duch kelganmisiz?",
         "type": 2,
         "answers": [
             {
-                "name":"Men shaxsan duch kelmaganman"
+                "name":"Ha, shaxsan duch kelganman"
             },
             {
-                "name":"Guruhdoshlarim bunga duch kelishdi"
+                "name":"Markaz rahbariyati va o‘quvchilar orasida korrupsiya bor"
             },
             {
-                "name":"Men bu haqda hech narsa bilmayman"
+                "name":"Bu haqida hech narsa bilmayman"
+            },
+            {
+                "name":"Bizda korrupsiya umuman yo‘q"
             }
         ]
     },
     {
-        "name_uz": "Sizning o'quv jarayoningizdagi o'quv-uslubiy yoki ilmiy adabiyotlar bilan yetarli darajada ta'minlanganini baholang.",
+        "name_uz": "O‘quv-uslubiy qo‘llanma va darsliklar bilan ta’minlanganingiz darajasini baholang",
         "type": 2,
         "answers": [
             {
-                "name":"Ta'minlangan"
+                "name":"To‘liq ta’minlanganman"
             },
             {
-                "name":"Ta'minlanmagan"
+                "name":"Umuman ta’minlanmaganman"
             },
             {
-                "name":"Qisman ta'minlangan"
+                "name":"Qisman ta’minlanganman"
             }
         ]
     },
     {
-        "name_uz": "Siz dars jarayonida o‘z sohangiz bo’yicha amaliy mashg‘ulotlar o‘tkazilganligini baholang.",
+        "name_uz": "Dars jarayonida kasbiy yo‘nalishingiz bo‘yicha amaliy mashg‘ulotlar o‘tkaziladimi?",
         "type": 2,
         "answers": [
             {
-                "name":"Amaliy darslar o'tkazildi"
+                "name":"Amaliy darslar o‘tkaziladi"
             },
             {
-                "name":"Amaliy darslar o'tkazilmadi"
+                "name":"Amaliy darslar o‘tkazilmaydi"
             }
         ]
     },
     {
-        "name_uz": "Ta'lim muassasasi sizga axborot resurslaridan foydalanish imkoniyatini taqdim etishini baholang. (elektron darsliklar, internet)",
+        "name_uz": "O‘quv markazi sizga axborot resurslari (elektron darsliklar, internet va h. k.)dan foydalanish imkoniyatini yaratganmi?",
         "type": 2,
         "answers": [
             {
-                "name":"Foydalandim"
+                "name":"Foydalanish imkoni mavjud"
             },
             {
-                "name":"Foydalanmadim"
+                "name":"Foydalanish imkoni mavjud emas"
             }
         ]
     },
     {
-        "name_uz": "O'qituvchilarning vazifalarini o'z vaqtida bajarishini baholang.",
+        "name_uz": "O‘qituvchilarning dars berish salohiyatini qanday baholaysiz?",
         "type": 2,
         "answers": [
             {
-                "name":"A'lo"
+                "name":"A’lo"
             },
             {
                 "name":"Yaxshi"
             },
             {
-                "name":"O'rta"
+                "name":"O‘rta"
+            },
+             {
+                "name":"Qoniqarsiz"
             }
         ]
     },
     {
-        "name_uz": "O'qituvchilarning o’z ishiga nisbatdan bo’lgan ma’suliyatini baholang.",
+        "name_uz": "O‘qituvchilarning o‘z ishiga nisbatan mas’uliyatini qanday baholaysiz?",
         "type": 2,
         "answers": [
             {
-                "name":"A'lo"
+                "name":"A’lo"
             },
             {
                 "name":"Yaxshi"
             },
             {
-                "name":"O'rta"
+                "name":"O‘rta"
+            },
+             {
+                "name":"Qoniqarsiz"
             }
         ]
     },
     {
-        "name_uz": "O'qituvchining bilim va tajribasini qanday baholaysiz?",
+        "name_uz": "O‘qituvchilarning bilim va tajribasini qanday baholaysiz?",
         "type": 2,
         "answers": [
             {
-                "name":"A'lo"
+                "name":"A’lo"
             },
             {
                 "name":"Yaxshi"
             },
             {
-                "name":"O'rta"
+                "name":"O‘rta"
+            },
+             {
+                "name":"Qoniqarsiz"
             }
         ]
     },
     {
-        "name_uz": "Sizda taqdim etilayotgan ta'lim xizmatlari sifatini oshirish va o’quv jarayonidan tashqari ishlarni tashkil qilish bo'yicha fikrlaringiz bormi? Istaklaringizni yozing.",
+        "name_uz": "Kasbiy ta’lim sifatini yanada oshirish va siz tahsil olayotgan o‘quv markazi faoliyatini yanada yaxshilash bo‘yicha fikr-mulohaza va takliflaringizni yozib qoldiring.",
         "type": 1
     }
 ]
