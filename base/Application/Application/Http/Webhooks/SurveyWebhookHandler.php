@@ -217,7 +217,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                         $this->nextStep($step, $this->message->text());
                     } else {
                         $this->chat->html("<b>Noto'g'ri ma'lumot jo'natildi!</b>")->send();
-                        $this->chat->html("Iltimos to'g'ri buyruqni tanlang!")->send();
+                        $this->chat->html("Iltimos, to'g'ri buyruqni tanlang!")->send();
                     }
                 }
                 break;
@@ -236,8 +236,6 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                         foreach ($regions as $region) {
                             $regionKeyboards[] =  ReplyButton::make($region->name);
                         }
-                        $this->chat->message('Rahmat!')
-                            ->send();
                         $this->chat->message('<b>Marhamat, siz o‘qiyotgan kasbiy ta’lim markazi joylashgan hududni tanlang</b>')
                             ->replyKeyboard(ReplyKeyboard::make()
                                 ->row($regionKeyboards)->chunk(2)
@@ -255,13 +253,11 @@ class SurveyWebhookHandler extends BaseWebHookHandler
             case 4: {
                     $region = RegionTranslation::where('name', $message)->first();
                     if ($region) {
-                        $this->chat->message('Rahmat!')
-                            ->send();
                         $this->educationCenter($region->region_id);
                         $this->nextStep($step, $this->message->text());
                     } else {
                         $this->errorMessage("<b>Noto'g'ri viloyat tanlangan!</b>");
-                        $this->errorMessage("Iltimos qaytadan urunib ko'ring!");
+                        $this->errorMessage("Iltimos, qaytadan urunib ko'ring!");
                     }
                 }
                 break;
@@ -269,8 +265,6 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                     if ($message) {
                         $educationCenter = EducationCenterTranslation::where('name', $message)->first();
                         if ($educationCenter) {
-                            $this->chat->message('Rahmat!')
-                                ->send();
                             $this->specialities($educationCenter->education_center_id);
                             $this->application->update([
                                 'education_center_id' => $educationCenter->education_center_id
@@ -278,7 +272,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                             $this->nextStep($step, $this->message->text());
                         } else {
                             $this->errorMessage("<b>Noto'g'ri o'quv markazi  tanlangan!</b>");
-                            $this->errorMessage("Iltimos qaytadan urunib ko'ring!");
+                            $this->errorMessage("Iltimos, qaytadan urunib ko'ring!");
                         }
                     } else if (isset($data['message']['web_app_data'])) {
                         $speciality = $data['message']['web_app_data']['button_text'];
