@@ -33,9 +33,10 @@ class Question extends Model
 
     public $fillable = [
         'status',
-        'survey_id'
+        'survey_id',
+        'type'
     ];
-
+    const SURVEY_ID = 1;
     /**
      * The attributes that should be casted to native types.
      *
@@ -44,6 +45,7 @@ class Question extends Model
     protected $casts = [
         'id' => 'integer',
         'status' => 'boolean',
+        'type' =>'integer',
         'survey_id' => 'integer'
     ];
 
@@ -55,6 +57,14 @@ class Question extends Model
     public static $rules = [
         'status' => 'required|boolean'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($question) {
+            $question->survey_id = self::SURVEY_ID;
+        });
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

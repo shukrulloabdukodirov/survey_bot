@@ -2,6 +2,8 @@
 
 namespace Base\Survey\Application\Http\Controllers\Api\V1;
 
+use Base\Survey\Application\Http\Collections\Api\V1\QuestionAnswerCollection;
+use Base\Survey\Application\Http\Collections\Api\V1\QuestionCollection;
 use Base\Survey\Application\Http\Requests\Api\V1\CreateQuestionAnswerAPIRequest;
 use Base\Survey\Application\Http\Requests\Api\V1\UpdateQuestionAnswerAPIRequest;
 use Base\Survey\Domain\Models\QuestionAnswer;
@@ -40,7 +42,7 @@ class QuestionAnswerAPIController extends AppBaseController
             $request->get('limit')
         );
 
-        return $this->sendResponse($questionAnswers->toArray(), 'Question Answers retrieved successfully');
+        return $this->sendResponse(new QuestionAnswerCollection($questionAnswers), 'Question Answers retrieved successfully');
     }
 
     /**

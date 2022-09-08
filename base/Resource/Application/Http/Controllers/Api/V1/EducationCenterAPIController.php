@@ -2,10 +2,13 @@
 
 namespace Base\Resource\Application\Http\Controllers\Api\V1;
 
+use Base\Resource\Application\Http\Collections\Api\V1\EducationCenterCollection;
+use Base\Resource\Application\Http\Collections\Api\V1\EducationCenterResource;
 use Base\Resource\Application\Http\Requests\Api\V1\CreateEducationCenterAPIRequest;
 use Base\Resource\Application\Http\Requests\Api\V1\UpdateEducationCenterAPIRequest;
 use Base\Resource\Domain\Models\EducationCenter;
 use Base\Resource\Domain\Repositories\EducationCenterRepository;
+use Base\Resource\Domain\Services\EducationCenterStoreService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -19,10 +22,11 @@ class EducationCenterAPIController extends AppBaseController
 {
     /** @var  EducationCenterRepository */
     private $educationCenterRepository;
-
-    public function __construct(EducationCenterRepository $educationCenterRepo)
+    private $educationCenterService;
+    public function __construct(EducationCenterRepository $educationCenterRepo, EducationCenterStoreService $educationCenterService)
     {
         $this->educationCenterRepository = $educationCenterRepo;
+        $this->educationCenterService = $educationCenterService;
     }
 
     /**
@@ -40,7 +44,7 @@ class EducationCenterAPIController extends AppBaseController
             $request->get('limit')
         );
 
-        return $this->sendResponse($educationCenters->toArray(), 'Education Centers retrieved successfully');
+        return $this->sendResponse(new EducationCenterCollection($educationCenters), 'Education Centers retrieved successfully');
     }
 
     /**
@@ -55,9 +59,9 @@ class EducationCenterAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        $educationCenter = $this->educationCenterRepository->create($input);
+        $educationCenter = $this->educationCenterService->storeEducationCenter($input);
 
-        return $this->sendResponse($educationCenter->toArray(), 'Education Center saved successfully');
+        return $this->sendResponse(new EducationCenterResource($educationCenter), 'Education Center saved successfully');
     }
 
     /**
@@ -77,7 +81,7 @@ class EducationCenterAPIController extends AppBaseController
             return $this->sendError('Education Center not found');
         }
 
-        return $this->sendResponse($educationCenter->toArray(), 'Education Center retrieved successfully');
+        return $this->sendResponse(new EducationCenterResource($educationCenter), 'Education Center retrieved successfully');
     }
 
     /**
@@ -100,9 +104,9 @@ class EducationCenterAPIController extends AppBaseController
             return $this->sendError('Education Center not found');
         }
 
-        $educationCenter = $this->educationCenterRepository->update($input, $id);
+        $educationCenter = $this->educationCenterService->updateEducationCenter($input, $id);
 
-        return $this->sendResponse($educationCenter->toArray(), 'EducationCenter updated successfully');
+        return $this->sendResponse(new EducationCenterResource($educationCenter), 'EducationCenter updated successfully');
     }
 
     /**

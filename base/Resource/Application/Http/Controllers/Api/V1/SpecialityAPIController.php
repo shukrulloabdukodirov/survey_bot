@@ -2,10 +2,12 @@
 
 namespace Base\Resource\Application\Http\Controllers\Api\V1;
 
+use Base\Resource\Application\Http\Collections\Api\V1\SpecialityResource;
 use Base\Resource\Application\Http\Requests\Api\V1\CreateSpecialtyAPIRequest;
 use Base\Resource\Application\Http\Requests\Api\V1\UpdateSpecialtyAPIRequest;
 use Base\Resource\Domain\Models\Speciality;
 use Base\Resource\Domain\Repositories\SpecialityRepository;
+use Base\Resource\Domain\Services\SpecialityStoreService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -18,11 +20,12 @@ use Response;
 class SpecialityAPIController extends AppBaseController
 {
     /** @var  SpecialityRepository */
-    private $specialtyRepository;
-
-    public function __construct(SpecialityRepository $specialtyRepo)
+    private $specialityRepository;
+    private $specialityService;
+    public function __construct(SpecialityRepository $specialityRepository, SpecialityStoreService $specialityService)
     {
-        $this->specialtyRepository = $specialtyRepo;
+        $this->specialityRepository = $specialityRepository;
+        $this->specialityService = $specialityService;
     }
 
     /**
@@ -34,7 +37,7 @@ class SpecialityAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $specialties = $this->specialtyRepository->all(
+        $specialties = $this->specialityRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
             $request->get('limit')
@@ -55,9 +58,9 @@ class SpecialityAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        $specialty = $this->specialtyRepository->create($input);
+        $speciality = $this->specialityService->storeSpeciality($input);
 
-        return $this->sendResponse($specialty->toArray(), 'Specialty saved successfully');
+        return $this->sendResponse(new SpecialityResource($speciality), 'Specialty saved successfully');
     }
 
     /**
@@ -70,14 +73,14 @@ class SpecialityAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var Speciality $specialty */
-        $specialty = $this->specialtyRepository->find($id);
+        /** @var Speciality $speciality */
+        $speciality = $this->specialityRepository->find($id);
 
-        if (empty($specialty)) {
+        if (empty($speciality)) {
             return $this->sendError('Specialty not found');
         }
 
-        return $this->sendResponse($specialty->toArray(), 'Specialty retrieved successfully');
+        return $this->sendResponse(new SpecialityResource($speciality), 'Specialty retrieved successfully');
     }
 
     /**
@@ -93,16 +96,16 @@ class SpecialityAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        /** @var Speciality $specialty */
-        $specialty = $this->specialtyRepository->find($id);
+        /** @var Speciality $speciality */
+        $speciality = $this->specialityRepository->find($id);
 
-        if (empty($specialty)) {
+        if (empty($speciality)) {
             return $this->sendError('Specialty not found');
         }
 
-        $specialty = $this->specialtyRepository->update($input, $id);
+        $speciality = $this->specialityService->updateSpeciality($input, $id);
 
-        return $this->sendResponse($specialty->toArray(), 'Specialty updated successfully');
+        return $this->sendResponse(new SpecialityResource($speciality), 'Specialty updated successfully');
     }
 
     /**
@@ -117,14 +120,14 @@ class SpecialityAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var Speciality $specialty */
-        $specialty = $this->specialtyRepository->find($id);
+        /** @var Speciality $speciality */
+        $speciality = $this->specialityRepository->find($id);
 
-        if (empty($specialty)) {
+        if (empty($speciality)) {
             return $this->sendError('Specialty not found');
         }
 
-        $specialty->delete();
+        $speciality->delete();
 
         return $this->sendSuccess('Specialty deleted successfully');
     }

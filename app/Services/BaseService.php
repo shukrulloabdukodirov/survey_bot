@@ -18,4 +18,12 @@ class BaseService
         }
         return $res;
     }
+
+    public function reformat($data) :array{
+        $res = [];
+        foreach ($data as $k=>$item){
+            $res[$k] = $this->load($item);
+        }
+        return array_values($res);
+    }
 }

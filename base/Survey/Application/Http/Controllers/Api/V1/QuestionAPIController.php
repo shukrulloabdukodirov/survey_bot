@@ -2,10 +2,13 @@
 
 namespace Base\Survey\Application\Http\Controllers\Api\V1;
 
+use Base\Survey\Application\Http\Collections\Api\V1\QuestionCollection;
+use Base\Survey\Application\Http\Collections\Api\V1\QuestionResource;
 use Base\Survey\Application\Http\Requests\Api\V1\CreateQuestionAPIRequest;
 use Base\Survey\Application\Http\Requests\Api\V1\UpdateQuestionAPIRequest;
 use Base\Survey\Domain\Models\Question;
 use Base\Survey\Domain\Repositories\QuestionRepository;
+use Base\Survey\Domain\Services\QuestionService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -19,10 +22,11 @@ class QuestionAPIController extends AppBaseController
 {
     /** @var  QuestionRepository */
     private $questionRepository;
-
-    public function __construct(QuestionRepository $questionRepo)
+    private $questionService;
+    public function __construct(QuestionRepository $questionRepo, QuestionService $questionService)
     {
         $this->questionRepository = $questionRepo;
+        $this->questionService = $questionService;
     }
 
     /**
@@ -40,7 +44,7 @@ class QuestionAPIController extends AppBaseController
             $request->get('limit')
         );
 
-        return $this->sendResponse($questions->toArray(), 'Questions retrieved successfully');
+        return $this->sendResponse(new QuestionCollection($questions), 'Questions retrieved successfully');
     }
 
     /**
@@ -53,11 +57,11 @@ class QuestionAPIController extends AppBaseController
      */
     public function store(CreateQuestionAPIRequest $request)
     {
-        $input = $request->all();
+        $input = $request;
 
-        $question = $this->questionRepository->create($input);
+        $question = $this->questionService->storeQuestion($input);
 
-        return $this->sendResponse($question->toArray(), 'Question saved successfully');
+        return $this->sendResponse(new QuestionResource($question), 'Question saved successfully');
     }
 
     /**
@@ -77,7 +81,7 @@ class QuestionAPIController extends AppBaseController
             return $this->sendError('Question not found');
         }
 
-        return $this->sendResponse($question->toArray(), 'Question retrieved successfully');
+        return $this->sendResponse(new QuestionResource($question), 'Question retrieved successfully');
     }
 
     /**
@@ -91,7 +95,6 @@ class QuestionAPIController extends AppBaseController
      */
     public function update($id, UpdateQuestionAPIRequest $request)
     {
-        $input = $request->all();
 
         /** @var Question $question */
         $question = $this->questionRepository->find($id);
@@ -100,9 +103,9 @@ class QuestionAPIController extends AppBaseController
             return $this->sendError('Question not found');
         }
 
-        $question = $this->questionRepository->update($input, $id);
+        $question = $this->questionService->updateQuestion($request, $id);
 
-        return $this->sendResponse($question->toArray(), 'Question updated successfully');
+        return $this->sendResponse(new QuestionResource($question), 'Question updated successfully');
     }
 
     /**
