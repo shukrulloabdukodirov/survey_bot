@@ -3,12 +3,14 @@
 namespace Base\Resource\Application\Http\Controllers\Api\V1;
 
 use Base\Resource\Application\Http\Collections\Api\V1\RegionCollection;
+use Base\Resource\Application\Http\Collections\Api\V1\RegionResource;
 use Base\Resource\Application\Http\Collections\Api\V1\RegionShowCollection;
 use Base\Resource\Application\Http\Collections\Api\V1\RegionShowResource;
 use Base\Resource\Application\Http\Requests\Api\V1\CreateRegionAPIRequest;
 use Base\Resource\Application\Http\Requests\Api\V1\UpdateRegionAPIRequest;
 use Base\Resource\Domain\Models\Region;
 use Base\Resource\Domain\Repositories\RegionRepository;
+use Base\Resource\Domain\Services\RegionStoreService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
@@ -21,11 +23,12 @@ use Response;
 class RegionAPIController extends AppBaseController
 {
     /** @var  RegionRepository */
+    private $storeService;
     private $regionRepository;
-
-    public function __construct(RegionRepository $regionRepo)
+    public function __construct(RegionStoreService $storeService,RegionRepository $regionRepository)
     {
-        $this->regionRepository = $regionRepo;
+        $this->storeService = $storeService;
+        $this->regionRepository = $regionRepository;
     }
 
     /**
@@ -58,9 +61,9 @@ class RegionAPIController extends AppBaseController
     {
         $input = $request->all();
 
-        $region = $this->regionRepository->create($input);
+        $region = $this->storeService->storeRegion($input);
 
-        return $this->sendResponse($region->toArray(), 'Region saved successfully');
+        return $this->sendResponse(new RegionResource($region), 'Region saved successfully');
     }
 
     /**
@@ -103,9 +106,9 @@ class RegionAPIController extends AppBaseController
             return $this->sendError('Region not found');
         }
 
-        $region = $this->regionRepository->update($input, $id);
+        $region = $this->storeService->updateRegion($input, $id);
 
-        return $this->sendResponse($region->toArray(), 'Region updated successfully');
+        return $this->sendResponse(new RegionShowResource($region), 'Region updated successfully');
     }
 
     /**
