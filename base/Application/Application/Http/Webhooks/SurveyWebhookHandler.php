@@ -216,7 +216,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                             ->send();
                         $this->nextStep($step, $this->message->text());
                     } else {
-                        $this->chat->html("<b>Noto'g'ri ma'lumot jo'natildi!</b>")->send();
+                        $this->chat->html("<b>Xato ma'lumot kiritildi.l</b>")->send();
                         $this->chat->html("Iltimos, to'g'ri buyruqni tanlang!")->send();
                     }
                 }
@@ -245,7 +245,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                             ->send();
                         $this->nextStep($step, $phone);
                     } else {
-                        $this->errorMessage("<b>Noto'g'ri  telefon raqam jo'natildi!</b>");
+                        $this->errorMessage("<b>Xato ma'lumot kiritildi.</b>");
                         $this->errorMessage("Iltimos, qaytadan urunib ko'ring!");
                     }
                 }
@@ -256,7 +256,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                         $this->educationCenter($region->region_id);
                         $this->nextStep($step, $this->message->text());
                     } else {
-                        $this->errorMessage("<b>Noto'g'ri viloyat tanlangan!</b>");
+                        $this->errorMessage("<b>Xato ma'lumot kiritildi.</b>");
                         $this->errorMessage("Iltimos, qaytadan urunib ko'ring!");
                     }
                 }
@@ -271,7 +271,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                             ]);
                             $this->nextStep($step, $this->message->text());
                         } else {
-                            $this->errorMessage("<b>Noto'g'ri o'quv markazi  tanlangan!</b>");
+                            $this->errorMessage("<b>Xato ma'lumot kiritildi.</b>");
                             $this->errorMessage("Iltimos, qaytadan urunib ko'ring!");
                         }
                     } else if (isset($data['message']['web_app_data'])) {
@@ -303,7 +303,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         $questions = TelegramChatQuestion::all();
         $lastId = $questions[sizeof($questions) - 1]->id;
         if ($index <= $lastId) {
-            $step->update([
+            $step->update([ 
                 'condition' => false,
             ]);
             $step = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' => $index])->first();
