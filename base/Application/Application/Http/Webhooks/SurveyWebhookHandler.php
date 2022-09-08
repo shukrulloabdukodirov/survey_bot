@@ -216,7 +216,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                             ->send();
                         $this->nextStep($step, $this->message->text());
                     } else {
-                        $this->chat->html("<b>Xato ma'lumot kiritildi.l</b>")->send();
+                        $this->chat->html("<b>Xato ma'lumot kiritildi.</b>")->send();
                         $this->chat->html("Iltimos, to'g'ri buyruqni tanlang!")->send();
                     }
                 }
