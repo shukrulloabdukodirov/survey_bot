@@ -21,6 +21,6 @@ class EducationCenterStoreService extends BaseService
 
     public function updateEducationCenter($data,$id){
         $input = $this->load($data);
-        return $this->educationCenter->update($data,$id);
+        return $this->educationCenter->update($input,$id);
     }
 }
