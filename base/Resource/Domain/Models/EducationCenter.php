@@ -57,7 +57,7 @@ class EducationCenter extends Model
      * @var array
      */
     public static $rules = [
-        'status' => 'required|boolean'
+        // 'status' => 'required|boolean'
     ];
     public function specialities()
     {

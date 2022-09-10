@@ -9,7 +9,7 @@ Route::resource('cities', V1\CityAPIController::class);
 Route::resource('education-centers', V1\EducationCenterAPIController::class);
 
 
-Route::resource('specialties', V1\SpecialtyAPIController::class);
+Route::resource('specialities', V1\SpecialityAPIController::class);
 
 
 

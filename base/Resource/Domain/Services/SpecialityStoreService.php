@@ -19,6 +19,6 @@ class SpecialityStoreService extends BaseService
 
     public function updateSpeciality($data,$id){
         $input = $this->load($data);
-        return $this->speciality->update($data, $id);
+        return $this->speciality->update($input, $id);
     }
 }

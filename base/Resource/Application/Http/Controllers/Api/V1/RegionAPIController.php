@@ -98,7 +98,6 @@ class RegionAPIController extends AppBaseController
     public function update($id, UpdateRegionAPIRequest $request)
     {
         $input = $request->all();
-
         /** @var Region $region */
         $region = $this->regionRepository->find($id);
 
