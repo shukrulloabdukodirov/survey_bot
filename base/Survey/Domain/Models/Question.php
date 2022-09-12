@@ -55,7 +55,7 @@ class Question extends Model
      * @var array
      */
     public static $rules = [
-        'status' => 'required|boolean'
+        // 'status' => 'required|boolean'
     ];
 
     protected static function boot()
