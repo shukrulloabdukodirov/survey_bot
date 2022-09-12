@@ -16,7 +16,11 @@ class UpdateQuestionAPIRequest extends APIRequest
     {
         return true;
     }
-
+    public function prepareForValidation(){
+        if($this->has('answers')){
+            $this->answers = json_decode($this->answers,true);
+        }
+    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,8 +28,8 @@ class UpdateQuestionAPIRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = Question::$rules;
-        
-        return $rules;
+        return [
+            'answers'=>'array'
+        ];
     }
 }
