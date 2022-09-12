@@ -49,7 +49,7 @@ class Speciality extends Model
      * @var array
      */
     public static $rules = [
-        'status' => 'required|boolean'
+        // 'status' => 'required|boolean'
     ];
 
     public function educationCenters()

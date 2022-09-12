@@ -386,13 +386,12 @@ class SurveyWebhookHandler extends BaseWebHookHandler
     }
     public function saveAnswers($answers)
     {
-        Log::info($answers);
         $answers = json_decode($answers);
         Log::info($answers);
         foreach ($answers as $answer) {
             $appAns = ApplicationAnswer::firstOrCreate(['application_id' => $this->application->id, 'question_id' => $answer->question_id]);
             $appAns->update([
-                'question_answer_id' => isset($answer->answer_id) ? $answer->answer_id : null,
+                'question_answer_id' => isset($answer->answer_id)&& is_numeric($answer->answer_id) ? $answer->answer_id : null,
                 'answer_by_input' => isset($answer->answer_by_input) ? $answer->answer_by_input : null
             ]);
         }

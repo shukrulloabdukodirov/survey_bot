@@ -96,6 +96,7 @@ class EducationCenterAPIController extends AppBaseController
     public function update($id, UpdateEducationCenterAPIRequest $request)
     {
         $input = $request->all();
+        // $input['status']=$input['status']==='true';
 
         /** @var EducationCenter $educationCenter */
         $educationCenter = $this->educationCenterRepository->find($id);
