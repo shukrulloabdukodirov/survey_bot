@@ -21,4 +21,12 @@ class SpecialityStoreService extends BaseService
         $input = $this->load($data);
         return $this->speciality->update($data, $id);
     }
+
+    public function deleteSpeciality($request,$speciality){
+        $data = $this->speciality->find($speciality);
+        if(empty($data)){
+            return $data;
+        }
+        return $data->educationCenters()->detach($request->education_center_id);
+    }
 }

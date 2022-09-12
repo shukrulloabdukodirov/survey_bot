@@ -28,7 +28,6 @@ class Speciality extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $with=['speciality_translations'];
 
     public $fillable = [
         'status'
@@ -53,7 +52,8 @@ class Speciality extends Model
         'status' => 'required|boolean'
     ];
 
-    public function speciality_translations(){
-        return $this->hasMany(SpecialityTranslation::class, 'speciality_id','id');
+    public function educationCenters()
+    {
+        return $this->belongsToMany(\Base\Resource\Domain\Models\EducationCenter::class,'education_center_specialities','education_center_id','speciality_id');
     }
 }

@@ -118,16 +118,14 @@ class SpecialityAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $speciality)
     {
         /** @var Speciality $speciality */
-        $speciality = $this->specialityRepository->find($id);
+        $speciality = $this->specialityService->deleteSpeciality($request,$speciality);
 
         if (empty($speciality)) {
             return $this->sendError('Specialty not found');
         }
-
-        $speciality->delete();
 
         return $this->sendSuccess('Specialty deleted successfully');
     }
