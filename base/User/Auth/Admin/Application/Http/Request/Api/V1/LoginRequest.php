@@ -1,11 +1,10 @@
 <?php
 
-namespace Base\Survey\Application\Http\Requests\Api\V1;
+namespace Base\User\Auth\Admin\Application\Http\Request\Api\V1;
 
-use Base\Survey\Domain\Models\Question;
 use InfyOm\Generator\Request\APIRequest;
 
-class CreateQuestionAPIRequest extends APIRequest
+class LoginRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,11 +16,6 @@ class CreateQuestionAPIRequest extends APIRequest
         return true;
     }
 
-    public function prepareForValidation(){
-        if($this->has('answers')){
-            $this->answers = json_encode($this->answers,true);
-        }
-    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -29,8 +23,9 @@ class CreateQuestionAPIRequest extends APIRequest
      */
     public function rules()
     {
-       return [
-            'answers'=>'array'
-       ];
+        return [
+            'email' => ['required', 'string', 'email', 'max:255', ],
+            'password' => ['required', 'string', 'min:8', ],
+        ];
     }
 }

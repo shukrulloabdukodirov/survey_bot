@@ -49,14 +49,6 @@ class Question extends Model
         'survey_id' => 'integer'
     ];
 
-    /**
-     * Validation rules
-     *
-     * @var array
-     */
-    public static $rules = [
-        // 'status' => 'required|boolean'
-    ];
 
     protected static function boot()
     {
