@@ -18,7 +18,7 @@ class UpdateQuestionAPIRequest extends APIRequest
     }
     public function prepareForValidation(){
         if($this->has('answers')){
-            $this->answers = json_encode($this->answers,true);
+            $this->answers = json_decode($this->answers,true);
         }
     }
     /**
