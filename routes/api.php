@@ -20,16 +20,3 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('get-questions',function()
-{
-    $response=
-    // Question::query()->get();
-    QuestionResource::collection(Question::query()->get());
-    // DB::table('questions')
-    // ->select(['questions.*','question_translations.text as question'])
-    // ->join('question_translations','question_translations.question_id','=','questions.id')
-    // ->join('question_answer_translations','question_answer_translations.question_id','=','questions.id')
-    // ->where('question_translations.locale','=','uz')
-    // ->get();
-    return $response;
-});
