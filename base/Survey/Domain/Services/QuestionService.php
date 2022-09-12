@@ -21,7 +21,7 @@ class QuestionService extends BaseService
         if(!empty($data)){
             $input = $request->only('answers');
             foreach ($input['answers'] as $answer){
-                $data->questionAnswers()->create($this->load($answer));
+                $data->questionAnswers()->create($this->load(json_decode($answer, true)));
             }
         }
         return $data;
@@ -32,6 +32,7 @@ class QuestionService extends BaseService
         if(!empty($data)){
            $input = $request->only('answers');
            foreach ($input['answers'] as $answer){
+                $answer=json_decode($answer, true);
                $updateAnswer = $data->questionAnswers()->where('id',$answer['id'])->first();
                if(!empty($updateAnswer)){
                    $updateAnswer->fill($this->load($answer))->update();

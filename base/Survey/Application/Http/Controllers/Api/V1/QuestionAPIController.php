@@ -58,9 +58,7 @@ class QuestionAPIController extends AppBaseController
     public function store(CreateQuestionAPIRequest $request)
     {
         $input = $request;
-        return $request;
-
-        dd($input);
+        
         $question = $this->questionService->storeQuestion($input);
 
         return $this->sendResponse(new QuestionResource($question), 'Question saved successfully');
