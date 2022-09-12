@@ -17,6 +17,11 @@ class CreateQuestionAPIRequest extends APIRequest
         return true;
     }
 
+    public function prepareForValidation(){
+        if($this->has('answers')){
+            $this->answers = json_encode($this->answers,true);
+        }
+    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,6 +29,8 @@ class CreateQuestionAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return Question::$rules;
+       return [
+            'answers'=>'array'
+       ];
     }
 }
