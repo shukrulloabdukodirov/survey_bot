@@ -41,12 +41,13 @@ class LoginController extends Controller
     }
 
     public function login(LoginRequest $request){
+       
         if (method_exists($this, 'hasTooManyLoginAttempts') &&
             $this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
 
             return $this->sendLockoutResponse($request);
-        }
+        }   
 
         if ($this->attemptLogin($request)) {
             if ($request->hasSession()) {
