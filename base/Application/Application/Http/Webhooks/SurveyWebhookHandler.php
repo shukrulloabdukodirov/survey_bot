@@ -111,7 +111,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         } else {
             $regionKeyboards = [];
             foreach ($regions as $region) {
-                $regionKeyboards[] =  ReplyButton::make(ucfirst($region->name));
+                $regionKeyboards[] =  ReplyButton::make(strtolower($region->name));
             }
             $this->chat->message('<b>O‘zingiz tahsil olayotgan kasb-hunarga o‘qitish markazini tanlang</b>')
                 ->replyKeyboard(ReplyKeyboard::make()
@@ -138,7 +138,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         } else {
             $specialitieKeyboards = [];
             foreach ($specialities as $specialitiy) {
-                $specialitieKeyboards[] = ReplyButton::make(ucfirst($specialitiy->name))->webApp('https://172-105-76-165.ip.linodeusercontent.com/form');
+                $specialitieKeyboards[] = ReplyButton::make(strtolower($specialitiy->name))->webApp('https://172-105-76-165.ip.linodeusercontent.com/form');
             }
             $this->chat->message('<b>O‘zingiz o‘qiyotgan kasbiy ta’lim yo‘nalishini tanlang</b>')
                 ->replyKeyboard(
