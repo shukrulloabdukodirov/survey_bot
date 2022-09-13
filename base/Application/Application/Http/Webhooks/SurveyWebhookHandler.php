@@ -111,7 +111,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         } else {
             $regionKeyboards = [];
             foreach ($regions as $region) {
-                $regionKeyboards[] =  ReplyButton::make(strtolower($region->name));
+                $regionKeyboards[] =  ReplyButton::make(ucfirst(strtolower($region->name)));
             }
             $this->chat->message('<b>O‘zingiz tahsil olayotgan kasb-hunarga o‘qitish markazini tanlang</b>')
                 ->replyKeyboard(ReplyKeyboard::make()
@@ -138,7 +138,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         } else {
             $specialitieKeyboards = [];
             foreach ($specialities as $specialitiy) {
-                $specialitieKeyboards[] = ReplyButton::make(strtolower($specialitiy->name))->webApp('https://172-105-76-165.ip.linodeusercontent.com/form');
+                $specialitieKeyboards[] = ReplyButton::make(ucfirst(strtolower($specialitiy->name)))->webApp('https://172-105-76-165.ip.linodeusercontent.com/form');
             }
             $this->chat->message('<b>O‘zingiz o‘qiyotgan kasbiy ta’lim yo‘nalishini tanlang</b>')
                 ->replyKeyboard(
@@ -263,7 +263,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                 break;
             case 5: {
                     if ($message) {
-                        $educationCenter = EducationCenterTranslation::where('name', $message)->first();
+                        $educationCenter = EducationCenterTranslation::where('name', strtoupper($message))->first();
                         if ($educationCenter) {
                             $this->specialities($educationCenter->education_center_id);
                             $this->application->update([
@@ -278,7 +278,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                         $speciality = $data['message']['web_app_data']['button_text'];
                         $step->update(['value' => $speciality]);
                         $answers = $data['message']['web_app_data']['data'];
-                        $speciality_id = SpecialityTranslation::where(['name' => $speciality])->first()->speciality_id;
+                        $speciality_id = SpecialityTranslation::where(['name' =>strtoupper($speciality)])->first()->speciality_id;
                         $this->application->update(['speciality_id' => $speciality_id]);
                         if ($answers) {
                             $this->saveAnswers($answers);
