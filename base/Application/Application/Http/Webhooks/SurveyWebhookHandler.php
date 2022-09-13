@@ -111,7 +111,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         } else {
             $regionKeyboards = [];
             foreach ($regions as $region) {
-                $regionKeyboards[] =  ReplyButton::make($region->name);
+                $regionKeyboards[] =  ReplyButton::make(ucfirst($region->name));
             }
             $this->chat->message('<b>O‘zingiz tahsil olayotgan kasb-hunarga o‘qitish markazini tanlang</b>')
                 ->replyKeyboard(ReplyKeyboard::make()
@@ -138,7 +138,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         } else {
             $specialitieKeyboards = [];
             foreach ($specialities as $specialitiy) {
-                $specialitieKeyboards[] = ReplyButton::make($specialitiy->name)->webApp('https://172-105-76-165.ip.linodeusercontent.com/form');
+                $specialitieKeyboards[] = ReplyButton::make(ucfirst($specialitiy->name))->webApp('https://172-105-76-165.ip.linodeusercontent.com/form');
             }
             $this->chat->message('<b>O‘zingiz o‘qiyotgan kasbiy ta’lim yo‘nalishini tanlang</b>')
                 ->replyKeyboard(
@@ -246,7 +246,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                         $this->nextStep($step, $phone);
                     } else {
                         $this->errorMessage("<b>Xato ma'lumot kiritildi.</b>");
-                        $this->errorMessage("Iltimos, qaytadan urunib ko'ring!");
+                        $this->errorMessage("Iltimos, qaytadan urinib ko'ring!");
                     }
                 }
                 break;
@@ -257,7 +257,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                         $this->nextStep($step, $this->message->text());
                     } else {
                         $this->errorMessage("<b>Xato ma'lumot kiritildi.</b>");
-                        $this->errorMessage("Iltimos, qaytadan urunib ko'ring!");
+                        $this->errorMessage("Iltimos, qaytadan urinib ko'ring!");
                     }
                 }
                 break;
@@ -272,7 +272,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                             $this->nextStep($step, $this->message->text());
                         } else {
                             $this->errorMessage("<b>Xato ma'lumot kiritildi.</b>");
-                            $this->errorMessage("Iltimos, qaytadan urunib ko'ring!");
+                            $this->errorMessage("Iltimos, qaytadan urinib ko'ring!");
                         }
                     } else if (isset($data['message']['web_app_data'])) {
                         $speciality = $data['message']['web_app_data']['button_text'];
