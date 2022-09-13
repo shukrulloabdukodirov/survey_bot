@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Resources\QuestionResource;
+use Base\Survey\Application\Http\Controllers\Api\V1\QuestionAPIController;
 use Base\Survey\Domain\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -37,7 +38,7 @@ Route::group(
         Route::post('login',
            [LoginController::class,'login']
         );
-        
+        Route::get('v1/front/questions',[QuestionAPIController::class,'index']);
     }
 );
 // Route::post('logout', [
