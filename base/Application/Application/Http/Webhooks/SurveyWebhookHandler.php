@@ -185,7 +185,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
 
     public function finish()
     {
-        $this->chat->message("Etiboringiz uchun rahmat!")->removeReplyKeyboard()->send();
+        $this->chat->message("Siz so‘rovnomadan muvaffaqiyatli o‘tdingiz! Kasbiy ta’lim sohasini yanada rivojlantirishga befarq bo‘lmaganingiz uchun tashakkur! So‘rovnomada yana ishtirok etish uchun 24 soatdan keyin qayta urinib ko‘rishingiz mumkin!")->removeReplyKeyboard()->send();
     }
     public function steps()
     {
