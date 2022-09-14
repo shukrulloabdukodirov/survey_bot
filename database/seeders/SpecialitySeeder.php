@@ -27,16 +27,16 @@ class SpecialitySeeder extends Seeder
             $model = new Speciality();
             $model->fill([
                 'uz' => [
-                    'name'=>strtoupper($speciality['speciality'])
+                    'name'=>$speciality['speciality']
                 ],
                 'ru' => [
-                    'name'=>strtoupper($speciality['speciality'])
+                    'name'=>$speciality['speciality']
                 ],
                 'en' => [
-                    'name'=>strtoupper($speciality['speciality'])
+                    'name'=>$speciality['speciality']
                 ],
                 'cyrl' => [
-                    'name'=>strtoupper($speciality['speciality'])
+                    'name'=>$speciality['speciality']
                 ]
             ]);
             $model->save();

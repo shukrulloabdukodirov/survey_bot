@@ -24,8 +24,8 @@ class EducationCenterSpecialitySeeder extends Seeder
 
         foreach($eduCenters as $eduCenter){
             foreach ($array as $sarray){
-                if($sarray['education_center'] == $eduCenter->name){
-                    $speciality = Speciality::whereTranslation('name',strtoupper($sarray['speciality']),'uz')->first();
+                if($sarray['education_center'] == strtoupper($eduCenter->name)){
+                    $speciality = Speciality::whereTranslation('name',$sarray['speciality'],'uz')->first();
                     if(!empty($speciality)){
                         $model = new EducationCenterSpeciality();
                         $model->education_center_id = $eduCenter->id;

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Resources\QuestionResource;
+use App\Models\User;
 use Base\Survey\Application\Http\Controllers\Api\V1\QuestionAPIController;
 use Base\Survey\Domain\Models\Question;
 use Illuminate\Http\Request;
@@ -24,6 +25,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/users',function(){
+    return User::all();
+});
 
 // Authentication Routes...
 // Route::get('login', [

@@ -111,7 +111,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         } else {
             $regionKeyboards = [];
             foreach ($regions as $region) {
-                $regionKeyboards[] =  ReplyButton::make(ucfirst(strtolower($region->name)));
+                $regionKeyboards[] =  ReplyButton::make($region->name);
             }
             $this->chat->message('<b>O‘zingiz tahsil olayotgan kasb-hunarga o‘qitish markazini tanlang</b>')
                 ->replyKeyboard(ReplyKeyboard::make()
@@ -138,7 +138,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         } else {
             $specialitieKeyboards = [];
             foreach ($specialities as $specialitiy) {
-                $specialitieKeyboards[] = ReplyButton::make(ucfirst(strtolower($specialitiy->name)))->webApp('https://172-105-76-165.ip.linodeusercontent.com/form');
+                $specialitieKeyboards[] = ReplyButton::make($specialitiy->name)->webApp('https://172-105-76-165.ip.linodeusercontent.com/form');
             }
             $this->chat->message('<b>O‘zingiz o‘qiyotgan kasbiy ta’lim yo‘nalishini tanlang</b>')
                 ->replyKeyboard(
@@ -203,8 +203,8 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         switch ($index) {
             case 1: {
                     $this->chat->message('Assalomu alaykum! Kasb-hunar ta’limi markazlari faoliyatini baholash maqsadida ishlab chiqilgan maxsus botga xush kelibsiz! So‘rovnomada ishtirokingiz uchun minnatdorchilik bildiramiz! Sizning xolis bahoyingiz kasbiy ta’lim kelajagini belgilashda muhim ahamiyatga ega!')->replyKeyboard(ReplyKeyboard::make()
-                    ->button("So'rovnomada ishtirok etish")->resize(true))
-                    ->send();
+                        ->button("So'rovnomada ishtirok etish")->resize(true))
+                        ->send();
                     $this->nextStep($step);
                 }
                 break;
@@ -263,7 +263,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                 break;
             case 5: {
                     if ($message) {
-                        $educationCenter = EducationCenterTranslation::where('name', strtoupper($message))->first();
+                        $educationCenter = EducationCenterTranslation::where('name', $message)->first();
                         if ($educationCenter) {
                             $this->specialities($educationCenter->education_center_id);
                             $this->application->update([
@@ -278,7 +278,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                         $speciality = $data['message']['web_app_data']['button_text'];
                         $step->update(['value' => $speciality]);
                         $answers = $data['message']['web_app_data']['data'];
-                        $speciality_id = SpecialityTranslation::where(['name' =>strtoupper($speciality)])->first()->speciality_id;
+                        $speciality_id = SpecialityTranslation::where(['name' => $speciality])->first()->speciality_id;
                         $this->application->update(['speciality_id' => $speciality_id]);
                         if ($answers) {
                             $this->saveAnswers($answers);
@@ -303,7 +303,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         $questions = TelegramChatQuestion::all();
         $lastId = $questions[sizeof($questions) - 1]->id;
         if ($index <= $lastId) {
-            $step->update([ 
+            $step->update([
                 'condition' => false,
             ]);
             $step = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' => $index])->first();
@@ -391,7 +391,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         foreach ($answers as $answer) {
             $appAns = ApplicationAnswer::firstOrCreate(['application_id' => $this->application->id, 'question_id' => $answer->question_id]);
             $appAns->update([
-                'question_answer_id' => isset($answer->answer_id)&& is_numeric($answer->answer_id) ? $answer->answer_id : null,
+                'question_answer_id' => isset($answer->answer_id) && is_numeric($answer->answer_id) ? $answer->answer_id : null,
                 'answer_by_input' => isset($answer->answer_by_input) ? $answer->answer_by_input : null
             ]);
         }

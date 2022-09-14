@@ -26,16 +26,16 @@ class EducationCenterTypeSeeder extends Seeder
             $model = new EducationCenterType();
             $model->fill([
                 'uz' => [
-                    'name'=>strtoupper($education_center['name_uz'])
+                    'name'=>ucfirst(strtolower($education_center['name_uz']))
                 ],
                 'ru' => [
-                    'name'=>strtoupper($education_center['name_ru'])
+                    'name'=>ucfirst(strtolower($education_center['name_ru']))
                 ],
                 'en' => [
-                    'name'=>strtoupper($education_center['name_en'])
+                    'name'=>ucfirst(strtolower($education_center['name_en']))
                 ],
                 'cyrl' => [
-                    'name'=>strtoupper($education_center['name_cyrl'])
+                    'name'=>ucfirst(strtolower($education_center['name_cyrl']))
                 ]
             ]);
             $model->save();

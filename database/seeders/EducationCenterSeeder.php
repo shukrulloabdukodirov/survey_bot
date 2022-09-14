@@ -29,16 +29,16 @@ class EducationCenterSeeder extends Seeder
                 $model->city_id = null;
                 $model->fill([
                     'uz' => [
-                        'name'=>strtoupper($education_center['education_center'])
+                        'name'=>ucfirst(strtolower($education_center['education_center']))
                     ],
                     'ru' => [
-                        'name'=>strtoupper($education_center['education_center'])
+                        'name'=>ucfirst(strtolower($education_center['education_center']))
                     ],
                     'en' => [
-                        'name'=>strtoupper($education_center['education_center'])
+                        'name'=>ucfirst(strtolower($education_center['education_center']))
                     ],
                     'cyrl' => [
-                        'name'=>strtoupper($education_center['education_center'])
+                        'name'=>ucfirst(strtolower($education_center['education_center']))
                     ]
                 ]);
                 $model->education_center_type_id = str_contains($education_center['education_center'], 'MONOMARKAZI')?1:2;
