@@ -21,6 +21,8 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'role',
+        'education_center_id'
     ];
 
     /**
@@ -41,4 +43,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+     /**
+     * Validation rules
+     *
+     * @var array
+     */
+    public static $rules = [
+        'username' => 'required|string|max:255|unique:users',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:8|confirmed',
+        'education_center_id'=>'required',
+    ];
+
+
+    public function education_center()
+    {
+        return $this->belongsTo(\Base\Resource\Domain\Models\EducationCenter::class, 'education_center_id', 'id');
+    }
 }

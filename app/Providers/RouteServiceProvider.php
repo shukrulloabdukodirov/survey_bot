@@ -45,6 +45,9 @@ class RouteServiceProvider extends ServiceProvider
 
     protected $applicant_namespace = "Base\User\Applicant\Application\Http\Controllers\Api";
     protected $applicant_dir = "base/User/Applicant/Application/Http/Routes/";
+
+    protected $user_namespace = "Base\User\Auth\Admin\Application\Http\Controllers\Api";
+    protected $user_dir = "base/User/Auth/Admin/Application/Http/Routes/";
     public function boot()
     {
         $this->configureRateLimiting();
@@ -84,6 +87,13 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
         });
+
+            //             users
+
+            Route::prefix('api/v1/')
+            ->middleware('api')
+            ->namespace($this->user_namespace)
+            ->group(base_path($this->user_dir . 'api.php'));
     }
 
     /**

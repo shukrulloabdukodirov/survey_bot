@@ -8,6 +8,7 @@ use Base\Survey\Application\Http\Controllers\Api\V1\QuestionAPIController;
 use Base\Survey\Domain\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,15 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/users',function(){
-    return User::all();
-});
 
-// Authentication Routes...
-// Route::get('login', [
-//   'as' => 'login',
-//   'uses' => 'Auth\LoginController@showLoginForm'
-// ]);
 
 Route::group(
     [
