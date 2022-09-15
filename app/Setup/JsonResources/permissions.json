@@ -49,7 +49,18 @@
                 "resource.question.list",
                 "education_center",
                 "education_center.specialities",
-                "education_center.applications"
+                "education_center.applications",
+                "region.education_center",
+                "region.education_center.specialities",
+                "region.education_center.applications"
+            ]
+        },
+        {
+            "name": "region_admin",
+            "permissions": [
+                "region.education_center",
+                "region.education_center.specialities",
+                "region.education_center.applications"
             ]
         },
         {
@@ -105,6 +116,9 @@
         "resource.question.list",
         "education_center",
         "education_center.specialities",
-        "education_center.applications"
+        "education_center.applications",
+        "region.education_center",
+        "region.education_center.specialities",
+        "region.education_center.applications"
     ]
 }
