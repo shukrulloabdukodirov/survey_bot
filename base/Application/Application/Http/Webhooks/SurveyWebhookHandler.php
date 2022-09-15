@@ -109,17 +109,37 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         if ($regions->isEmpty()) {
             $this->chat->message('<b>O\'quv markazi topilmadi</b>')->send();
         } else {
-            $regionKeyboards = [];
-            foreach ($regions as $region) {
-                $regionKeyboards[] =  ReplyButton::make($region->name);
-            }
-            $this->chat->message('<b>O‘zingiz tahsil olayotgan kasb-hunarga o‘qitish markazini tanlang</b>')
-                ->replyKeyboard(ReplyKeyboard::make()
-                    ->row($regionKeyboards)->resize()
+            $keyboard=ReplyKeyboard::make()
+            ->row([
+                ReplyButton::make($this->message->text().' ⬇️')
+            ]);
+            for ($i=0; $i<count($regions);$i+=2) {
+                if($i+1<count($regions))
+                {
+                    $keyboard
                     ->row([
-                        ReplyButton::make('◀️Asosiy menyu')->width(0.5),
-                        ReplyButton::make('🔙Orqaga')->width(0.5)
-                    ])->resize()->chunk(1))
+                        ReplyButton::make($regions[$i]->name),
+                        ReplyButton::make($regions[$i+1]->name),
+                    ]);
+                }
+                else
+                {
+                    $keyboard
+                    ->row([
+                        ReplyButton::make($regions[$i]->name),
+                    ]);
+                }
+            }
+            $keyboard=$keyboard
+            ->row([
+                ReplyButton::make('🔙Orqaga')
+                ])
+                ->row([
+                    ReplyButton::make('◀️Asosiy menyu'),
+                ]);
+
+            $this->chat->message('<b>O‘zingiz tahsil olayotgan kasb-hunarga o‘qitish markazini tanlang</b>')
+                ->replyKeyboard($keyboard)
                 ->send();
         }
     }
@@ -133,21 +153,48 @@ class SurveyWebhookHandler extends BaseWebHookHandler
             ->where('speciality_translations.locale', '=', 'uz')
             ->get();
         Log::info($specialities);
+
+        $region = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' => 3])->first();
+
+        
         if ($specialities->isEmpty()) {
             $this->chat->message('<b>Ushbu o\'quv markazda yo\'nalishlar topilmadi!</b>')->send();
         } else {
-            $specialitieKeyboards = [];
-            foreach ($specialities as $specialitiy) {
-                $specialitieKeyboards[] = ReplyButton::make($specialitiy->name)->webApp('https://172-105-76-165.ip.linodeusercontent.com/form');
+            $keyboard=ReplyKeyboard::make()
+            ->row([
+                    ReplyButton::make($region->value.' ⬇️'),
+            ]
+            )
+            ->row([
+                ReplyButton::make($this->message->text().' ⬇️'),
+            ]);
+            for ($i=0;$i<count($specialities);$i+=2) {
+                if($i+1<count($specialities))
+                {
+                    $keyboard=$keyboard
+                    ->row([
+                        ReplyButton::make($specialities[$i]->name)->webApp('https://172-105-76-165.ip.linodeusercontent.com/form'),
+                        ReplyButton::make($specialities[$i+1]->name)->webApp('https://172-105-76-165.ip.linodeusercontent.com/form')
+                    ]);
+                }
+                else
+                {
+                    $keyboard=$keyboard
+                    ->row([
+                        ReplyButton::make($specialities[$i]->name)->width(0,75)->webApp('https://172-105-76-165.ip.linodeusercontent.com/form'),
+                    ]);
+                }
             }
+            $keyboard=$keyboard
+            ->row([
+                ReplyButton::make('🔙Orqaga')
+                ])
+                ->row([
+                ReplyButton::make('◀️Asosiy menyu'),
+            ]);
             $this->chat->message('<b>O‘zingiz o‘qiyotgan kasbiy ta’lim yo‘nalishini tanlang</b>')
                 ->replyKeyboard(
-                    ReplyKeyboard::make()
-                        ->row($specialitieKeyboards)->resize()
-                        ->row([
-                            ReplyButton::make('◀️Asosiy menyu')->width(0.5),
-                            ReplyButton::make('🔙Orqaga')->width(0.5)
-                        ])->chunk(1)->resize()
+                    $keyboard
                 )
                 ->send();
         }
@@ -325,37 +372,25 @@ class SurveyWebhookHandler extends BaseWebHookHandler
     public function checkMessage(TelegramChatQuestionAnswer $step)
     {
         $message = $this->message->text();
+        $region = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' =>3])->first();
+        $educationCenter = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' =>4])->first();
+        
+        if(isset($region)&&$message===$region->value." ⬇️")
+        {
+            return $this->mainMenu($step);
+        }
+        else if(isset($educationCenter)&&$message===$educationCenter->value." ⬇️")
+        {
+            return $this->goBack($step);
+        }
+        
         switch ($message) {
             case "🔙Orqaga": {
-                    $previous = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' => $step->telegram_chat_question_id - 2])->first();
-                    if ($previous) {
-                        $step->update(['condition' => false]);
-                        $previous->update([
-                            'condition' => true
-                        ]);
-                        $doublePrevious = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' => $step->telegram_chat_question_id - 3])->first();
-                        if ($doublePrevious) {
-                            return $doublePrevious->value;
-                        } else {
-                            return '/start';
-                        }
-                    }
+                   return $this->goBack($step);
                 }
                 break;
             case "◀️Asosiy menyu": {
-                    $previous = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' => 3])->first();
-                    if ($previous) {
-                        $step->update(['condition' => false]);
-                        $previous->update([
-                            'condition' => true
-                        ]);
-                        $doublePrevious = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' => $step->telegram_chat_question_id - 3])->first();
-                        if ($doublePrevious) {
-                            return $doublePrevious->value;
-                        } else {
-                            return '/start';
-                        }
-                    }
+                    return $this->mainMenu($step);
                 }
                 break;
         }
@@ -394,6 +429,38 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                 'question_answer_id' => isset($answer->answer_id) && is_numeric($answer->answer_id) ? $answer->answer_id : null,
                 'answer_by_input' => isset($answer->answer_by_input) ? $answer->answer_by_input : null
             ]);
+        }
+    }
+    public function mainMenu(TelegramChatQuestionAnswer $step)
+    {
+        $previous = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' => 3])->first();
+        if ($previous) {
+            $step->update(['condition' => false]);
+            $previous->update([
+                'condition' => true
+            ]);
+            $doublePrevious = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' => $step->telegram_chat_question_id - 3])->first();
+            if ($doublePrevious) {
+                return $doublePrevious->value;
+            } else {
+                return '/start';
+            }
+        }
+    }
+    public function goBack(TelegramChatQuestionAnswer $step)
+    {
+        $previous = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' => $step->telegram_chat_question_id - 2])->first();
+        if ($previous) {
+            $step->update(['condition' => false]);
+            $previous->update([
+                'condition' => true
+            ]);
+            $doublePrevious = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' => $step->telegram_chat_question_id - 3])->first();
+            if ($doublePrevious) {
+                return $doublePrevious->value;
+            } else {
+                return '/start';
+            }
         }
     }
 }
