@@ -45,10 +45,13 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         if (isset($data['message'])) {
             $this->applicant = Applicant::firstOrCreate(['chat_id' => $data['message']['chat']['id']]);
 
-            $this->application = Application::firstOrCreate([
-                'applicant_id' => $this->applicant->id,
-                'survey_id' => 1
-            ]);
+            $lastApplication = Application::where([
+                'applicant_id' => $this->applicant->id
+            ])->latest()->first();
+            if($lastApplication)
+            {
+                $this->application=$lastApplication;
+            }
             $this->applicantInfo = ApplicantInfo::firstOrCreate([
                 'applicant_id' => $this->applicant->id,
                 'first_name' => $data['message']['chat']['first_name'],
@@ -145,19 +148,30 @@ class SurveyWebhookHandler extends BaseWebHookHandler
     }
     public function specialities($id)
     {
+
+        $firstApplication=Application::where([
+            'applicant_id'=>$this->applicant->id,
+            'condition'=>false
+        ])->first();
+        if($firstApplication)
+        {
+            $specialities[]=Speciality::find($firstApplication->speciality_id);
+        }
+        else
+        {
+            $specialities = DB::table('education_center_specialities')
+                ->select('speciality_translations.name')
+                ->where('education_center_id', '=', $id)
+                ->join('speciality_translations', 'speciality_translations.speciality_id', '=', 'education_center_specialities.speciality_id')
+                ->where('speciality_translations.locale', '=', 'uz')
+                ->get();
+        }
         // $specialities = EducationCenter::query()->find($id)-> specialities();
-        $specialities = DB::table('education_center_specialities')
-            ->select('speciality_translations.name')
-            ->where('education_center_id', '=', $id)
-            ->join('speciality_translations', 'speciality_translations.speciality_id', '=', 'education_center_specialities.speciality_id')
-            ->where('speciality_translations.locale', '=', 'uz')
-            ->get();
-        Log::info($specialities);
 
         $region = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' => 3])->first();
 
         
-        if ($specialities->isEmpty()) {
+        if (count($specialities)===0) {
             $this->chat->message('<b>Ushbu o\'quv markazda yo\'nalishlar topilmadi!</b>')->send();
         } else {
             $keyboard=ReplyKeyboard::make()
@@ -257,7 +271,38 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                 break;
             case 2: {
                     if ($message === "So'rovnomada ishtirok etish") {
-                        $this->chat->message('<b>Telefon raqamingizni kiriting (+99 89 _   _ _ _  _ _  _ _) yoki saqlangan telefon raqamingizni yuborishni so‘raymiz!</b>')->replyKeyboard(ReplyKeyboard::make()
+                        $lastApplication=Application::where([
+                            'applicant_id'=>$this->applicant->id
+                        ])->latest()->first();
+                        if($lastApplication)
+                        {
+                            if(!$lastApplication->condition)
+                            {
+                                $date=strtotime($lastApplication->updated_at);
+                                $now= time();
+                                $diff=$now-$date;
+                                if($diff<24*60*60)
+                                {
+                                    $message='Siz so\'nggi 24 soatni ichida so\'rovnomadan o\'tgansiz. Siz '.date('H:i:s',24*60*60-$diff).' vaqtdan so\'ng yana so\'rovnomadan qayta  o\'tishingiz mumkin!'  ;
+                                    $this->chat->message($message)->send();
+                                    return;
+                                }
+                                else
+                                {
+                                    Application::create([
+                                        'applicant_id'=>$this->applicant->id
+                                    ]);        
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Application::create([
+                                'applicant_id'=>$this->applicant->id
+                            ]);
+                        }
+                        $this->chat->message('<b>Telefon raqamingizni kiriting (+998 _ _   _ _ _  _ _  _ _) yoki saqlangan telefon raqamingizni yuborishni so‘raymiz!
+    So‘rovnomada ishtirok etish uchun yuborgan telefon raqamingiz orqali faqat bitta kasbiy ta’lim markazi faoliyatini baholay olasiz!</b>')->replyKeyboard(ReplyKeyboard::make()
                             ->button('🔙Orqaga')->width(0.5)->resize(true)
                             ->button('📱Telefon raqamni yuborish')->requestContact()->resize(true))
                             ->send();
@@ -312,6 +357,23 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                     if ($message) {
                         $educationCenter = EducationCenterTranslation::where('name', $message)->first();
                         if ($educationCenter) {
+                            $firstApplication=Application::where([
+                                'applicant_id'=>$this->applicant->id,
+                                'condition'=>false
+                            ])->first();
+                            if($firstApplication)
+                            {
+                                if($educationCenter->education_center_id!==$firstApplication->education_center_id)
+                                {
+                                    $firstEducationCenter=EducationCenter::find($firstApplication->education_center_id)->name;
+                                    $firstSpeciality=Speciality::find($firstApplication->speciality_id)->name;
+                                    $message="So‘rovnomada ishtirok etish uchun yuborgan telefon raqamingiz orqali faqat bitta kasbiy ta’lim markazi faoliyatini baholay olasiz!";
+                                    $this->chat->message($message)->send();
+                                    $message="Siz ushbu raqam orqali \"" .$firstEducationCenter."\"ning   \"".$firstSpeciality."\" yo'nalishiga ovoz bergansiz.";
+                                    $this->chat->message($message)->send();
+                                    return;
+                                }
+                            }
                             $this->specialities($educationCenter->education_center_id);
                             $this->application->update([
                                 'education_center_id' => $educationCenter->education_center_id
@@ -430,6 +492,9 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                 'answer_by_input' => isset($answer->answer_by_input) ? $answer->answer_by_input : null
             ]);
         }
+        $this->application->update([
+            'condition'=>0
+        ]);
     }
     public function mainMenu(TelegramChatQuestionAnswer $step)
     {
