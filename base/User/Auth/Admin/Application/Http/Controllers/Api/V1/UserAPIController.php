@@ -18,7 +18,7 @@ use Response;
  * @package Base\User\User\Application\Http\Controllers\Api\V1
  */
 
-class UserApiController extends AppBaseController
+class UserAPIController extends AppBaseController
 {
     /** @var  UserRepository */
     private $userRepository;
@@ -60,6 +60,8 @@ class UserApiController extends AppBaseController
 
         $input['password']=Hash::make($input['password']);
 
+
+
         $user = $this->userRepository->create($input);
 
         return $this->sendResponse(new UserResource($user), 'User saved successfully');
@@ -95,7 +97,7 @@ class UserApiController extends AppBaseController
      * @return Response
      */
     public function update($id, UpdateUserAPIRequest $request)
-    {   
+    {
         $input = $request->all();
 
         $input['password']=Hash::make($input['password']);

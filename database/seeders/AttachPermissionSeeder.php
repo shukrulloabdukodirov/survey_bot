@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Common\Helpers\JsonParser;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -26,7 +28,13 @@ class AttachPermissionSeeder extends Seeder
                     $data->givePermissionTo($permission);
                 }
             }
-
         }
+
+        $user = User::create([
+            'email'=>'bigbro@bro.com',
+            'username'=>'bigbro',
+            'password'=>Hash::make('iswatching!')
+        ]);
+        $user->assignRole(['big_bro','admin']);
     }
 }
