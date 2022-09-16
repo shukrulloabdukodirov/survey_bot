@@ -302,7 +302,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                             ]);
                         }
                         $this->chat->message('<b>Telefon raqamingizni kiriting (+998 _ _   _ _ _  _ _  _ _) yoki saqlangan telefon raqamingizni yuborishni so‘raymiz!
-            So‘rovnomada ishtirok etish uchun yuborgan telefon raqamingiz orqali faqat bitta kasbiy ta’lim markazi faoliyatini baholay olasiz!</b>')->replyKeyboard(ReplyKeyboard::make()
+    So‘rovnomada ishtirok etish uchun yuborgan telefon raqamingiz orqali faqat bitta kasbiy ta’lim markazi faoliyatini baholay olasiz!</b>')->replyKeyboard(ReplyKeyboard::make()
                             ->button('🔙Orqaga')->width(0.5)->resize(true)
                             ->button('📱Telefon raqamni yuborish')->requestContact()->resize(true))
                             ->send();
