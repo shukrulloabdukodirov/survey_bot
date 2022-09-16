@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Resources\QuestionResource;
 use App\Models\User;
+use Base\Resource\Domain\Models\EducationCenter;
+use Base\Resource\Domain\Models\Speciality;
 use Base\Survey\Application\Http\Controllers\Api\V1\QuestionAPIController;
 use Base\Survey\Domain\Models\Question;
 use Illuminate\Http\Request;
@@ -36,6 +38,9 @@ Route::group(
            [LoginController::class,'login']
         );
         Route::get('v1/front/questions',[QuestionAPIController::class,'index']);
+        Route::get('latest-user',function(){
+           return EducationCenter::find(83);
+        });
     }
 );
 // Route::post('logout', [
