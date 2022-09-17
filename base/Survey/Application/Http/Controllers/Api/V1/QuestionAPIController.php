@@ -25,6 +25,7 @@ class QuestionAPIController extends AppBaseController
     private $questionService;
     public function __construct(QuestionRepository $questionRepo, QuestionService $questionService)
     {
+        $this->middleware(['role:big_bro|admin|region_admin|education_center']);
         $this->questionRepository = $questionRepo;
         $this->questionService = $questionService;
     }
@@ -58,7 +59,7 @@ class QuestionAPIController extends AppBaseController
     public function store(CreateQuestionAPIRequest $request)
     {
         $input = $request;
-        
+
         $question = $this->questionService->storeQuestion($input);
 
         return $this->sendResponse(new QuestionResource($question), 'Question saved successfully');

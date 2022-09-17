@@ -25,6 +25,7 @@ class EducationCenterAPIController extends AppBaseController
     private $educationCenterService;
     public function __construct(EducationCenterRepository $educationCenterRepo, EducationCenterStoreService $educationCenterService)
     {
+        $this->middleware(['role:big_bro|admin|region_admin|education_center']);
         $this->educationCenterRepository = $educationCenterRepo;
         $this->educationCenterService = $educationCenterService;
     }

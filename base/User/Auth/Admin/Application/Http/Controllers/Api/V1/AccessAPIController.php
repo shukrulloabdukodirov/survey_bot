@@ -14,6 +14,7 @@ class AccessAPIController extends AppBaseController
     protected $permissionRepository;
     public function __construct(RolesRepository $roleRepository, PermissionRepository $permissionRepository)
     {
+        $this->middleware(['role:big_bro|admin']);
         $this->roleRepository = $roleRepository;
         $this->permissionRepository = $permissionRepository;
     }

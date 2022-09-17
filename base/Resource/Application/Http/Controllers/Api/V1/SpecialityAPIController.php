@@ -24,6 +24,7 @@ class SpecialityAPIController extends AppBaseController
     private $specialityService;
     public function __construct(SpecialityRepository $specialityRepository, SpecialityStoreService $specialityService)
     {
+        $this->middleware(['role:big_bro|admin|region_admin|education_center']);
         $this->specialityRepository = $specialityRepository;
         $this->specialityService = $specialityService;
     }

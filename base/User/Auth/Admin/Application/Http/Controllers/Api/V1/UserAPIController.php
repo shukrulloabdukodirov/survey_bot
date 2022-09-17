@@ -25,6 +25,7 @@ class UserAPIController extends AppBaseController
 
     public function __construct(UserRepository $userRepo)
     {
+        $this->middleware(['role_or_permission:super:big_bro|admin']);
         $this->userRepository = $userRepo;
     }
 

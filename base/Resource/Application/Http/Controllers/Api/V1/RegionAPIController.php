@@ -27,6 +27,7 @@ class RegionAPIController extends AppBaseController
     private $regionRepository;
     public function __construct(RegionStoreService $storeService,RegionRepository $regionRepository)
     {
+        $this->middleware(['role:big_bro|admin|region_admin|education_center']);
         $this->storeService = $storeService;
         $this->regionRepository = $regionRepository;
     }

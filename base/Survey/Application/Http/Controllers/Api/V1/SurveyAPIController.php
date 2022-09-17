@@ -24,6 +24,7 @@ class SurveyAPIController extends AppBaseController
 
     public function __construct(SurveyRepository $surveyRepo)
     {
+        $this->middleware(['role:big_bro|admin|region_admin|education_center']);
         $this->surveyRepository = $surveyRepo;
     }
 
