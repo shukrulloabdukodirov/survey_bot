@@ -20,8 +20,11 @@ class QuestionService extends BaseService
         $data = $this->questionRepository->create($this->load($request->except('answers')));
         if(!empty($data)){
             $input = $request->only('answers');
-            foreach ($input['answers'] as $answer){
-                $data->questionAnswers()->create($this->load(json_decode($answer, true)));
+            if($input)
+            {
+                foreach ($input['answers'] as $answer){
+                    $data->questionAnswers()->create($this->load(json_decode($answer, true)));
+                }
             }
         }
         return $data;
@@ -31,14 +34,17 @@ class QuestionService extends BaseService
         $data = $this->questionRepository->update($this->load($request->except('answers')),$id);
         if(!empty($data)){
            $input = $request->only('answers');
-           foreach ($input['answers'] as $answer){
-                $answer=json_decode($answer, true);
-               $updateAnswer = $data->questionAnswers()->where('id',$answer['id'])->first();
-               if(!empty($updateAnswer)){
-                   $updateAnswer->fill($this->load($answer))->update();
-               }
-               else{
-                   $data->questionAnswers()->create($this->load($answer));
+           if($input)
+           {
+               foreach ($input['answers'] as $answer){
+                    $answer=json_decode($answer, true);
+                   $updateAnswer = $data->questionAnswers()->where('id',$answer['id'])->first();
+                   if(!empty($updateAnswer)){
+                       $updateAnswer->fill($this->load($answer))->update();
+                   }
+                   else{
+                       $data->questionAnswers()->create($this->load($answer));
+                   }
                }
            }
         }

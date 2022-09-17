@@ -16,8 +16,8 @@ class CreateApplicantsTable extends Migration
     {
         Schema::create('applicants', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('phone')->nullable();
-            $table->integer('pin')->nullable();
+            $table->bigInteger('phone')->nullable();
+            $table->bigInteger('pin')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
