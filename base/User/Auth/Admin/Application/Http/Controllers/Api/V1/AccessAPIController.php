@@ -1,5 +1,4 @@
 <?php
-
 namespace Base\User\Auth\Admin\Application\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\AppBaseController;
@@ -18,7 +17,21 @@ class AccessAPIController extends AppBaseController
         $this->roleRepository = $roleRepository;
         $this->permissionRepository = $permissionRepository;
     }
+    public function index(){
 
+    }
+    public function show(){
+
+    }
+    public function store(){
+
+    }
+    public function update(){
+
+    }
+    public function delete(){
+
+    }
     public function roles(Request $request){
         $roles = $this->roleRepository->all(
             $request->except(['skip', 'limit']),

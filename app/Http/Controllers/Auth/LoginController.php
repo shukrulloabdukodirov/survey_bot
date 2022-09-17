@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Base\User\Auth\Admin\Application\Http\Collections\Api\V1\UserResource;
 use Base\User\Auth\Admin\Application\Http\Request\Api\V1\LoginRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -41,13 +42,13 @@ class LoginController extends Controller
     }
 
     public function login(LoginRequest $request){
-       
+
         if (method_exists($this, 'hasTooManyLoginAttempts') &&
             $this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
 
             return $this->sendLockoutResponse($request);
-        }   
+        }
 
         if ($this->attemptLogin($request)) {
             if ($request->hasSession()) {
@@ -61,7 +62,7 @@ class LoginController extends Controller
                 'success' =>true,
                 'access_token' => $token,
                 'token_type' => 'Bearer',
-                'user'=>$user
+                'user'=>new UserResource($user)
             ]);
         }
 
