@@ -42,12 +42,16 @@ class RegionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $filter = $request->except(['skip', 'limit']);
+        $userRolesList = $request->user()->getRoleNames()->toArray();
+        if(count(array_intersect($userRolesList, ['region_admin','education_center']))>0){
+            $filter['id'] = $request->user()->educationCenter->region_id;
+        }
         $regions = $this->regionRepository->all(
-            $request->except(['skip', 'limit']),
+            $filter,
             $request->get('skip'),
             $request->get('limit')
         );
-
         return $this->sendResponse(new RegionCollection($regions), 'Regions retrieved successfully');
     }
 

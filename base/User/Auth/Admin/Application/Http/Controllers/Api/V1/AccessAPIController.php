@@ -38,7 +38,7 @@ class AccessAPIController extends AppBaseController
             $request->except(['skip', 'limit']),
             $request->get('skip'),
             $request->get('limit')
-        );
+        )->whereNotIn('name',['admin','big_bro']);
         return $this->sendResponse(new RolesCollection($roles), 'Roles retrieved successfully');
     }
 

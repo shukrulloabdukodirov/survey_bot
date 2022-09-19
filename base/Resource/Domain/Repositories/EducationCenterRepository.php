@@ -18,7 +18,8 @@ class EducationCenterRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'region_id',
-        'city_id'
+        'city_id',
+        'id'
     ];
 
     /**

@@ -42,8 +42,17 @@ class EducationCenterAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $filter = $request->except(['skip', 'limit']);
+        $userRolesList = $request->user()->getRoleNames()->toArray();
+
+        if(in_array('region_admin',$userRolesList)){
+            $filter['region_id'] = $request->user()->educationCenter->region_id;
+        }
+        if(in_array('education_center',$userRolesList)){
+            $filter['id'] = $request->user()->educationCenter->id;
+        }
         $educationCenters = $this->educationCenterRepository->all(
-            $request->except(['skip', 'limit']),
+            $filter,
             $request->get('skip'),
             $request->get('limit')
         )->sortBy('id');

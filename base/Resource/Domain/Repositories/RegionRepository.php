@@ -17,7 +17,7 @@ class RegionRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        
+        'id',
     ];
 
     /**

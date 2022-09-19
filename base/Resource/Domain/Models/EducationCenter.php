@@ -4,6 +4,7 @@ namespace Base\Resource\Domain\Models;
 
 use Astrotomic\Translatable\Translatable;
 use Eloquent as Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -59,6 +60,18 @@ class EducationCenter extends Model
     public static $rules = [
         // 'status' => 'required|boolean'
     ];
+
+    protected static function booted()
+    {
+        static::addGlobalScope('by_role', function (Builder $builder) {
+            $user = request()->user();
+            $rolesList = $user->getRoleNames()->toArray();
+            if(in_array('education_center',$rolesList)){
+                $builder->where('id',$user->education_center_id);
+            }
+        });
+    }
+
     public function specialities()
     {
         return $this->belongsToMany(\Base\Resource\Domain\Models\Speciality::class,'education_center_specialities','education_center_id','speciality_id');
