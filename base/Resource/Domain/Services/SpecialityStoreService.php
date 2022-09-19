@@ -24,9 +24,15 @@ class SpecialityStoreService extends BaseService
 
     public function deleteSpeciality($request,$speciality){
         $data = $this->speciality->find($speciality);
+
         if(empty($data)){
             return $data;
         }
-        return $data->educationCenters()->detach($request->education_center_id);
+        if(isset($request->education_center_id)&&!empty($request->education_center_id)){
+            return $data->educationCenters()->detach($request->education_center_id);
+        }
+        else{
+            return $data->delete();
+        }
     }
 }

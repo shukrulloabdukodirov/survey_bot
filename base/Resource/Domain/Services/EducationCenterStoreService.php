@@ -23,4 +23,18 @@ class EducationCenterStoreService extends BaseService
         $input = $this->load($data);
         return $this->educationCenter->update($input,$id);
     }
+
+    public function deleteEducationCenter($request,$educationCenter){
+        $data = $this->educationCenter->find($educationCenter);
+
+        if(empty($data)){
+            return $data;
+        }
+        if(isset($request->region_id)&&!empty($request->region_id)){
+            return $data->update(['region_id'=>null]);
+        }
+        else{
+            return $data->delete();
+        }
+    }
 }

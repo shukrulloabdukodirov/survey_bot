@@ -54,6 +54,6 @@ class Speciality extends Model
 
     public function educationCenters()
     {
-        return $this->belongsToMany(\Base\Resource\Domain\Models\EducationCenter::class,'education_center_specialities','education_center_id','speciality_id');
+        return $this->belongsToMany(\Base\Resource\Domain\Models\EducationCenter::class,'education_center_specialities','speciality_id','education_center_id');
     }
 }

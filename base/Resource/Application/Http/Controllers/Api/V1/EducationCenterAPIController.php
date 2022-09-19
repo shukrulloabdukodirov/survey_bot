@@ -4,9 +4,12 @@ namespace Base\Resource\Application\Http\Controllers\Api\V1;
 
 use Base\Resource\Application\Http\Collections\Api\V1\EducationCenterCollection;
 use Base\Resource\Application\Http\Collections\Api\V1\EducationCenterResource;
+use Base\Resource\Application\Http\Collections\Api\V1\EducationCenterShowResource;
+use Base\Resource\Application\Http\Collections\Api\V1\RegionShowResource;
 use Base\Resource\Application\Http\Requests\Api\V1\CreateEducationCenterAPIRequest;
 use Base\Resource\Application\Http\Requests\Api\V1\UpdateEducationCenterAPIRequest;
 use Base\Resource\Domain\Models\EducationCenter;
+use Base\Resource\Domain\Models\EducationCenterSpeciality;
 use Base\Resource\Domain\Repositories\EducationCenterRepository;
 use Base\Resource\Domain\Services\EducationCenterStoreService;
 use Illuminate\Http\Request;
@@ -121,17 +124,30 @@ class EducationCenterAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($request, $educationCenter)
     {
         /** @var EducationCenter $educationCenter */
-        $educationCenter = $this->educationCenterRepository->find($id);
+        $educationCenter = $this->educationCenterService->deleteEducationCenter($request,$educationCenter);
 
         if (empty($educationCenter)) {
-            return $this->sendError('Education Center not found');
+            return $this->sendError('Specialty not found');
         }
 
-        $educationCenter->delete();
-
         return $this->sendSuccess('Education Center deleted successfully');
+    }
+
+    public function addSpeciality(Request $request){
+        $validated = $request->validate([
+            'speciality_id' => 'required|exists:specialities,id',
+            'education_center_id' => 'required|exists:education_centers,id',
+        ]);
+        $educationCenter = EducationCenterSpeciality::updateOrCreate($validated);
+
+        if (empty($educationCenter)) {
+            return $this->sendError('Education center not found');
+        }
+
+        return $this->sendResponse(new EducationCenterResource($educationCenter->educationCenter), 'Education center updated successfully');
+
     }
 }

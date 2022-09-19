@@ -29,6 +29,8 @@ class EducationCenterSpeciality extends Model
     protected $primaryKey = 'id';
 
     public $fillable = [
+        'education_center_id',
+        'speciality_id',
         'status'
     ];
 
@@ -55,4 +57,11 @@ class EducationCenterSpeciality extends Model
     // public function specialities(){
     //     return $this->(EducationCenter::class, 'region_id','id');
     // }
+    public function educationCenter(){
+        return $this->belongsTo(EducationCenter::class,'education_center_id','id');
+    }
+
+    public function speciality(){
+        return $this->belongsTo(Speciality::class,'speciality_id','id');
+    }
 }

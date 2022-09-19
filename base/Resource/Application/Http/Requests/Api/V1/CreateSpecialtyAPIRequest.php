@@ -17,6 +17,11 @@ class CreateSpecialtyAPIRequest extends APIRequest
         return true;
     }
 
+    public function prepareForValidation()
+    {
+        $this->status = boolval($this->status);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *

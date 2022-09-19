@@ -8,6 +8,7 @@ use Base\Resource\Application\Http\Collections\Api\V1\RegionShowCollection;
 use Base\Resource\Application\Http\Collections\Api\V1\RegionShowResource;
 use Base\Resource\Application\Http\Requests\Api\V1\CreateRegionAPIRequest;
 use Base\Resource\Application\Http\Requests\Api\V1\UpdateRegionAPIRequest;
+use Base\Resource\Domain\Models\EducationCenter;
 use Base\Resource\Domain\Models\Region;
 use Base\Resource\Domain\Repositories\RegionRepository;
 use Base\Resource\Domain\Services\RegionStoreService;
@@ -133,5 +134,25 @@ class RegionAPIController extends AppBaseController
         $region->delete();
 
         return $this->sendSuccess('Region deleted successfully');
+    }
+
+    public function addEducationCenter(Request $request){
+        $validated = $request->validate([
+            'region_id' => 'required|exists:regions,id',
+            'education_center_id' => 'required',
+        ]);
+
+        $educationCenter = EducationCenter::where('id',$validated['education_center_id'])->first();
+
+        if (empty($educationCenter)) {
+            return $this->sendError('Education center not found');
+        }
+
+        $educationCenter->update([
+            'region_id'=>$validated['region_id']
+        ]);
+
+        return $this->sendResponse(new RegionShowResource($educationCenter->region), 'Region updated successfully');
+
     }
 }
