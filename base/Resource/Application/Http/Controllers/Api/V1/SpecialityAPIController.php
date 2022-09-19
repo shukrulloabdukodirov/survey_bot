@@ -10,6 +10,7 @@ use Base\Resource\Domain\Repositories\SpecialityRepository;
 use Base\Resource\Domain\Services\SpecialityStoreService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Base\Resource\Application\Http\Collections\Api\V1\SpecialityCollection;
 use Response;
 
 /**
@@ -44,7 +45,7 @@ class SpecialityAPIController extends AppBaseController
             $request->get('limit')
         );
 
-        return $this->sendResponse($specialties->toArray(), 'Specialties retrieved successfully');
+        return $this->sendResponse(new SpecialityCollection($specialties), 'Specialties retrieved successfully');
     }
 
     /**

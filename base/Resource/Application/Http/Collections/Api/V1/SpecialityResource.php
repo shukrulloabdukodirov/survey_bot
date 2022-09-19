@@ -16,9 +16,9 @@ class SpecialityResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name_uz'=>$this->translate('uz')->name,
-            'name_ru'=>$this->translate('ru')->name,
-            'name_en'=>$this->translate('en')->name,
+            'name_uz'=>isset($this->translate('uz')->name)?$this->translate('uz')->name:'',
+            'name_ru'=>isset($this->translate('ru')->name)?$this->translate('ru')->name:'',
+            'name_en'=>isset($this->translate('en')->name)?$this->translate('en')->name:'',
             'status' => $this->status
         ];
     }
