@@ -19,6 +19,16 @@ class SpecialityStoreService extends BaseService
 
     public function updateSpeciality($data,$id){
         $input = $this->load($data);
+        $data = $this->speciality->find($data['speciality_id']);
+        $old =  $this->speciality->find($id);
+        if(empty($data)){
+            return $data;
+        }
+        if(isset($request->education_center_id)&&!empty($request->education_center_id)){
+            $old->educationCenters()->detach($input['education_center_id']);
+            $data->educationCenters()->attach($input['education_center_id']);
+        }
+
         return $this->speciality->update($input, $id);
     }
 
