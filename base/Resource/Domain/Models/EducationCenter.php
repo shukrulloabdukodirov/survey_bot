@@ -63,5 +63,9 @@ class EducationCenter extends Model
     {
         return $this->belongsToMany(\Base\Resource\Domain\Models\Speciality::class,'education_center_specialities','education_center_id','speciality_id');
     }
-
+     
+    public function region()
+    {
+        return $this->belongsTo(Region::class);
+    }
 }
