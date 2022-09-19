@@ -46,7 +46,7 @@ class EducationCenterAPIController extends AppBaseController
             $request->except(['skip', 'limit']),
             $request->get('skip'),
             $request->get('limit')
-        );
+        )->sortBy('id');
 
         return $this->sendResponse(new EducationCenterCollection($educationCenters), 'Education Centers retrieved successfully');
     }
@@ -124,7 +124,7 @@ class EducationCenterAPIController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($request, $educationCenter)
+    public function destroy(Request $request, $educationCenter)
     {
         /** @var EducationCenter $educationCenter */
         $educationCenter = $this->educationCenterService->deleteEducationCenter($request,$educationCenter);
