@@ -19,6 +19,7 @@ class EducationCenterResource extends JsonResource
             'name_uz'=>$this->translate('uz')->name,
             'name_ru'=>$this->translate('ru')->name,
             'name_en'=>$this->translate('en')->name,
+            'region'=>new RegionResource($this->region),
             'specialities' => new SpecialityCollection($this->specialities->sortBy('id')),
             'status'=>$this->status
         ];
