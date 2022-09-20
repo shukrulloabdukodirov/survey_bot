@@ -25,7 +25,7 @@ class SpecialityAPIController extends AppBaseController
     private $specialityService;
     public function __construct(SpecialityRepository $specialityRepository, SpecialityStoreService $specialityService)
     {
-        $this->middleware(['role:big_bro|admin|region_admin|education_center']);
+        $this->middleware(['role:big_bro|admin']);
         $this->specialityRepository = $specialityRepository;
         $this->specialityService = $specialityService;
     }
@@ -39,13 +39,13 @@ class SpecialityAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $specialties = $this->specialityRepository->all(
+        $specialties = $this->specialityRepository->simple(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
             $request->get('limit')
         );
 
-        return $this->sendResponse(new SpecialityCollection($specialties), 'Specialties retrieved successfully');
+        return $this->success(new SpecialityCollection($specialties), 'Specialties retrieved successfully');
     }
 
     /**

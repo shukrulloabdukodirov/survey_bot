@@ -51,7 +51,7 @@ class EducationCenterAPIController extends AppBaseController
         if(in_array('education_center',$userRolesList)){
             $filter['id'] = $request->user()->educationCenter->id;
         }
-        $educationCenters = $this->educationCenterRepository->all(
+        $educationCenters = $this->educationCenterRepository->simple(
             $filter,
             $request->get('skip'),
             $request->get('limit')
