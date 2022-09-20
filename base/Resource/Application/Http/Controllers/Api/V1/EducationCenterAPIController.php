@@ -55,9 +55,8 @@ class EducationCenterAPIController extends AppBaseController
             $filter,
             $request->get('skip'),
             $request->get('limit')
-        )->sortBy('id');
-
-        return $this->sendResponse(new EducationCenterCollection($educationCenters), 'Education Centers retrieved successfully');
+        );
+        return  $this->success(new EducationCenterCollection($educationCenters),'Education Centers retrieved successfully');
     }
 
     /**

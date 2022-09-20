@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Common\Utils\ResponseFormatter;
 use InfyOm\Generator\Utils\ResponseUtil;
 use Response;
 
@@ -21,6 +22,11 @@ class AppBaseController extends Controller
     public function sendResponse($result, $message)
     {
         return Response::json(ResponseUtil::makeResponse($message, $result));
+    }
+
+    public function success($result, $message)
+    {
+        return ResponseFormatter::success($message, $result);
     }
 
     public function sendError($error, $code = 404)
