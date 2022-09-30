@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Base\Resource\Domain\Models\EducationCenter;
 use Illuminate\Container\Container as Application;
 use Illuminate\Database\Eloquent\Model;
 
@@ -90,7 +91,14 @@ abstract class BaseRepository
         if (count($search)) {
             foreach($search as $key => $value) {
                 if (in_array($key, $this->getFieldsSearchable())) {
-                    $query->where($key, $value);
+                    if($key==='region_id' && $this->model instanceof EducationCenter)
+                    {
+                        $query->orWhere($key, null)->orWhere($key,$value);
+                    }
+                    else
+                    {
+                        $query->where($key, $value);
+                    }
                 }
             }
         }

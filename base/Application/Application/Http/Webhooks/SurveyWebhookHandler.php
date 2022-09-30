@@ -48,9 +48,8 @@ class SurveyWebhookHandler extends BaseWebHookHandler
             $lastApplication = Application::where([
                 'applicant_id' => $this->applicant->id
             ])->latest()->first();
-            if($lastApplication)
-            {
-                $this->application=$lastApplication;
+            if ($lastApplication) {
+                $this->application = $lastApplication;
             }
             $this->applicantInfo = ApplicantInfo::firstOrCreate([
                 'applicant_id' => $this->applicant->id,
@@ -99,7 +98,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         foreach ($regions as $region) {
             $regionKeyboards[] =  ReplyButton::make($region->name);
         }
-        $this->chat->message('<b>Tuman yoki shaharni tanlang</b>')->replyKeyboard(ReplyKeyboard::make()
+        $this->chat->message('Tuman yoki shaharni tanlang')->replyKeyboard(ReplyKeyboard::make()
             ->button('◀️Asosiy menyu')->width(0.5)->resize(true)
             ->button('🔙Orqaga')->width(0.5)->resize(true)
             ->row($regionKeyboards)->chunk(2))
@@ -110,38 +109,35 @@ class SurveyWebhookHandler extends BaseWebHookHandler
     {
         $regions = Region::query()->find($id)->educationCenters;
         if ($regions->isEmpty()) {
-            $this->chat->message('<b>O\'quv markazi topilmadi</b>')->send();
+            $this->chat->message('O\'quv markazi topilmadi')->send();
         } else {
-            $keyboard=ReplyKeyboard::make()
-            ->row([
-                ReplyButton::make($this->message->text().' ⬇️')
-            ]);
-            for ($i=0; $i<count($regions);$i+=2) {
-                if($i+1<count($regions))
-                {
+            $keyboard = ReplyKeyboard::make()
+                ->row([
+                    ReplyButton::make($this->message->text() . ' ⬇️')
+                ]);
+            for ($i = 0; $i < count($regions); $i += 2) {
+                if ($i + 1 < count($regions)) {
                     $keyboard
-                    ->row([
-                        ReplyButton::make($regions[$i]->name),
-                        ReplyButton::make($regions[$i+1]->name),
-                    ]);
-                }
-                else
-                {
+                        ->row([
+                            ReplyButton::make($regions[$i]->name),
+                            ReplyButton::make($regions[$i + 1]->name),
+                        ]);
+                } else {
                     $keyboard
-                    ->row([
-                        ReplyButton::make($regions[$i]->name),
-                    ]);
+                        ->row([
+                            ReplyButton::make($regions[$i]->name),
+                        ]);
                 }
             }
-            $keyboard=$keyboard
-            ->row([
-                ReplyButton::make('🔙Orqaga')
+            $keyboard = $keyboard
+                ->row([
+                    ReplyButton::make('🔙Orqaga')
                 ])
                 ->row([
                     ReplyButton::make('◀️Asosiy menyu'),
                 ]);
 
-            $this->chat->message('<b>O‘zingiz tahsil olayotgan kasb-hunarga o‘qitish markazini tanlang</b>')
+            $this->chat->message('O‘zingiz tahsil olayotgan kasb-hunarga o‘qitish markazini tanlang')
                 ->replyKeyboard($keyboard)
                 ->send();
         }
@@ -149,16 +145,13 @@ class SurveyWebhookHandler extends BaseWebHookHandler
     public function specialities($id)
     {
 
-        $firstApplication=Application::where([
-            'applicant_id'=>$this->applicant->id,
-            'condition'=>false
+        $firstApplication = Application::where([
+            'applicant_id' => $this->applicant->id,
+            'condition' => false
         ])->first();
-        if($firstApplication)
-        {
-            $specialities[]=Speciality::find($firstApplication->speciality_id);
-        }
-        else
-        {
+        if ($firstApplication) {
+            $specialities[] = Speciality::find($firstApplication->speciality_id);
+        } else {
             $specialities = DB::table('education_center_specialities')
                 ->select('speciality_translations.name')
                 ->where('education_center_id', '=', $id)
@@ -170,43 +163,41 @@ class SurveyWebhookHandler extends BaseWebHookHandler
 
         $region = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' => 3])->first();
 
-        
-        if (count($specialities)===0) {
-            $this->chat->message('<b>Ushbu o\'quv markazda yo\'nalishlar topilmadi!</b>')->send();
+
+        if (count($specialities) === 0) {
+            $this->chat->message('Ushbu o\'quv markazda yo\'nalishlar topilmadi!')->send();
         } else {
-            $keyboard=ReplyKeyboard::make()
-            ->row([
-                    ReplyButton::make($region->value.' ⬇️'),
-            ]
-            )
-            ->row([
-                ReplyButton::make($this->message->text().' ⬇️'),
-            ]);
-            for ($i=0;$i<count($specialities);$i+=2) {
-                if($i+1<count($specialities))
-                {
-                    $keyboard=$keyboard
-                    ->row([
-                        ReplyButton::make($specialities[$i]->name)->webApp('https://172-105-76-165.ip.linodeusercontent.com/form'),
-                        ReplyButton::make($specialities[$i+1]->name)->webApp('https://172-105-76-165.ip.linodeusercontent.com/form')
-                    ]);
-                }
-                else
-                {
-                    $keyboard=$keyboard
-                    ->row([
-                        ReplyButton::make($specialities[$i]->name)->width(0,75)->webApp('https://172-105-76-165.ip.linodeusercontent.com/form'),
-                    ]);
+            $keyboard = ReplyKeyboard::make()
+                ->row(
+                    [
+                        ReplyButton::make($region->value . ' ⬇️'),
+                    ]
+                )
+                ->row([
+                    ReplyButton::make($this->message->text() . ' ⬇️'),
+                ]);
+            for ($i = 0; $i < count($specialities); $i += 2) {
+                if ($i + 1 < count($specialities)) {
+                    $keyboard = $keyboard
+                        ->row([
+                            ReplyButton::make($specialities[$i]->name)->webApp('https://sorovnoma-bot.mehnat.uz/form'),
+                            ReplyButton::make($specialities[$i + 1]->name)->webApp('https://sorovnoma-bot.mehnat.uz/form')
+                        ]);
+                } else {
+                    $keyboard = $keyboard
+                        ->row([
+                            ReplyButton::make($specialities[$i]->name)->width(0, 75)->webApp('https://sorovnoma-bot.mehnat.uz/form'),
+                        ]);
                 }
             }
-            $keyboard=$keyboard
-            ->row([
-                ReplyButton::make('🔙Orqaga')
+            $keyboard = $keyboard
+                ->row([
+                    ReplyButton::make('🔙Orqaga')
                 ])
                 ->row([
-                ReplyButton::make('◀️Asosiy menyu'),
-            ]);
-            $this->chat->message('<b>O‘zingiz o‘qiyotgan kasbiy ta’lim yo‘nalishini tanlang</b>')
+                    ReplyButton::make('◀️Asosiy menyu'),
+                ]);
+            $this->chat->message('O‘zingiz o‘qiyotgan kasbiy ta’lim yo‘nalishini tanlang')
                 ->replyKeyboard(
                     $keyboard
                 )
@@ -251,6 +242,14 @@ class SurveyWebhookHandler extends BaseWebHookHandler
     public function steps()
     {
         $step = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'condition' => true])->first();
+        if (!$step) {
+            $step = TelegramChatQuestionAnswer::firstOrCreate([
+                'applicant_id' => $this->applicant->id,
+                'telegram_chat_question_id' => 1,
+                'condition' => true,
+                'value' => '/start'
+            ]);
+        }
         $message = $this->message->text();
         $checkMessage = $this->checkMessage($step);
         if ($checkMessage) {
@@ -263,7 +262,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
         $index = $step->telegram_chat_question_id;
         switch ($index) {
             case 1: {
-                    $this->chat->message('Assalomu alaykum! Kasb-hunar ta’limi markazlari faoliyatini baholash maqsadida ishlab chiqilgan maxsus botga xush kelibsiz! So‘rovnomada ishtirokingiz uchun minnatdorchilik bildiramiz! Sizning xolis bahoyingiz kasbiy ta’lim kelajagini belgilashda muhim ahamiyatga ega!')->replyKeyboard(ReplyKeyboard::make()
+                    $this->chat->message('Assalomu alaykum! "Ishga marhamat" monomarkazlari va kasb-hunarga o‘qitish markazlari faoliyatini baholash maqsadida ishlab chiqilgan maxsus botga xush kelibsiz! So‘rovnomada ishtirokingiz uchun minnatdorchilik bildiramiz! Sizning xolis bahoyingiz kasbiy ta’lim kelajagini belgilashda muhim ahamiyatga ega!')->replyKeyboard(ReplyKeyboard::make()
                         ->button("So'rovnomada ishtirok etish")->resize(true))
                         ->send();
                     $this->nextStep($step);
@@ -271,44 +270,37 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                 break;
             case 2: {
                     if ($message === "So'rovnomada ishtirok etish") {
-                        $lastApplication=Application::where([
-                            'applicant_id'=>$this->applicant->id
+                        $lastApplication = Application::where([
+                            'applicant_id' => $this->applicant->id
                         ])->latest()->first();
-                        if($lastApplication)
-                        {
-                            if(!$lastApplication->condition)
-                            {
-                                $date=strtotime($lastApplication->updated_at);
-                                $now= time();
-                                $diff=$now-$date;
-                                if($diff<24*60*60)
-                                {
-                                    $message='Siz so\'nggi 24 soatni ichida so\'rovnomadan o\'tgansiz. Siz '.date('H:i:s',24*60*60-$diff).' vaqtdan so\'ng yana so\'rovnomadan qayta  o\'tishingiz mumkin!'  ;
+                        if ($lastApplication) {
+                            if (!$lastApplication->condition) {
+                                $date = strtotime($lastApplication->updated_at);
+                                $now = time();
+                                $diff = $now - $date;
+                                if ($diff < 24 * 60 * 60) {
+                                    $message = 'Siz so\'nggi 24 soatni ichida so\'rovnomadan o\'tgansiz. Siz ' . date('H:i:s', 24 * 60 * 60 - $diff) . ' vaqtdan so\'ng yana so\'rovnomadan qayta  o\'tishingiz mumkin!';
                                     $this->chat->message($message)->send();
                                     return;
-                                }
-                                else
-                                {
+                                } else {
                                     Application::create([
-                                        'applicant_id'=>$this->applicant->id
-                                    ]);        
+                                        'applicant_id' => $this->applicant->id
+                                    ]);
                                 }
                             }
-                        }
-                        else
-                        {
+                        } else {
                             Application::create([
-                                'applicant_id'=>$this->applicant->id
+                                'applicant_id' => $this->applicant->id
                             ]);
                         }
-                        $this->chat->message('<b>Telefon raqamingizni kiriting (+998 _ _   _ _ _  _ _  _ _) yoki saqlangan telefon raqamingizni yuborishni so‘raymiz!
-    So‘rovnomada ishtirok etish uchun yuborgan telefon raqamingiz orqali faqat bitta kasbiy ta’lim markazi faoliyatini baholay olasiz!</b>')->replyKeyboard(ReplyKeyboard::make()
+                        $this->chat->message('Telefon raqamingizni kiriting (+998 _ _   _ _ _  _ _  _ _) yoki saqlangan telefon raqamingizni yuborishni so‘raymiz!
+    So‘rovnomada ishtirok etish uchun yuborgan telefon raqamingiz orqali faqat bitta kasbiy ta’lim markazi faoliyatini baholay olasiz!')->replyKeyboard(ReplyKeyboard::make()
                             ->button('🔙Orqaga')->width(0.5)->resize(true)
                             ->button('📱Telefon raqamni yuborish')->requestContact()->resize(true))
                             ->send();
                         $this->nextStep($step, $this->message->text());
                     } else {
-                        $this->chat->html("<b>Xato ma'lumot kiritildi.</b>")->send();
+                        $this->chat->html("Xato ma'lumot kiritildi.")->send();
                         $this->chat->html("Iltimos, to'g'ri buyruqni tanlang!")->send();
                     }
                 }
@@ -328,7 +320,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                         foreach ($regions as $region) {
                             $regionKeyboards[] =  ReplyButton::make($region->name);
                         }
-                        $this->chat->message('<b>Marhamat, siz o‘qiyotgan kasbiy ta’lim markazi joylashgan hududni tanlang</b>')
+                        $this->chat->message('Marhamat, siz o‘qiyotgan "Ishga marhamat" monomarkazi yoki kasb-hunarga o‘qitish markazi joylashgan hududni tanlang')
                             ->replyKeyboard(ReplyKeyboard::make()
                                 ->row($regionKeyboards)->chunk(2)
                                 ->row([
@@ -337,7 +329,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                             ->send();
                         $this->nextStep($step, $phone);
                     } else {
-                        $this->errorMessage("<b>Xato ma'lumot kiritildi.</b>");
+                        $this->errorMessage("Xato ma'lumot kiritildi.");
                         $this->errorMessage("Iltimos, qaytadan urinib ko'ring!");
                     }
                 }
@@ -348,7 +340,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                         $this->educationCenter($region->region_id);
                         $this->nextStep($step, $this->message->text());
                     } else {
-                        $this->errorMessage("<b>Xato ma'lumot kiritildi.</b>");
+                        $this->errorMessage("Xato ma'lumot kiritildi.");
                         $this->errorMessage("Iltimos, qaytadan urinib ko'ring!");
                     }
                 }
@@ -357,19 +349,17 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                     if ($message) {
                         $educationCenter = EducationCenterTranslation::where('name', $message)->first();
                         if ($educationCenter) {
-                            $firstApplication=Application::where([
-                                'applicant_id'=>$this->applicant->id,
-                                'condition'=>false
+                            $firstApplication = Application::where([
+                                'applicant_id' => $this->applicant->id,
+                                'condition' => false
                             ])->first();
-                            if($firstApplication)
-                            {
-                                if($educationCenter->education_center_id!==$firstApplication->education_center_id)
-                                {
-                                    $firstEducationCenter=EducationCenter::find($firstApplication->education_center_id)->name;
-                                    $firstSpeciality=Speciality::find($firstApplication->speciality_id)->name;
-                                    $message="So‘rovnomada ishtirok etish uchun yuborgan telefon raqamingiz orqali faqat bitta kasbiy ta’lim markazi faoliyatini baholay olasiz!";
+                            if ($firstApplication) {
+                                if ($educationCenter->education_center_id !== $firstApplication->education_center_id) {
+                                    $firstEducationCenter = EducationCenter::find($firstApplication->education_center_id)->name;
+                                    $firstSpeciality = Speciality::find($firstApplication->speciality_id)->name;
+                                    $message = "So‘rovnomada ishtirok etish uchun yuborgan telefon raqamingiz orqali faqat bitta kasbiy ta’lim markazi faoliyatini baholay olasiz!";
                                     $this->chat->message($message)->send();
-                                    $message="Siz ushbu raqam orqali \"" .$firstEducationCenter."\"ning   \"".$firstSpeciality."\" yo'nalishiga ovoz bergansiz.";
+                                    $message = "Siz ushbu raqam orqali \"" . $firstEducationCenter . "\"ning   \"" . $firstSpeciality . "\" yo'nalishiga ovoz bergansiz.";
                                     $this->chat->message($message)->send();
                                     return;
                                 }
@@ -380,7 +370,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                             ]);
                             $this->nextStep($step, $this->message->text());
                         } else {
-                            $this->errorMessage("<b>Xato ma'lumot kiritildi.</b>");
+                            $this->errorMessage("Xato ma'lumot kiritildi.");
                             $this->errorMessage("Iltimos, qaytadan urinib ko'ring!");
                         }
                     } else if (isset($data['message']['web_app_data'])) {
@@ -389,9 +379,9 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                         $answers = $data['message']['web_app_data']['data'];
                         $speciality_id = SpecialityTranslation::where(['name' => $speciality])->first()->speciality_id;
                         $this->application->update(['speciality_id' => $speciality_id]);
+                        $this->finish();
                         if ($answers) {
                             $this->saveAnswers($answers);
-                            $this->finish();
                             $step->update(['condition' => false]);
                         }
                     }
@@ -434,21 +424,18 @@ class SurveyWebhookHandler extends BaseWebHookHandler
     public function checkMessage(TelegramChatQuestionAnswer $step)
     {
         $message = $this->message->text();
-        $region = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' =>3])->first();
-        $educationCenter = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' =>4])->first();
-        
-        if(isset($region)&&$message===$region->value." ⬇️")
-        {
+        $region = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' => 3])->first();
+        $educationCenter = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' => 4])->first();
+
+        if (isset($region) && $message === $region->value . " ⬇️") {
             return $this->mainMenu($step);
-        }
-        else if(isset($educationCenter)&&$message===$educationCenter->value." ⬇️")
-        {
+        } else if (isset($educationCenter) && $message === $educationCenter->value . " ⬇️") {
             return $this->goBack($step);
         }
-        
+
         switch ($message) {
             case "🔙Orqaga": {
-                   return $this->goBack($step);
+                    return $this->goBack($step);
                 }
                 break;
             case "◀️Asosiy menyu": {
@@ -493,7 +480,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
             ]);
         }
         $this->application->update([
-            'condition'=>0
+            'condition' => 0
         ]);
     }
     public function mainMenu(TelegramChatQuestionAnswer $step)

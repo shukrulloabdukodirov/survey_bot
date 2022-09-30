@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+use function PHPUnit\Framework\isEmpty;
+
 /**
  * Class EducationCenter
  * @package Base\Resource\Domain\Models
@@ -65,9 +67,12 @@ class EducationCenter extends Model
     {
         static::addGlobalScope('by_role', function (Builder $builder) {
             $user = request()->user();
-            $rolesList = $user->getRoleNames()->toArray();
-            if(in_array('education_center',$rolesList)){
-                $builder->where('id',$user->education_center_id);
+            if(!isEmpty( $user))
+            {
+                $rolesList = $user->getRoleNames()->toArray();
+                if(in_array('education_center',$rolesList)){
+                    $builder->where('id',$user->education_center_id);
+                }
             }
         });
     }

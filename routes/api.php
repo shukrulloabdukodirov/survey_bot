@@ -27,7 +27,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+Route::post('logout',function(Request $request){
+    request()->user()->tokens()->delete();
+    return ['success'=>true,'message'=>'Logged out!'];
+});
 
 
 Route::group(
@@ -38,9 +41,6 @@ Route::group(
            [LoginController::class,'login']
         );
         Route::get('v1/front/questions',[QuestionAPIController::class,'index']);
-        Route::get('latest-user',function(){
-           return EducationCenter::find(83);
-        });
     }
 );
 

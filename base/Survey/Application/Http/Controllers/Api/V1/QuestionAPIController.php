@@ -25,7 +25,7 @@ class QuestionAPIController extends AppBaseController
     private $questionService;
     public function __construct(QuestionRepository $questionRepo, QuestionService $questionService)
     {
-        $this->middleware(['role:big_bro|admin|region_admin|education_center']);
+        // $this->middleware(['role:big_bro|admin|region_admin|education_center']);
         $this->questionRepository = $questionRepo;
         $this->questionService = $questionService;
     }
