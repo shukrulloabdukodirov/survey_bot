@@ -2,8 +2,12 @@
 
 namespace App\Console;
 
+use DefStudio\Telegraph\Facades\Telegraph;
+use DefStudio\Telegraph\Models\TelegraphBot;
+use DefStudio\Telegraph\Models\TelegraphChat;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -15,9 +19,15 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function()
+        {
+            /** @var TelegraphChat $chat */
+                $chat=TelegraphChat::find(3);
+                $date=date('h:i');
+                $message='This is new message';
+                $message=$chat->message($message)->silent()->send();
+        })->everyMinute();
     }
-
     /**
      * Register the commands for the application.
      *

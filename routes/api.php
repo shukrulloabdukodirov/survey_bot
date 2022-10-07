@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\PosterController;
 use App\Http\Resources\QuestionResource;
 use App\Models\User;
 use Base\Resource\Domain\Models\EducationCenter;
@@ -41,6 +42,8 @@ Route::group(
            [LoginController::class,'login']
         );
         Route::get('v1/front/questions',[QuestionAPIController::class,'index']);
+        Route::post('/v1/telegram-bot/poster',[PosterController::class, 'sendNewPost']);
     }
+
 );
 

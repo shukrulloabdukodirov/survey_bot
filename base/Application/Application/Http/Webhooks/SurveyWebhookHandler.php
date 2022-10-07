@@ -1,5 +1,4 @@
 <?php
-
 namespace Base\Application\Application\Http\Webhooks;
 
 use Base\Application\Domain\Models\Application;
@@ -40,51 +39,79 @@ class SurveyWebhookHandler extends BaseWebHookHandler
     public function handle(Request $request, TelegraphBot $bot): void
     {
         parent::handle($request, $bot);
-        $data = $request->all();
-        Log::info($data);
-        if (isset($data['message'])) {
-            $this->applicant = Applicant::firstOrCreate(['chat_id' => $data['message']['chat']['id']]);
-
-            $lastApplication = Application::where([
-                'applicant_id' => $this->applicant->id
-            ])->latest()->first();
-            if ($lastApplication) {
-                $this->application = $lastApplication;
+        
+        if($bot->id===2)
+        {
+            if($this->message->text()==='/start')
+            {
+                $this->chat->message('Assalomu alaykum poster botimizga xush kelibsiz.')->send();
             }
-            $this->applicantInfo = ApplicantInfo::firstOrCreate([
-                'applicant_id' => $this->applicant->id,
-                'first_name' => $data['message']['chat']['first_name'],
-                'nickname' => isset($data['message']['chat']['username']) ? $data['message']['chat']['username'] : ''
-            ]);
-            $chat = DB::table('telegraph_chats')->where('chat_id', '=', $data['message']['chat']['id'])->get();
-            if (!$chat) {
-                $chat = $this->bot->chats()->create([
-                    'chat_id' => $data['message']['chat']['id'],
-                    'name' => $data['message']['chat']['first_name']
-                ]);
-            }
+            // if($this->message->text()==='/newpost')
+            // {
+            //     $this->chat->message("Iltimos yangi post uchun ma'lumotlarni yuboring")->send();
+                
+            // }
+            // else
+            // {
+            //     $data=$request->all();
+            //     // $this->chat->message('This is title of image')->photo('AgACAgIAAxkBAAMpYz1vRuC_YgGLx_63GhVke84tFgMAAk3DMRuhaOlJ-ilHX0jNlvcBAAMCAAN4AAMqBA')->send();
+            //     // $this->chat->html('Ha yana')->send();
+            // }
         }
-
-        if (isset($data['message']['text']) && $data['message']['text'] === '/start') {
-            $step = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'condition' => true])->first();
-            if ($step) {
-                $step->update(['condition' => false]);
-            }
-            $step = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' => 1])->first();
-            if (!$step) {
-                TelegramChatQuestionAnswer::create([
+        else
+        {
+            $data = $request->all();
+            Log::info($data);
+            if (isset($data['message'])) {
+                $this->applicant = Applicant::firstOrCreate(['chat_id' => $data['message']['from']['id']]);
+    
+                $lastApplication = Application::where([
+                    'applicant_id' => $this->applicant->id
+                ])->latest()->first();
+                if ($lastApplication) {
+                    $this->application = $lastApplication;
+                }
+                $this->applicantInfo = ApplicantInfo::firstOrCreate([
                     'applicant_id' => $this->applicant->id,
-                    'telegram_chat_question_id' => 1,
-                    'value' => isset($data['message']['text']) ? $data['message']['text'] : 'Some text',
-                    'condition' => true
+                    'first_name' => $data['message']['from']['first_name'],
+                    'nickname' => isset($data['message']['from']['username']) ? $data['message']['from']['username'] : ''
                 ]);
-            } else {
-                $step->update(['condition' => true]);
+                $chat = DB::table('telegraph_chats')->where('chat_id', '=', $data['message']['chat']['id'])->first();
+                
+                if (!$chat) {
+                    $chat = $this->bot->chats()->create([
+                        'chat_id' => $data['message']['chat']['id'],
+                        'name' => $this->applicantInfo->first_name
+                    ]);
+                }
+            }
+    
+            if(isset($data['message']['text']))
+            {
+                if (($data['message']['text'] === '/start') ||$data['message']['text']==='/start@monomarkaz_sorovnoma_bot') {
+                    $step = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'condition' => true])->first();
+                    if ($step) {
+                        $step->update(['condition' => false]);
+                    }
+                    $step = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'telegram_chat_question_id' => 1])->first();
+                    if (!$step) {
+                        TelegramChatQuestionAnswer::create([
+                            'applicant_id' => $this->applicant->id,
+                            'telegram_chat_question_id' => 1,
+                            'value' => isset($data['message']['text']) ? $data['message']['text'] : 'Some text',
+                            'condition' => true
+                        ]);
+                    } else {
+                        $step->update(['condition' => true]);
+                    }
+                }
+            }
+            if (isset($this->applicant)) {
+                $this->steps();
             }
         }
-        if (isset($this->applicant)) {
-            $this->steps();
-        }
+        
+        
     }
     public function start()
     {
@@ -92,7 +119,6 @@ class SurveyWebhookHandler extends BaseWebHookHandler
 
     public function city($id)
     {
-        Log::info('contact-bor');
         $regions = Region::query()->find($id)->cities;
         $regionKeyboards = [];
         foreach ($regions as $region) {
@@ -218,7 +244,6 @@ class SurveyWebhookHandler extends BaseWebHookHandler
             $question = Question::query()->find($id);
         }
         $regionKeyboards = [];
-        Log::info($question);
         if ($question->type == 2) {
             foreach ($question->questionAnswers as $region) {
                 $regionKeyboards[] =  Button::make($region->string)->action('question')->param('question_id', $question->id);
@@ -256,8 +281,6 @@ class SurveyWebhookHandler extends BaseWebHookHandler
             $message = $checkMessage;
             $step = TelegramChatQuestionAnswer::where(['applicant_id' => $this->applicant->id, 'condition' => true])->first();
         }
-        Log::info($message);
-        Log::info($step);
         $data = $this->request->all();
         $index = $step->telegram_chat_question_id;
         switch ($index) {
@@ -274,6 +297,7 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                             'applicant_id' => $this->applicant->id
                         ])->latest()->first();
                         if ($lastApplication) {
+
                             if (!$lastApplication->condition) {
                                 $date = strtotime($lastApplication->updated_at);
                                 $now = time();
@@ -294,7 +318,8 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                             ]);
                         }
                         $this->chat->message('Telefon raqamingizni kiriting (+998 _ _   _ _ _  _ _  _ _) yoki saqlangan telefon raqamingizni yuborishni so‘raymiz!
-    So‘rovnomada ishtirok etish uchun yuborgan telefon raqamingiz orqali faqat bitta kasbiy ta’lim markazi faoliyatini baholay olasiz!')->replyKeyboard(ReplyKeyboard::make()
+                        So‘rovnomada ishtirok etish uchun yuborgan telefon raqamingiz orqali faqat bitta kasbiy ta’lim markazi faoliyatini baholay olasiz!')
+                            ->replyKeyboard(ReplyKeyboard::make()
                             ->button('🔙Orqaga')->width(0.5)->resize(true)
                             ->button('📱Telefon raqamni yuborish')->requestContact()->resize(true))
                             ->send();
@@ -465,13 +490,11 @@ class SurveyWebhookHandler extends BaseWebHookHandler
     }
     public function errorMessage($message)
     {
-        Log::info($message);
         $this->chat->html($message)->send();
     }
     public function saveAnswers($answers)
     {
         $answers = json_decode($answers);
-        Log::info($answers);
         foreach ($answers as $answer) {
             $appAns = ApplicationAnswer::firstOrCreate(['application_id' => $this->application->id, 'question_id' => $answer->question_id]);
             $appAns->update([
@@ -514,5 +537,10 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                 return '/start';
             }
         }
+    }
+
+    public function timeOutFunction()
+    {
+        $this->chat->message("This is call after 10s")->removeReplyKeyboard()->send();
     }
 }

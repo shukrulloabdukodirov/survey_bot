@@ -85,16 +85,11 @@ abstract class BaseWebHookHandler
         if (!$this->canHandle($command)) {
             if ($this->message?->chat()?->type() === Chat::TYPE_PRIVATE) {
                 report(TelegramWebhookException::invalidCommand($command));
-                $this->sendMessage();
             }
             
             return;
         }
         $this->$command();
-    }
-    private function sendMessage(): void
-    {
-        $this->chat->html("Unknown commandsss")->send();
     }
     private function handleMessage(): void
     {
