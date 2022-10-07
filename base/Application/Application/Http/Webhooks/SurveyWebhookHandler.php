@@ -206,13 +206,13 @@ class SurveyWebhookHandler extends BaseWebHookHandler
                 if ($i + 1 < count($specialities)) {
                     $keyboard = $keyboard
                         ->row([
-                            ReplyButton::make($specialities[$i]->name)->webApp('http://178.128.197.247/form'),
-                            ReplyButton::make($specialities[$i + 1]->name)->webApp('http://178.128.197.247/form')
+                            ReplyButton::make($specialities[$i]->name)->webApp('https://sorovnoma-bot.mehnat.uz/form'),
+                            ReplyButton::make($specialities[$i + 1]->name)->webApp('https://sorovnoma-bot.mehnat.uz/form')
                         ]);
                 } else {
                     $keyboard = $keyboard
                         ->row([
-                            ReplyButton::make($specialities[$i]->name)->width(0, 75)->webApp('http://178.128.197.247/form'),
+                            ReplyButton::make($specialities[$i]->name)->width(0, 75)->webApp('https://sorovnoma-bot.mehnat.uz/form'),
                         ]);
                 }
             }
